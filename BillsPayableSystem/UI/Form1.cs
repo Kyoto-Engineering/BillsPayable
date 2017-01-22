@@ -14,14 +14,14 @@ using BillsPayableSystem.DbGateway;
 
 namespace BillsPayableSystem
 {
-    public partial class Form1 : Form
+    public partial class frmBillEntry : Form
     {
         private SqlConnection con;
         private SqlCommand cmd;
         private SqlDataReader rdr;
         ConnectionString cs = new ConnectionString();
         public int btype_id, nameOfBillId;
-        public Form1()
+        public frmBillEntry()
         {
             InitializeComponent();
         }
@@ -44,7 +44,7 @@ namespace BillsPayableSystem
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    cmbBillsType.Items.Add(rdr.GetValue(0).ToString());
+                    cmbBillType.Items.Add(rdr.GetValue(0).ToString());
                 }
             }
             catch (Exception ex)
@@ -55,13 +55,13 @@ namespace BillsPayableSystem
 
         private void cmbBillsType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmbBillsName.Text = "";
-            cmbBillsName.Items.Clear();
-            cmbBillsName.SelectedIndex = -1;
+            cmbBillPurpose.Text = "";
+            cmbBillPurpose.Items.Clear();
+            cmbBillPurpose.SelectedIndex = -1;
 
-            txtDescriptions.Clear();
+            txtBillNarrative.Clear();
 
-            txtAmount.Clear();
+            
 
             try
             {
@@ -69,7 +69,7 @@ namespace BillsPayableSystem
                 con.Open();
                 cmd = con.CreateCommand();
 
-                cmd.CommandText = "SELECT BillTypeId from BillsPayableType WHERE BillTypeName= '" + cmbBillsType.Text + "'";
+                cmd.CommandText = "SELECT BillTypeId from BillsPayableType WHERE BillTypeName= '" + cmbBillType.Text + "'";
                 
                 rdr = cmd.ExecuteReader();
 
@@ -96,7 +96,7 @@ namespace BillsPayableSystem
 
                 while (rdr.Read())
                 {
-                    cmbBillsName.Items.Add(rdr[0]);            
+                    cmbBillPurpose.Items.Add(rdr[0]);            
                 }
                 if (con.State == ConnectionState.Open)
                 {
@@ -110,14 +110,14 @@ namespace BillsPayableSystem
             }        
         }
 
-        private void cmbBillsName_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbBillPurpose_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             try
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = "select BillId from BillsPayableName WHERE BillName= '" + cmbBillsName.Text + "'";
+                cmd.CommandText = "select BillId from BillsPayableName WHERE BillName= '" + cmbBillPurpose.Text + "'";
 
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
@@ -140,85 +140,88 @@ namespace BillsPayableSystem
             }
         }
 
-        private void cmbTransactionName_SelectedIndexChanged(object sender, EventArgs e)
-        {
+       
 
-        }
+       
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (cmbFY.Text == "")
-            {
-                MessageBox.Show("Please Select Fiscal Year", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (txtPayableTo.Text == "")
+            if (string.IsNullOrWhiteSpace(txtPayableTo.Text))
             {
                 MessageBox.Show("Please  enter Payable To", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+               
             }
 
-            if (cmbBillsType.Text == "")
-            {
-                MessageBox.Show("Please Select Type of Bill", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (cmbBillsName.Text == "")
-            {
-                MessageBox.Show("Please Select Name of Bill", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (txtDescriptions.Text == "")
-            {
-                MessageBox.Show("Please  enter Description", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (cmbTransactionName.Text == "")
-            {
-                MessageBox.Show("Please Select Transaction Type", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (txtAmount.Text == "")
+            else if (string.IsNullOrWhiteSpace(txtAmount.Text))
             {
                 MessageBox.Show("Please  enter Amount", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            try
+            else if (string.IsNullOrWhiteSpace(cmbPaymentMethod.Text))
+            {
+                MessageBox.Show("Please Select Payment Method", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            else if (string.IsNullOrWhiteSpace(cmbBillType.Text))
+            {
+                MessageBox.Show("Please Select Type of Bill", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            else if (string.IsNullOrWhiteSpace(cmbBillPurpose.Text))
+            {
+                MessageBox.Show("Please Select Bill Purpose", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            else if (string.IsNullOrWhiteSpace(txtBillNarrative.Text))
+            {
+                MessageBox.Show("Please  enter Bill Narrative", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            else try
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                String query = "insert into BTransaction(BillId, Descriptions, TransactionType, Amount, Date, DueDate, PayableTo, FiscalYear) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8)";
+                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, PayableTo, Note) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9)";
                 cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@d1", nameOfBillId);
-                cmd.Parameters.AddWithValue("@d2", txtDescriptions.Text);
-                cmd.Parameters.AddWithValue("@d3", cmbTransactionName.Text);
+                cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
+                cmd.Parameters.AddWithValue("@d3", cmbPaymentMethod.Text);
                 cmd.Parameters.AddWithValue("@d4", Convert.ToDecimal(txtAmount.Text));
-                cmd.Parameters.AddWithValue("@d5", dateTimePicker1.Value);
-                cmd.Parameters.AddWithValue("@d6", DueDate.Value);
-                cmd.Parameters.AddWithValue("@d7", txtPayableTo.Text);
-                cmd.Parameters.AddWithValue("@d8", cmbFY.Text);
+                cmd.Parameters.AddWithValue("@d5", dtpBillDate.Value);
+                cmd.Parameters.AddWithValue("@d6", dtpBillReceivedDate.Value);
+                cmd.Parameters.AddWithValue("@d7", dtpDueDate.Value);
+                cmd.Parameters.AddWithValue("@d8", txtPayableTo.Text);
+                cmd.Parameters.AddWithValue("@d9", txtNote.Text);
+                
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                cmbFY.Items.Clear();
-                txtPayableTo.Clear();
-                cmbBillsType.Items.Clear();
-                cmbBillsName.Items.Clear();
-                txtDescriptions.Clear();
-                cmbTransactionName.Items.Clear();
-                txtAmount.Clear();
+                
                 con.Close();
-            }
+                ClearData();
+                
+            } 
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }        
         }
-
+        private void ClearData()
+        {
+            txtPayableTo.Clear();
+            txtAmount.Clear();
+            cmbPaymentMethod.SelectedIndex = -1;
+            cmbBillType.SelectedIndex = -1;
+            cmbBillPurpose.Text = "";
+            cmbBillPurpose.Items.Clear();
+            cmbBillPurpose.SelectedIndex = -1;
+            txtBillNarrative.Clear();
+            txtNote.Clear();
+        }    
     }
 }
