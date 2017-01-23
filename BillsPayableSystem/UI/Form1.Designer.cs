@@ -143,7 +143,7 @@
             this.txtAmount.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAmount.Location = new System.Drawing.Point(272, 360);
             this.txtAmount.Name = "txtAmount";
-            this.txtAmount.Size = new System.Drawing.Size(188, 32);
+            this.txtAmount.Size = new System.Drawing.Size(267, 32);
             this.txtAmount.TabIndex = 25;
             // 
             // cmbPaymentMethod
@@ -156,7 +156,7 @@
             "Cash"});
             this.cmbPaymentMethod.Location = new System.Drawing.Point(272, 433);
             this.cmbPaymentMethod.Name = "cmbPaymentMethod";
-            this.cmbPaymentMethod.Size = new System.Drawing.Size(188, 30);
+            this.cmbPaymentMethod.Size = new System.Drawing.Size(267, 30);
             this.cmbPaymentMethod.TabIndex = 24;
             // 
             // txtBillNarrative
@@ -277,7 +277,6 @@
             this.txtNote.Size = new System.Drawing.Size(264, 63);
             this.txtNote.TabIndex = 37;
             this.txtNote.Text = "";
-            //this.txtNote.TextChanged += new System.EventHandler(this.txtNote_TextChanged);
             // 
             // frmBillEntry
             // 
