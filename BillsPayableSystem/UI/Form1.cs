@@ -20,7 +20,7 @@ namespace BillsPayableSystem
         private SqlCommand cmd;
         private SqlDataReader rdr;
         ConnectionString cs = new ConnectionString();
-        public int btype_id, nameOfBillId;
+        public int btype_id, nameOfBillId, bPayableToId, user_id, nameOfBPayableId;
         public frmBillEntry()
         {
             InitializeComponent();
@@ -29,6 +29,7 @@ namespace BillsPayableSystem
         private void Form1_Load(object sender, EventArgs e)
         {
             BillsType();
+            PayableTo();
         }
 
         private void BillsType()
@@ -53,6 +54,27 @@ namespace BillsPayableSystem
             }
         }
 
+        private void PayableTo()
+        {
+            try
+            {
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string ctt = "select BPayableToName from BPayableTo";
+                cmd = new SqlCommand(ctt);
+                cmd.Connection = con;
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    cmbPayableTo.Items.Add(rdr.GetValue(0).ToString());
+                }
+                cmbPayableTo.Items.Add("Not In The List");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void cmbBillsType_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbBillPurpose.Text = "";
@@ -140,19 +162,73 @@ namespace BillsPayableSystem
             }
         }
 
-       
-
-       
-
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtPayableTo.Text))
-            {
-                MessageBox.Show("Please  enter Payable To", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //if (string.IsNullOrWhiteSpace(txtPayableTo.Text))
+            //{
+            //    MessageBox.Show("Please  enter Payable To", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                
+            //}
+
+            if (string.IsNullOrWhiteSpace(cmbPayableTo.Text))
+            {
+                MessageBox.Show("Please  enter PayableTo Name", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (cmbPayableTo.Text == "Not In The List")
+            {
+
+                try
+                {
+                    con = new SqlConnection(cs.DBConn);
+                    con.Open();
+                    string ct2 = "select BPayableToName from BPayableTo where BillId='" + nameOfBillId + "'";
+                   
+
+                    cmd = new SqlCommand(ct2);
+                    cmd.Connection = con;
+                    rdr = cmd.ExecuteReader();
+
+                    if (rdr.Read())
+                    {
+                        MessageBox.Show("This PayableTo Name Already Exists,Please Select From List", "Error", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+
+                    else
+                    {
+                        try
+                        {
+
+                            con = new SqlConnection(cs.DBConn);
+                            String query1 = "insert into BPayableTo (BPayableToName, BillId) values (@d1,@d2)" +
+                                           "SELECT CONVERT(int,SCOPE_IDENTITY())";
+                            cmd = new SqlCommand(query1);
+                            cmd.Connection = con;
+                            cmd.Parameters.AddWithValue("@d1", txtPayableTo.Text);
+                            cmd.Parameters.AddWithValue("@d2", nameOfBillId);
+                            con.Open();
+                            nameOfBPayableId = (int)cmd.ExecuteScalar();
+                            con.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            else
+            {
+                nameOfBPayableId = bPayableToId;
             }
 
-            else if (string.IsNullOrWhiteSpace(txtAmount.Text))
+             if (string.IsNullOrWhiteSpace(txtAmount.Text))
             {
                 MessageBox.Show("Please  enter Amount", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -182,11 +258,13 @@ namespace BillsPayableSystem
                 return;
             }
 
-            else try
+            else
             {
+                try
+              {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, PayableTo, Note) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9)";
+                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9)";
                 cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@d1", nameOfBillId);
                 cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
@@ -195,7 +273,7 @@ namespace BillsPayableSystem
                 cmd.Parameters.AddWithValue("@d5", dtpBillDate.Value);
                 cmd.Parameters.AddWithValue("@d6", dtpBillReceivedDate.Value);
                 cmd.Parameters.AddWithValue("@d7", dtpDueDate.Value);
-                cmd.Parameters.AddWithValue("@d8", txtPayableTo.Text);
+                cmd.Parameters.AddWithValue("@d8", nameOfBPayableId);
                 cmd.Parameters.AddWithValue("@d9", txtNote.Text);
                 
                 cmd.ExecuteNonQuery();
@@ -209,10 +287,14 @@ namespace BillsPayableSystem
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }        
+            }
+          }        
         }
         private void ClearData()
         {
+            cmbPayableTo.Text = "";
+            cmbPayableTo.Items.Clear();
+            cmbPayableTo.SelectedIndex = -1;
             txtPayableTo.Clear();
             txtAmount.Clear();
             cmbPaymentMethod.SelectedIndex = -1;
@@ -222,6 +304,47 @@ namespace BillsPayableSystem
             cmbBillPurpose.SelectedIndex = -1;
             txtBillNarrative.Clear();
             txtNote.Clear();
+        }
+
+        private void cmbPayableTo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbPayableTo.Text == "Not In The List")
+            {
+                txtPayableTo.Visible = true;
+                txtPayableTo.Focus();
+            }
+            else
+            {
+                txtPayableTo.Clear();
+                txtPayableTo.Visible = false;
+
+                try
+                {
+                    con = new SqlConnection(cs.DBConn);
+                    con.Open();
+                    cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT BPayableToId from BPayableTo WHERE BPayableToName= '" + cmbPayableTo.Text + "'";
+                    rdr = cmd.ExecuteReader();
+
+                    if (rdr.Read())
+                    {
+                        bPayableToId = rdr.GetInt32(0);
+                    }
+                    if ((rdr != null))
+                    {
+                        rdr.Close();
+                    }
+                    if (con.State == ConnectionState.Open)
+                    {
+                        con.Close();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }    
     }
 }

@@ -50,6 +50,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblNote = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.RichTextBox();
+            this.cmbPayableTo = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblBillType
@@ -57,7 +58,7 @@
             this.lblBillType.AutoSize = true;
             this.lblBillType.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBillType.ForeColor = System.Drawing.Color.Yellow;
-            this.lblBillType.Location = new System.Drawing.Point(625, 85);
+            this.lblBillType.Location = new System.Drawing.Point(699, 85);
             this.lblBillType.Name = "lblBillType";
             this.lblBillType.Size = new System.Drawing.Size(93, 22);
             this.lblBillType.TabIndex = 0;
@@ -68,7 +69,7 @@
             this.lblBillsName.AutoSize = true;
             this.lblBillsName.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBillsName.ForeColor = System.Drawing.Color.Yellow;
-            this.lblBillsName.Location = new System.Drawing.Point(599, 141);
+            this.lblBillsName.Location = new System.Drawing.Point(687, 141);
             this.lblBillsName.Name = "lblBillsName";
             this.lblBillsName.Size = new System.Drawing.Size(120, 22);
             this.lblBillsName.TabIndex = 1;
@@ -90,7 +91,7 @@
             this.cmbBillType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBillType.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBillType.FormattingEnabled = true;
-            this.cmbBillType.Location = new System.Drawing.Point(735, 85);
+            this.cmbBillType.Location = new System.Drawing.Point(813, 85);
             this.cmbBillType.Name = "cmbBillType";
             this.cmbBillType.Size = new System.Drawing.Size(264, 30);
             this.cmbBillType.TabIndex = 6;
@@ -101,7 +102,7 @@
             this.cmbBillPurpose.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBillPurpose.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBillPurpose.FormattingEnabled = true;
-            this.cmbBillPurpose.Location = new System.Drawing.Point(735, 141);
+            this.cmbBillPurpose.Location = new System.Drawing.Point(813, 142);
             this.cmbBillPurpose.Name = "cmbBillPurpose";
             this.cmbBillPurpose.Size = new System.Drawing.Size(264, 30);
             this.cmbBillPurpose.TabIndex = 7;
@@ -132,7 +133,7 @@
             this.lblPayableTo.AutoSize = true;
             this.lblPayableTo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPayableTo.ForeColor = System.Drawing.Color.Yellow;
-            this.lblPayableTo.Location = new System.Drawing.Point(155, 279);
+            this.lblPayableTo.Location = new System.Drawing.Point(155, 260);
             this.lblPayableTo.Name = "lblPayableTo";
             this.lblPayableTo.Size = new System.Drawing.Size(111, 22);
             this.lblPayableTo.TabIndex = 15;
@@ -140,10 +141,10 @@
             // 
             // txtAmount
             // 
-            this.txtAmount.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAmount.Location = new System.Drawing.Point(272, 360);
+            this.txtAmount.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAmount.Location = new System.Drawing.Point(272, 346);
             this.txtAmount.Name = "txtAmount";
-            this.txtAmount.Size = new System.Drawing.Size(267, 32);
+            this.txtAmount.Size = new System.Drawing.Size(267, 29);
             this.txtAmount.TabIndex = 25;
             // 
             // cmbPaymentMethod
@@ -154,15 +155,15 @@
             this.cmbPaymentMethod.Items.AddRange(new object[] {
             "Cheque",
             "Cash"});
-            this.cmbPaymentMethod.Location = new System.Drawing.Point(272, 433);
+            this.cmbPaymentMethod.Location = new System.Drawing.Point(272, 402);
             this.cmbPaymentMethod.Name = "cmbPaymentMethod";
             this.cmbPaymentMethod.Size = new System.Drawing.Size(267, 30);
             this.cmbPaymentMethod.TabIndex = 24;
             // 
             // txtBillNarrative
             // 
-            this.txtBillNarrative.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBillNarrative.Location = new System.Drawing.Point(735, 212);
+            this.txtBillNarrative.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBillNarrative.Location = new System.Drawing.Point(813, 196);
             this.txtBillNarrative.Name = "txtBillNarrative";
             this.txtBillNarrative.Size = new System.Drawing.Size(264, 119);
             this.txtBillNarrative.TabIndex = 23;
@@ -173,7 +174,7 @@
             this.lblAmount.AutoSize = true;
             this.lblAmount.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAmount.ForeColor = System.Drawing.Color.Yellow;
-            this.lblAmount.Location = new System.Drawing.Point(182, 360);
+            this.lblAmount.Location = new System.Drawing.Point(182, 346);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(84, 22);
             this.lblAmount.TabIndex = 22;
@@ -184,7 +185,7 @@
             this.lblPaymentMethod.AutoSize = true;
             this.lblPaymentMethod.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPaymentMethod.ForeColor = System.Drawing.Color.Yellow;
-            this.lblPaymentMethod.Location = new System.Drawing.Point(107, 433);
+            this.lblPaymentMethod.Location = new System.Drawing.Point(107, 402);
             this.lblPaymentMethod.Name = "lblPaymentMethod";
             this.lblPaymentMethod.Size = new System.Drawing.Size(159, 22);
             this.lblPaymentMethod.TabIndex = 21;
@@ -195,7 +196,7 @@
             this.lblDescription.AutoSize = true;
             this.lblDescription.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescription.ForeColor = System.Drawing.Color.Yellow;
-            this.lblDescription.Location = new System.Drawing.Point(589, 211);
+            this.lblDescription.Location = new System.Drawing.Point(675, 196);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(132, 22);
             this.lblDescription.TabIndex = 20;
@@ -241,12 +242,13 @@
             // 
             // txtPayableTo
             // 
-            this.txtPayableTo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPayableTo.Location = new System.Drawing.Point(272, 279);
+            this.txtPayableTo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPayableTo.Location = new System.Drawing.Point(540, 277);
             this.txtPayableTo.Name = "txtPayableTo";
             this.txtPayableTo.Size = new System.Drawing.Size(267, 52);
             this.txtPayableTo.TabIndex = 34;
             this.txtPayableTo.Text = "";
+            this.txtPayableTo.Visible = false;
             // 
             // label1
             // 
@@ -264,7 +266,7 @@
             this.lblNote.AutoSize = true;
             this.lblNote.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.lblNote.Location = new System.Drawing.Point(660, 359);
+            this.lblNote.Location = new System.Drawing.Point(748, 349);
             this.lblNote.Name = "lblNote";
             this.lblNote.Size = new System.Drawing.Size(59, 22);
             this.lblNote.TabIndex = 36;
@@ -272,18 +274,34 @@
             // 
             // txtNote
             // 
-            this.txtNote.Location = new System.Drawing.Point(735, 360);
+            this.txtNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNote.Location = new System.Drawing.Point(813, 349);
             this.txtNote.Name = "txtNote";
             this.txtNote.Size = new System.Drawing.Size(264, 63);
             this.txtNote.TabIndex = 37;
             this.txtNote.Text = "";
+            // 
+            // cmbPayableTo
+            // 
+            this.cmbPayableTo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbPayableTo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbPayableTo.DropDownWidth = 233;
+            this.cmbPayableTo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPayableTo.FormattingEnabled = true;
+            this.cmbPayableTo.ItemHeight = 22;
+            this.cmbPayableTo.Location = new System.Drawing.Point(272, 260);
+            this.cmbPayableTo.Name = "cmbPayableTo";
+            this.cmbPayableTo.Size = new System.Drawing.Size(267, 30);
+            this.cmbPayableTo.TabIndex = 38;
+            this.cmbPayableTo.SelectedIndexChanged += new System.EventHandler(this.cmbPayableTo_SelectedIndexChanged);
             // 
             // frmBillEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Green;
-            this.ClientSize = new System.Drawing.Size(1055, 570);
+            this.ClientSize = new System.Drawing.Size(1117, 615);
+            this.Controls.Add(this.cmbPayableTo);
             this.Controls.Add(this.txtNote);
             this.Controls.Add(this.lblNote);
             this.Controls.Add(this.label1);
@@ -339,6 +357,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblNote;
         private System.Windows.Forms.RichTextBox txtNote;
+        private System.Windows.Forms.ComboBox cmbPayableTo;
     }
 }
 
