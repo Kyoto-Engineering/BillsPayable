@@ -21,7 +21,7 @@ namespace BillsPayableSystem
         private SqlDataReader rdr;
         ConnectionString cs = new ConnectionString();
         public int btype_id, nameOfBillId, bPayableToId, user_id, nameOfBPayableId;
-        public string test;
+        
 
         public frmBillEntry()
         {
@@ -33,18 +33,43 @@ namespace BillsPayableSystem
             BillsType();
             PayableTo();
         }
+        private void ClearData()
+        {
+            //cmbPayableTo.Text = "";
+            cmbPayableTo.Items.Clear();
+            cmbPayableTo.SelectedIndex = -1;
+            txtPayableTo.Visible = false;
+            txtPayableTo.Clear();
+            txtAmount.Clear();
+            cmbPaymentMethod.SelectedIndex = -1;
+            cmbBillType.SelectedIndex = -1;
+            cmbBillPurpose.Text = "";
+            cmbBillPurpose.Items.Clear();
+            cmbBillPurpose.SelectedIndex = -1;
+            txtBillNarrative.Clear();
+            txtNote.Clear();
+        }
+
+        private void connection()
+        {
+            con = new SqlConnection(cs.DBConn);
+            con.Open();
+        }
+
+        private void reader()
+        {
+            cmd.Connection = con;
+            rdr = cmd.ExecuteReader();
+        }
 
         private void BillsType()
         {
             try
             {
-
-                con = new SqlConnection(cs.DBConn);
-                con.Open();
+                connection();
                 string ct = "select BillTypeName from BillsPayableType";
                 cmd = new SqlCommand(ct);
-                cmd.Connection = con;
-                rdr = cmd.ExecuteReader();
+                reader();
                 while (rdr.Read())
                 {
                     cmbBillType.Items.Add(rdr.GetValue(0).ToString());
@@ -58,16 +83,12 @@ namespace BillsPayableSystem
 
         private void PayableTo()
         {
-
-
             try
             {
-                con = new SqlConnection(cs.DBConn);
-                con.Open();
+                connection();
                 string ctt = "select BPayableToName from BPayableTo";
                 cmd = new SqlCommand(ctt);
-                cmd.Connection = con;
-                rdr = cmd.ExecuteReader();
+                reader();
                 while (rdr.Read())
                 {
                     cmbPayableTo.Items.Add(rdr.GetValue(0).ToString());
@@ -94,13 +115,11 @@ namespace BillsPayableSystem
 
                 try
                 {
-                    con = new SqlConnection(cs.DBConn);
-                    con.Open();
+                    connection();
                     cmd = con.CreateCommand();
-                    cmd.CommandText = "SELECT BPayableToId from BPayableTo WHERE BPayableToName= '" + cmbPayableTo.Text +
-                                      "'";
+                    cmd.CommandText = "SELECT BPayableToId from BPayableTo WHERE BPayableToName= '" + cmbPayableTo.Text + "'";
+                    
                     rdr = cmd.ExecuteReader();
-
                     if (rdr.Read())
                     {
                         bPayableToId = rdr.GetInt32(0);
@@ -131,16 +150,12 @@ namespace BillsPayableSystem
 
             txtBillNarrative.Clear();
 
-
-
             try
             {
-                con = new SqlConnection(cs.DBConn);
-                con.Open();
+                connection();
                 cmd = con.CreateCommand();
 
-                cmd.CommandText = "SELECT BillTypeId from BillsPayableType WHERE BillTypeName= '" + cmbBillType.Text +
-                                  "'";
+                cmd.CommandText = "SELECT BillTypeId from BillsPayableType WHERE BillTypeName= '" + cmbBillType.Text + "'";
 
                 rdr = cmd.ExecuteReader();
 
@@ -157,13 +172,11 @@ namespace BillsPayableSystem
                     con.Close();
                 }
 
-                con = new SqlConnection(cs.DBConn);
-                con.Open();
+                connection();
                 string ct = "select distinct RTRIM(BillName) from BillsPayableName where BillTypeId= " + btype_id + "";
 
                 cmd = new SqlCommand(ct);
-                cmd.Connection = con;
-                rdr = cmd.ExecuteReader();
+                reader();
 
                 while (rdr.Read())
                 {
@@ -185,8 +198,7 @@ namespace BillsPayableSystem
         {
             try
             {
-                con = new SqlConnection(cs.DBConn);
-                con.Open();
+                connection();
                 cmd = con.CreateCommand();
                 cmd.CommandText = "select BillId from BillsPayableName WHERE BillName= '" + cmbBillPurpose.Text + "'";
 
@@ -213,65 +225,60 @@ namespace BillsPayableSystem
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
+              String x="";
               if (string.IsNullOrWhiteSpace(txtAmount.Text))
             {
                 MessageBox.Show("Please  enter Amount", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
 
             else if (string.IsNullOrWhiteSpace(cmbPaymentMethod.Text))
             {
                 MessageBox.Show("Please Select Payment Method", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
 
             else if (string.IsNullOrWhiteSpace(cmbBillType.Text))
             {
                 MessageBox.Show("Please Select Type of Bill", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
 
             else if (string.IsNullOrWhiteSpace(cmbBillPurpose.Text))
             {
                 MessageBox.Show("Please Select Bill Purpose", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
 
             else if (string.IsNullOrWhiteSpace(txtBillNarrative.Text))
             {
                 MessageBox.Show("Please  enter Bill Narrative", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
 
-              else if (string.IsNullOrWhiteSpace(cmbPayableTo.Text))
+            else if (string.IsNullOrWhiteSpace(cmbPayableTo.Text))
             {
                 MessageBox.Show("Please  enter PayableTo Name", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
             else if (cmbPayableTo.Text == "Not In The List")
             {
-                //compare();
                 try
                 {
-                    con = new SqlConnection(cs.DBConn);
-                    con.Open();
-                    string ct2 = "select BPayableToName from BPayableTo where BillId='" + nameOfBillId + "'";
+                    connection();
+                    string ct2 = "select BPayableToName from BPayableTo where BPayableToName='" + txtPayableTo.Text + "'";
 
                     cmd = new SqlCommand(ct2);
-                    cmd.Connection = con;
-                    rdr = cmd.ExecuteReader();
-                    if (rdr.Read() && rdr.IsDBNull(0))
-                {
-                        MessageBox.Show("This PayableTo Name Already Exists,Please Select From List", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    reader();
+                    while (rdr.Read())
+                    {
+                      x = rdr.GetValue(0).ToString();
+                    }
+                    if(x.Length>0) 
+                     {
+                        MessageBox.Show("This PayableTo Name Already Exists,Please Select From List", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
                         con.Close();
 
-                    }
+                     }
 
                     else try
                         {
-                            con.Close();
-                            con = new SqlConnection(cs.DBConn);
+                            connection();                            
                             String query1 = "insert into BPayableTo (BPayableToName, BillId) values (@d1,@d2)" +
                                             "SELECT CONVERT(int,SCOPE_IDENTITY())";
                             cmd = new SqlCommand(query1);
@@ -297,8 +304,7 @@ namespace BillsPayableSystem
                 nameOfBPayableId = bPayableToId;
               try
                 {
-                    con = new SqlConnection(cs.DBConn);
-                    con.Open();
+                    connection();
                     String query =
                         "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9)";
                     cmd = new SqlCommand(query, con);
@@ -324,52 +330,6 @@ namespace BillsPayableSystem
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void ClearData()
-        {
-            //cmbPayableTo.Text = "";
-            cmbPayableTo.Items.Clear();
-            cmbPayableTo.SelectedIndex = -1;
-            txtPayableTo.Visible = false;
-            txtPayableTo.Clear();
-            txtAmount.Clear();
-            cmbPaymentMethod.SelectedIndex = -1;
-            cmbBillType.SelectedIndex = -1;
-            cmbBillPurpose.Text = "";
-            cmbBillPurpose.Items.Clear();
-            cmbBillPurpose.SelectedIndex = -1;
-            txtBillNarrative.Clear();
-            txtNote.Clear();
-        }
-
-        
-
-        private void compare()
-        {
-            if (cmbPayableTo.Text == "Not In The List")
-            {
-                try
-                {
-                    con = new SqlConnection(cs.DBConn);
-                    con.Open();
-                    string ct2 = "select BPayableToName from BPayableTo where BillId='" + nameOfBillId + "'";
-
-                    cmd = new SqlCommand(ct2);
-                    cmd.Connection = con;
-                    rdr = cmd.ExecuteReader();
-                    if (rdr.Read())
-                    {
-                        MessageBox.Show("This PayableTo Name Already Exists,Please Select From List", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        con.Close();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
