@@ -212,41 +212,7 @@ namespace BillsPayableSystem
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-
-            if (string.IsNullOrWhiteSpace(cmbPayableTo.Text))
-            {
-                MessageBox.Show("Please  enter PayableTo Name", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
-            else if (cmbPayableTo.Text == "Not In The List")
-            {
-                compare();
-                try
-                {
-                    con = new SqlConnection(cs.DBConn);
-                    String query1 = "insert into BPayableTo (BPayableToName, BillId) values (@d1,@d2)" +
-                                    "SELECT CONVERT(int,SCOPE_IDENTITY())";
-                    cmd = new SqlCommand(query1);
-                    cmd.Connection = con;
-                    cmd.Parameters.AddWithValue("@d1", txtPayableTo.Text);
-                    cmd.Parameters.AddWithValue("@d2", nameOfBillId);
-                    con.Open();
-                    nameOfBPayableId = (int) cmd.ExecuteScalar();
-                    con.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-
-            else
-            {
-                nameOfBPayableId = bPayableToId;
-            }
-
-
-            if (string.IsNullOrWhiteSpace(txtAmount.Text))
+              if (string.IsNullOrWhiteSpace(txtAmount.Text))
             {
                 MessageBox.Show("Please  enter Amount", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -276,9 +242,58 @@ namespace BillsPayableSystem
 
             }
 
+              else if (string.IsNullOrWhiteSpace(cmbPayableTo.Text))
+            {
+                MessageBox.Show("Please  enter PayableTo Name", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+            else if (cmbPayableTo.Text == "Not In The List")
+            {
+                //compare();
+                try
+                {
+                    con = new SqlConnection(cs.DBConn);
+                    con.Open();
+                    string ct2 = "select BPayableToName from BPayableTo where BillId='" + nameOfBillId + "'";
+
+                    cmd = new SqlCommand(ct2);
+                    cmd.Connection = con;
+                    rdr = cmd.ExecuteReader();
+                    if (rdr.Read())
+                    {
+                        MessageBox.Show("This PayableTo Name Already Exists,Please Select From List", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        con.Close();
+                    }
+
+                    else try
+                        {
+                            con.Close();
+                            con = new SqlConnection(cs.DBConn);
+                            String query1 = "insert into BPayableTo (BPayableToName, BillId) values (@d1,@d2)" +
+                                            "SELECT CONVERT(int,SCOPE_IDENTITY())";
+                            cmd = new SqlCommand(query1);
+                            cmd.Connection = con;
+                            cmd.Parameters.AddWithValue("@d1", txtPayableTo.Text);
+                            cmd.Parameters.AddWithValue("@d2", nameOfBillId);
+                            con.Open();
+                            nameOfBPayableId = (int) cmd.ExecuteScalar();
+                            con.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
             else
             {
-                try
+                nameOfBPayableId = bPayableToId;
+              try
                 {
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
