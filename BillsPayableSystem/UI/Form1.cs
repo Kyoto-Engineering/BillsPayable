@@ -21,6 +21,7 @@ namespace BillsPayableSystem
         private SqlDataReader rdr;
         ConnectionString cs = new ConnectionString();
         public int btype_id, nameOfBillId, bPayableToId, user_id, nameOfBPayableId;
+        public string test;
 
         public frmBillEntry()
         {
@@ -259,11 +260,12 @@ namespace BillsPayableSystem
                     cmd = new SqlCommand(ct2);
                     cmd.Connection = con;
                     rdr = cmd.ExecuteReader();
-                    if (rdr.Read())
-                    {
+                    if (rdr.Read() && rdr.IsDBNull(0))
+                {
                         MessageBox.Show("This PayableTo Name Already Exists,Please Select From List", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                         con.Close();
+
                     }
 
                     else try
