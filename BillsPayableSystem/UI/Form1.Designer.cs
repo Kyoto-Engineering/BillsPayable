@@ -243,7 +243,7 @@
             // txtPayableTo
             // 
             this.txtPayableTo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPayableTo.Location = new System.Drawing.Point(540, 277);
+            this.txtPayableTo.Location = new System.Drawing.Point(540, 261);
             this.txtPayableTo.Name = "txtPayableTo";
             this.txtPayableTo.Size = new System.Drawing.Size(267, 52);
             this.txtPayableTo.TabIndex = 34;
