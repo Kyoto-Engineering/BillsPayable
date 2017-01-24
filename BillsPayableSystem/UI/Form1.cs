@@ -261,31 +261,34 @@ namespace BillsPayableSystem
                 try
                 {
                     connection();
-                    string ct2 = "select BPayableToName from BPayableTo where BPayableToName='" + txtPayableTo.Text + "'";
+                    string ct2 = "select BPayableToName from BPayableTo where BPayableToName='" + txtPayableTo.Text +
+                                 "'";
 
                     cmd = new SqlCommand(ct2);
                     reader();
                     while (rdr.Read())
                     {
-                      x = rdr.GetValue(0).ToString();
+                        x = rdr.GetValue(0).ToString();
                     }
-                    if(x.Length>0) 
-                     {
-                        MessageBox.Show("This PayableTo Name Already Exists,Please Select From List", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (x.Length > 0)
+                    {
+                        MessageBox.Show("This PayableTo Name Already Exists,Please Select From List", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                         con.Close();
 
-                     }
+                    }
 
-                    else try
+                    else
+                        try
                         {
-                            connection();                            
+
+                            connection();
                             String query1 = "insert into BPayableTo (BPayableToName, BillId) values (@d1,@d2)" +
                                             "SELECT CONVERT(int,SCOPE_IDENTITY())";
                             cmd = new SqlCommand(query1);
                             cmd.Connection = con;
                             cmd.Parameters.AddWithValue("@d1", txtPayableTo.Text);
                             cmd.Parameters.AddWithValue("@d2", nameOfBillId);
-                            con.Open();
                             nameOfBPayableId = (int) cmd.ExecuteScalar();
                             con.Close();
                         }
@@ -302,11 +305,11 @@ namespace BillsPayableSystem
             else
             {
                 nameOfBPayableId = bPayableToId;
-              try
-                {
+            }
+             try
+                {   
                     connection();
-                    String query =
-                        "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9)";
+                    String query ="insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9)";
                     cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@d1", nameOfBillId);
                     cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
@@ -334,6 +337,6 @@ namespace BillsPayableSystem
             }
         }
     }
-}
+
       
     
