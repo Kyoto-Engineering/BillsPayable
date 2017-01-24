@@ -323,7 +323,11 @@ namespace BillsPayableSystem
                     cmd.Parameters.AddWithValue("@d9", txtNote.Text);
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    SaveNewPayableTo();
+                    if (cmbPayableTo.Text == "Not In The List")
+                    {
+                        SaveNewPayableTo();
+                    }
+                    
                     MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearData();
                     PayableTo();
