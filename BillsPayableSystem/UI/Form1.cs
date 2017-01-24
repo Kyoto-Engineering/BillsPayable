@@ -321,11 +321,10 @@ namespace BillsPayableSystem
                     cmd.Parameters.AddWithValue("@d7", dtpDueDate.Value);
                     cmd.Parameters.AddWithValue("@d8", nameOfBPayableId);
                     cmd.Parameters.AddWithValue("@d9", txtNote.Text);
-
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                     con.Close();
+                    SaveNewPayableTo();
+                    MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearData();
                     PayableTo();
 

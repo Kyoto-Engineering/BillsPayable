@@ -167,7 +167,7 @@
             // txtBillNarrative
             // 
             this.txtBillNarrative.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBillNarrative.Location = new System.Drawing.Point(813, 218);
+            this.txtBillNarrative.Location = new System.Drawing.Point(813, 248);
             this.txtBillNarrative.Name = "txtBillNarrative";
             this.txtBillNarrative.Size = new System.Drawing.Size(363, 119);
             this.txtBillNarrative.TabIndex = 23;
