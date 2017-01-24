@@ -73,7 +73,7 @@
             this.lblBillsName.AutoSize = true;
             this.lblBillsName.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBillsName.ForeColor = System.Drawing.Color.Yellow;
-            this.lblBillsName.Location = new System.Drawing.Point(687, 166);
+            this.lblBillsName.Location = new System.Drawing.Point(687, 170);
             this.lblBillsName.Name = "lblBillsName";
             this.lblBillsName.Size = new System.Drawing.Size(120, 22);
             this.lblBillsName.TabIndex = 1;
@@ -97,7 +97,7 @@
             this.cmbBillType.FormattingEnabled = true;
             this.cmbBillType.Location = new System.Drawing.Point(813, 85);
             this.cmbBillType.Name = "cmbBillType";
-            this.cmbBillType.Size = new System.Drawing.Size(264, 30);
+            this.cmbBillType.Size = new System.Drawing.Size(363, 30);
             this.cmbBillType.TabIndex = 6;
             this.cmbBillType.SelectedIndexChanged += new System.EventHandler(this.cmbBillsType_SelectedIndexChanged);
             // 
@@ -106,9 +106,9 @@
             this.cmbBillPurpose.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBillPurpose.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBillPurpose.FormattingEnabled = true;
-            this.cmbBillPurpose.Location = new System.Drawing.Point(813, 166);
+            this.cmbBillPurpose.Location = new System.Drawing.Point(813, 170);
             this.cmbBillPurpose.Name = "cmbBillPurpose";
-            this.cmbBillPurpose.Size = new System.Drawing.Size(264, 30);
+            this.cmbBillPurpose.Size = new System.Drawing.Size(363, 30);
             this.cmbBillPurpose.TabIndex = 7;
             this.cmbBillPurpose.SelectedIndexChanged += new System.EventHandler(this.cmbBillPurpose_SelectedIndexChanged_1);
             // 
@@ -124,9 +124,9 @@
             // 
             this.BtnSave.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnSave.ForeColor = System.Drawing.Color.DarkGreen;
-            this.BtnSave.Location = new System.Drawing.Point(887, 455);
+            this.BtnSave.Location = new System.Drawing.Point(618, 477);
             this.BtnSave.Name = "BtnSave";
-            this.BtnSave.Size = new System.Drawing.Size(112, 53);
+            this.BtnSave.Size = new System.Drawing.Size(112, 60);
             this.BtnSave.TabIndex = 12;
             this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = true;
@@ -146,7 +146,7 @@
             // txtAmount
             // 
             this.txtAmount.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAmount.Location = new System.Drawing.Point(272, 346);
+            this.txtAmount.Location = new System.Drawing.Point(272, 364);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(267, 29);
             this.txtAmount.TabIndex = 25;
@@ -167,9 +167,9 @@
             // txtBillNarrative
             // 
             this.txtBillNarrative.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBillNarrative.Location = new System.Drawing.Point(813, 214);
+            this.txtBillNarrative.Location = new System.Drawing.Point(813, 218);
             this.txtBillNarrative.Name = "txtBillNarrative";
-            this.txtBillNarrative.Size = new System.Drawing.Size(264, 119);
+            this.txtBillNarrative.Size = new System.Drawing.Size(363, 119);
             this.txtBillNarrative.TabIndex = 23;
             this.txtBillNarrative.Text = "";
             // 
@@ -178,7 +178,7 @@
             this.lblAmount.AutoSize = true;
             this.lblAmount.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAmount.ForeColor = System.Drawing.Color.Yellow;
-            this.lblAmount.Location = new System.Drawing.Point(182, 346);
+            this.lblAmount.Location = new System.Drawing.Point(182, 364);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(84, 22);
             this.lblAmount.TabIndex = 22;
@@ -200,7 +200,7 @@
             this.lblDescription.AutoSize = true;
             this.lblDescription.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescription.ForeColor = System.Drawing.Color.Yellow;
-            this.lblDescription.Location = new System.Drawing.Point(675, 216);
+            this.lblDescription.Location = new System.Drawing.Point(675, 220);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(132, 22);
             this.lblDescription.TabIndex = 20;
@@ -247,7 +247,7 @@
             // txtPayableTo
             // 
             this.txtPayableTo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPayableTo.Location = new System.Drawing.Point(540, 261);
+            this.txtPayableTo.Location = new System.Drawing.Point(272, 296);
             this.txtPayableTo.Name = "txtPayableTo";
             this.txtPayableTo.Size = new System.Drawing.Size(267, 52);
             this.txtPayableTo.TabIndex = 34;
@@ -270,7 +270,7 @@
             this.lblNote.AutoSize = true;
             this.lblNote.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.lblNote.Location = new System.Drawing.Point(748, 369);
+            this.lblNote.Location = new System.Drawing.Point(748, 373);
             this.lblNote.Name = "lblNote";
             this.lblNote.Size = new System.Drawing.Size(59, 22);
             this.lblNote.TabIndex = 36;
@@ -279,9 +279,9 @@
             // txtNote
             // 
             this.txtNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNote.Location = new System.Drawing.Point(813, 369);
+            this.txtNote.Location = new System.Drawing.Point(813, 373);
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(264, 63);
+            this.txtNote.Size = new System.Drawing.Size(363, 63);
             this.txtNote.TabIndex = 37;
             this.txtNote.Text = "";
             // 
@@ -303,7 +303,7 @@
             // 
             this.lblFrom.AutoSize = true;
             this.lblFrom.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFrom.Location = new System.Drawing.Point(565, 127);
+            this.lblFrom.Location = new System.Drawing.Point(736, 135);
             this.lblFrom.Name = "lblFrom";
             this.lblFrom.Size = new System.Drawing.Size(53, 19);
             this.lblFrom.TabIndex = 39;
@@ -313,7 +313,7 @@
             // 
             this.lblTo.AutoSize = true;
             this.lblTo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTo.Location = new System.Drawing.Point(844, 127);
+            this.lblTo.Location = new System.Drawing.Point(994, 135);
             this.lblTo.Name = "lblTo";
             this.lblTo.Size = new System.Drawing.Size(35, 19);
             this.lblTo.TabIndex = 40;
@@ -322,17 +322,17 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(624, 127);
+            this.dateTimePicker1.Location = new System.Drawing.Point(813, 131);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 26);
+            this.dateTimePicker1.Size = new System.Drawing.Size(163, 26);
             this.dateTimePicker1.TabIndex = 41;
             // 
             // dateTimePicker2
             // 
             this.dateTimePicker2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(877, 127);
+            this.dateTimePicker2.Location = new System.Drawing.Point(1034, 131);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 26);
+            this.dateTimePicker2.Size = new System.Drawing.Size(142, 26);
             this.dateTimePicker2.TabIndex = 42;
             // 
             // frmBillEntry
@@ -340,7 +340,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Green;
-            this.ClientSize = new System.Drawing.Size(1117, 615);
+            this.ClientSize = new System.Drawing.Size(1283, 694);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.lblTo);

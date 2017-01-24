@@ -223,90 +223,91 @@ namespace BillsPayableSystem
             }
         }
 
+        private void SaveNewPayableTo()
+        {
+            try
+            {
+
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string query1 = "insert into BPayableTo (BPayableToName, BillId) values (@d1,@d2)" + "SELECT CONVERT(int,SCOPE_IDENTITY())";
+                cmd = new SqlCommand(query1, con);
+                cmd.Parameters.AddWithValue("@d1", txtPayableTo.Text);
+                cmd.Parameters.AddWithValue("@d2", nameOfBillId);
+                nameOfBPayableId = (int)cmd.ExecuteScalar();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void BtnSave_Click(object sender, EventArgs e)
         {
               String x="";
+
+              if (cmbPayableTo.Text == "Not In The List")
+              {
+                  con = new SqlConnection(cs.DBConn);
+                  con.Open();
+                  string ct2 = "select BPayableToName from BPayableTo where BPayableToName='" + txtPayableTo.Text + "'";
+                  cmd = new SqlCommand(ct2, con);
+                  rdr = cmd.ExecuteReader();
+                  if (rdr.Read())
+                  {
+                      MessageBox.Show("This PayableTo Name Already Exists,Please Select From List", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                      txtPayableTo.Clear();
+                      return;
+
+                  }
+              }
+              else
+              {
+                  nameOfBPayableId = bPayableToId;
+              }
+
+
               if (string.IsNullOrWhiteSpace(txtAmount.Text))
             {
                 MessageBox.Show("Please  enter Amount", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                  return;
+                 
             }
 
-            else if (string.IsNullOrWhiteSpace(cmbPaymentMethod.Text))
+             if (string.IsNullOrWhiteSpace(cmbPaymentMethod.Text))
             {
                 MessageBox.Show("Please Select Payment Method", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                 return;
             }
 
-            else if (string.IsNullOrWhiteSpace(cmbBillType.Text))
+           if (string.IsNullOrWhiteSpace(cmbBillType.Text))
             {
                 MessageBox.Show("Please Select Type of Bill", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               return;
             }
 
-            else if (string.IsNullOrWhiteSpace(cmbBillPurpose.Text))
+           
+            if (string.IsNullOrWhiteSpace(cmbBillPurpose.Text))
             {
                 MessageBox.Show("Please Select Bill Purpose", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
             }
 
-            else if (string.IsNullOrWhiteSpace(txtBillNarrative.Text))
+            if (string.IsNullOrWhiteSpace(txtBillNarrative.Text))
             {
                 MessageBox.Show("Please  enter Bill Narrative", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
-            else if (string.IsNullOrWhiteSpace(cmbPayableTo.Text))
+            if (string.IsNullOrWhiteSpace(cmbPayableTo.Text))
             {
                 MessageBox.Show("Please  enter PayableTo Name", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             
-            else if (cmbPayableTo.Text == "Not In The List")
-            {
+          
                 try
-                {
-                    connection();
-                    string ct2 = "select BPayableToName from BPayableTo where BPayableToName='" + txtPayableTo.Text +
-                                 "'";
-
-                    cmd = new SqlCommand(ct2);
-                    reader();
-                    while (rdr.Read())
-                    {
-                        x = rdr.GetValue(0).ToString();
-                    }
-                    if (x.Length > 0)
-                    {
-                        MessageBox.Show("This PayableTo Name Already Exists,Please Select From List", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        con.Close();
-
-                    }
-
-                    else
-                        try
-                        {
-
-                            connection();
-                            String query1 = "insert into BPayableTo (BPayableToName, BillId) values (@d1,@d2)" +
-                                            "SELECT CONVERT(int,SCOPE_IDENTITY())";
-                            cmd = new SqlCommand(query1);
-                            cmd.Connection = con;
-                            cmd.Parameters.AddWithValue("@d1", txtPayableTo.Text);
-                            cmd.Parameters.AddWithValue("@d2", nameOfBillId);
-                            nameOfBPayableId = (int) cmd.ExecuteScalar();
-                            con.Close();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                nameOfBPayableId = bPayableToId;
-            }
-             try
                 {   
                     connection();
                     String query ="insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9)";
