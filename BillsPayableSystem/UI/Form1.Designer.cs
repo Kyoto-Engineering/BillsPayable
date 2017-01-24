@@ -53,8 +53,8 @@
             this.cmbPayableTo = new System.Windows.Forms.ComboBox();
             this.lblFrom = new System.Windows.Forms.Label();
             this.lblTo = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
+            this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // lblBillType
@@ -73,7 +73,7 @@
             this.lblBillsName.AutoSize = true;
             this.lblBillsName.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBillsName.ForeColor = System.Drawing.Color.Yellow;
-            this.lblBillsName.Location = new System.Drawing.Point(687, 170);
+            this.lblBillsName.Location = new System.Drawing.Point(687, 182);
             this.lblBillsName.Name = "lblBillsName";
             this.lblBillsName.Size = new System.Drawing.Size(120, 22);
             this.lblBillsName.TabIndex = 1;
@@ -106,7 +106,7 @@
             this.cmbBillPurpose.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBillPurpose.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBillPurpose.FormattingEnabled = true;
-            this.cmbBillPurpose.Location = new System.Drawing.Point(813, 170);
+            this.cmbBillPurpose.Location = new System.Drawing.Point(813, 182);
             this.cmbBillPurpose.Name = "cmbBillPurpose";
             this.cmbBillPurpose.Size = new System.Drawing.Size(363, 30);
             this.cmbBillPurpose.TabIndex = 7;
@@ -150,6 +150,7 @@
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(267, 29);
             this.txtAmount.TabIndex = 25;
+            this.txtAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAmount_KeyPress);
             // 
             // cmbPaymentMethod
             // 
@@ -167,7 +168,7 @@
             // txtBillNarrative
             // 
             this.txtBillNarrative.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBillNarrative.Location = new System.Drawing.Point(813, 248);
+            this.txtBillNarrative.Location = new System.Drawing.Point(813, 229);
             this.txtBillNarrative.Name = "txtBillNarrative";
             this.txtBillNarrative.Size = new System.Drawing.Size(363, 119);
             this.txtBillNarrative.TabIndex = 23;
@@ -200,7 +201,7 @@
             this.lblDescription.AutoSize = true;
             this.lblDescription.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescription.ForeColor = System.Drawing.Color.Yellow;
-            this.lblDescription.Location = new System.Drawing.Point(675, 220);
+            this.lblDescription.Location = new System.Drawing.Point(669, 229);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(132, 22);
             this.lblDescription.TabIndex = 20;
@@ -302,47 +303,53 @@
             // lblFrom
             // 
             this.lblFrom.AutoSize = true;
-            this.lblFrom.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFrom.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFrom.ForeColor = System.Drawing.Color.Yellow;
             this.lblFrom.Location = new System.Drawing.Point(736, 135);
             this.lblFrom.Name = "lblFrom";
-            this.lblFrom.Size = new System.Drawing.Size(53, 19);
+            this.lblFrom.Size = new System.Drawing.Size(65, 22);
             this.lblFrom.TabIndex = 39;
             this.lblFrom.Text = "From :";
+            this.lblFrom.Visible = false;
             // 
             // lblTo
             // 
             this.lblTo.AutoSize = true;
-            this.lblTo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTo.ForeColor = System.Drawing.Color.Yellow;
             this.lblTo.Location = new System.Drawing.Point(994, 135);
             this.lblTo.Name = "lblTo";
-            this.lblTo.Size = new System.Drawing.Size(35, 19);
+            this.lblTo.Size = new System.Drawing.Size(41, 22);
             this.lblTo.TabIndex = 40;
             this.lblTo.Text = "To :";
+            this.lblTo.Visible = false;
             // 
-            // dateTimePicker1
+            // dtpFrom
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(813, 131);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(163, 26);
-            this.dateTimePicker1.TabIndex = 41;
+            this.dtpFrom.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFrom.Location = new System.Drawing.Point(813, 131);
+            this.dtpFrom.Name = "dtpFrom";
+            this.dtpFrom.Size = new System.Drawing.Size(163, 29);
+            this.dtpFrom.TabIndex = 41;
+            this.dtpFrom.Visible = false;
             // 
-            // dateTimePicker2
+            // dtpTo
             // 
-            this.dateTimePicker2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(1034, 131);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(142, 26);
-            this.dateTimePicker2.TabIndex = 42;
+            this.dtpTo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpTo.Location = new System.Drawing.Point(1034, 131);
+            this.dtpTo.Name = "dtpTo";
+            this.dtpTo.Size = new System.Drawing.Size(142, 29);
+            this.dtpTo.TabIndex = 42;
+            this.dtpTo.Visible = false;
             // 
             // frmBillEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Green;
-            this.ClientSize = new System.Drawing.Size(1283, 694);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.ClientSize = new System.Drawing.Size(1238, 614);
+            this.Controls.Add(this.dtpTo);
+            this.Controls.Add(this.dtpFrom);
             this.Controls.Add(this.lblTo);
             this.Controls.Add(this.lblFrom);
             this.Controls.Add(this.cmbPayableTo);
@@ -404,8 +411,8 @@
         private System.Windows.Forms.ComboBox cmbPayableTo;
         private System.Windows.Forms.Label lblFrom;
         private System.Windows.Forms.Label lblTo;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtpFrom;
+        private System.Windows.Forms.DateTimePicker dtpTo;
     }
 }
 
