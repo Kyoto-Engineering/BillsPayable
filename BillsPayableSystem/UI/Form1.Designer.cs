@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBillEntry));
             this.lblBillType = new System.Windows.Forms.Label();
             this.lblBillsName = new System.Windows.Forms.Label();
             this.lblBillDate = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@
             this.lblDueDate = new System.Windows.Forms.Label();
             this.lblBillReceivedDate = new System.Windows.Forms.Label();
             this.dtpBillReceivedDate = new System.Windows.Forms.DateTimePicker();
-            this.txtPayableTo = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNote = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.RichTextBox();
@@ -55,13 +55,15 @@
             this.lblTo = new System.Windows.Forms.Label();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
+            this.lblSiNo = new System.Windows.Forms.Label();
+            this.txtBillSiNo = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblBillType
             // 
             this.lblBillType.AutoSize = true;
             this.lblBillType.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBillType.ForeColor = System.Drawing.Color.Yellow;
+            this.lblBillType.ForeColor = System.Drawing.Color.Blue;
             this.lblBillType.Location = new System.Drawing.Point(699, 85);
             this.lblBillType.Name = "lblBillType";
             this.lblBillType.Size = new System.Drawing.Size(93, 22);
@@ -72,7 +74,7 @@
             // 
             this.lblBillsName.AutoSize = true;
             this.lblBillsName.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBillsName.ForeColor = System.Drawing.Color.Yellow;
+            this.lblBillsName.ForeColor = System.Drawing.Color.Blue;
             this.lblBillsName.Location = new System.Drawing.Point(687, 182);
             this.lblBillsName.Name = "lblBillsName";
             this.lblBillsName.Size = new System.Drawing.Size(120, 22);
@@ -83,8 +85,8 @@
             // 
             this.lblBillDate.AutoSize = true;
             this.lblBillDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBillDate.ForeColor = System.Drawing.Color.Yellow;
-            this.lblBillDate.Location = new System.Drawing.Point(24, 80);
+            this.lblBillDate.ForeColor = System.Drawing.Color.Blue;
+            this.lblBillDate.Location = new System.Drawing.Point(24, 87);
             this.lblBillDate.Name = "lblBillDate";
             this.lblBillDate.Size = new System.Drawing.Size(242, 22);
             this.lblBillDate.TabIndex = 2;
@@ -114,7 +116,8 @@
             // 
             // dtpBillDate
             // 
-            this.dtpBillDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpBillDate.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.dtpBillDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpBillDate.Location = new System.Drawing.Point(272, 85);
             this.dtpBillDate.Name = "dtpBillDate";
             this.dtpBillDate.Size = new System.Drawing.Size(267, 29);
@@ -124,11 +127,11 @@
             // 
             this.BtnSave.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnSave.ForeColor = System.Drawing.Color.DarkGreen;
-            this.BtnSave.Location = new System.Drawing.Point(618, 477);
+            this.BtnSave.Image = ((System.Drawing.Image)(resources.GetObject("BtnSave.Image")));
+            this.BtnSave.Location = new System.Drawing.Point(542, 466);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(112, 60);
             this.BtnSave.TabIndex = 12;
-            this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = true;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
@@ -136,8 +139,8 @@
             // 
             this.lblPayableTo.AutoSize = true;
             this.lblPayableTo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPayableTo.ForeColor = System.Drawing.Color.Yellow;
-            this.lblPayableTo.Location = new System.Drawing.Point(155, 260);
+            this.lblPayableTo.ForeColor = System.Drawing.Color.Blue;
+            this.lblPayableTo.Location = new System.Drawing.Point(155, 295);
             this.lblPayableTo.Name = "lblPayableTo";
             this.lblPayableTo.Size = new System.Drawing.Size(111, 22);
             this.lblPayableTo.TabIndex = 15;
@@ -146,7 +149,7 @@
             // txtAmount
             // 
             this.txtAmount.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAmount.Location = new System.Drawing.Point(272, 364);
+            this.txtAmount.Location = new System.Drawing.Point(272, 351);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(267, 29);
             this.txtAmount.TabIndex = 25;
@@ -178,8 +181,8 @@
             // 
             this.lblAmount.AutoSize = true;
             this.lblAmount.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAmount.ForeColor = System.Drawing.Color.Yellow;
-            this.lblAmount.Location = new System.Drawing.Point(182, 364);
+            this.lblAmount.ForeColor = System.Drawing.Color.Blue;
+            this.lblAmount.Location = new System.Drawing.Point(182, 350);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(84, 22);
             this.lblAmount.TabIndex = 22;
@@ -189,7 +192,7 @@
             // 
             this.lblPaymentMethod.AutoSize = true;
             this.lblPaymentMethod.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPaymentMethod.ForeColor = System.Drawing.Color.Yellow;
+            this.lblPaymentMethod.ForeColor = System.Drawing.Color.Blue;
             this.lblPaymentMethod.Location = new System.Drawing.Point(107, 402);
             this.lblPaymentMethod.Name = "lblPaymentMethod";
             this.lblPaymentMethod.Size = new System.Drawing.Size(159, 22);
@@ -200,7 +203,7 @@
             // 
             this.lblDescription.AutoSize = true;
             this.lblDescription.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.ForeColor = System.Drawing.Color.Yellow;
+            this.lblDescription.ForeColor = System.Drawing.Color.Blue;
             this.lblDescription.Location = new System.Drawing.Point(669, 229);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(132, 22);
@@ -209,8 +212,8 @@
             // 
             // dtpDueDate
             // 
-            this.dtpDueDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpDueDate.Location = new System.Drawing.Point(272, 211);
+            this.dtpDueDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpDueDate.Location = new System.Drawing.Point(272, 191);
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Size = new System.Drawing.Size(267, 29);
             this.dtpDueDate.TabIndex = 29;
@@ -219,8 +222,8 @@
             // 
             this.lblDueDate.AutoSize = true;
             this.lblDueDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDueDate.ForeColor = System.Drawing.Color.Yellow;
-            this.lblDueDate.Location = new System.Drawing.Point(169, 211);
+            this.lblDueDate.ForeColor = System.Drawing.Color.Blue;
+            this.lblDueDate.Location = new System.Drawing.Point(169, 194);
             this.lblDueDate.Name = "lblDueDate";
             this.lblDueDate.Size = new System.Drawing.Size(97, 22);
             this.lblDueDate.TabIndex = 28;
@@ -230,8 +233,8 @@
             // 
             this.lblBillReceivedDate.AutoSize = true;
             this.lblBillReceivedDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBillReceivedDate.ForeColor = System.Drawing.Color.Yellow;
-            this.lblBillReceivedDate.Location = new System.Drawing.Point(95, 141);
+            this.lblBillReceivedDate.ForeColor = System.Drawing.Color.Blue;
+            this.lblBillReceivedDate.Location = new System.Drawing.Point(95, 140);
             this.lblBillReceivedDate.Name = "lblBillReceivedDate";
             this.lblBillReceivedDate.Size = new System.Drawing.Size(171, 22);
             this.lblBillReceivedDate.TabIndex = 30;
@@ -239,21 +242,11 @@
             // 
             // dtpBillReceivedDate
             // 
-            this.dtpBillReceivedDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpBillReceivedDate.Location = new System.Drawing.Point(272, 142);
+            this.dtpBillReceivedDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpBillReceivedDate.Location = new System.Drawing.Point(272, 136);
             this.dtpBillReceivedDate.Name = "dtpBillReceivedDate";
             this.dtpBillReceivedDate.Size = new System.Drawing.Size(267, 29);
             this.dtpBillReceivedDate.TabIndex = 31;
-            // 
-            // txtPayableTo
-            // 
-            this.txtPayableTo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPayableTo.Location = new System.Drawing.Point(272, 296);
-            this.txtPayableTo.Name = "txtPayableTo";
-            this.txtPayableTo.Size = new System.Drawing.Size(267, 52);
-            this.txtPayableTo.TabIndex = 34;
-            this.txtPayableTo.Text = "";
-            this.txtPayableTo.Visible = false;
             // 
             // label1
             // 
@@ -270,7 +263,7 @@
             // 
             this.lblNote.AutoSize = true;
             this.lblNote.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.lblNote.ForeColor = System.Drawing.Color.Blue;
             this.lblNote.Location = new System.Drawing.Point(748, 373);
             this.lblNote.Name = "lblNote";
             this.lblNote.Size = new System.Drawing.Size(59, 22);
@@ -279,7 +272,7 @@
             // 
             // txtNote
             // 
-            this.txtNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNote.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNote.Location = new System.Drawing.Point(813, 373);
             this.txtNote.Name = "txtNote";
             this.txtNote.Size = new System.Drawing.Size(363, 63);
@@ -294,17 +287,18 @@
             this.cmbPayableTo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPayableTo.FormattingEnabled = true;
             this.cmbPayableTo.ItemHeight = 22;
-            this.cmbPayableTo.Location = new System.Drawing.Point(272, 260);
+            this.cmbPayableTo.Location = new System.Drawing.Point(272, 296);
             this.cmbPayableTo.Name = "cmbPayableTo";
             this.cmbPayableTo.Size = new System.Drawing.Size(267, 30);
             this.cmbPayableTo.TabIndex = 38;
             this.cmbPayableTo.SelectedIndexChanged += new System.EventHandler(this.cmbPayableTo_SelectedIndexChanged);
+            this.cmbPayableTo.Leave += new System.EventHandler(this.cmbPayableTo_Leave);
             // 
             // lblFrom
             // 
             this.lblFrom.AutoSize = true;
             this.lblFrom.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFrom.ForeColor = System.Drawing.Color.Yellow;
+            this.lblFrom.ForeColor = System.Drawing.Color.Blue;
             this.lblFrom.Location = new System.Drawing.Point(736, 135);
             this.lblFrom.Name = "lblFrom";
             this.lblFrom.Size = new System.Drawing.Size(65, 22);
@@ -316,7 +310,7 @@
             // 
             this.lblTo.AutoSize = true;
             this.lblTo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTo.ForeColor = System.Drawing.Color.Yellow;
+            this.lblTo.ForeColor = System.Drawing.Color.Blue;
             this.lblTo.Location = new System.Drawing.Point(994, 135);
             this.lblTo.Name = "lblTo";
             this.lblTo.Size = new System.Drawing.Size(41, 22);
@@ -342,12 +336,36 @@
             this.dtpTo.TabIndex = 42;
             this.dtpTo.Visible = false;
             // 
+            // lblSiNo
+            // 
+            this.lblSiNo.AutoSize = true;
+            this.lblSiNo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSiNo.ForeColor = System.Drawing.Color.Blue;
+            this.lblSiNo.Location = new System.Drawing.Point(136, 248);
+            this.lblSiNo.Name = "lblSiNo";
+            this.lblSiNo.Size = new System.Drawing.Size(130, 22);
+            this.lblSiNo.TabIndex = 43;
+            this.lblSiNo.Text = "Bill Serial No :";
+            // 
+            // txtBillSiNo
+            // 
+            this.txtBillSiNo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBillSiNo.Location = new System.Drawing.Point(272, 244);
+            this.txtBillSiNo.Name = "txtBillSiNo";
+            this.txtBillSiNo.Size = new System.Drawing.Size(267, 29);
+            this.txtBillSiNo.TabIndex = 44;
+            this.txtBillSiNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBillSiNo_KeyPress);
+            // 
             // frmBillEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Green;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1238, 614);
+            this.Controls.Add(this.txtBillSiNo);
+            this.Controls.Add(this.lblSiNo);
             this.Controls.Add(this.dtpTo);
             this.Controls.Add(this.dtpFrom);
             this.Controls.Add(this.lblTo);
@@ -356,7 +374,6 @@
             this.Controls.Add(this.txtNote);
             this.Controls.Add(this.lblNote);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtPayableTo);
             this.Controls.Add(this.dtpBillReceivedDate);
             this.Controls.Add(this.lblBillReceivedDate);
             this.Controls.Add(this.dtpDueDate);
@@ -404,7 +421,6 @@
         private System.Windows.Forms.Label lblDueDate;
         private System.Windows.Forms.Label lblBillReceivedDate;
         private System.Windows.Forms.DateTimePicker dtpBillReceivedDate;
-        private System.Windows.Forms.RichTextBox txtPayableTo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblNote;
         private System.Windows.Forms.RichTextBox txtNote;
@@ -413,6 +429,8 @@
         private System.Windows.Forms.Label lblTo;
         private System.Windows.Forms.DateTimePicker dtpFrom;
         private System.Windows.Forms.DateTimePicker dtpTo;
+        private System.Windows.Forms.Label lblSiNo;
+        private System.Windows.Forms.TextBox txtBillSiNo;
     }
 }
 
