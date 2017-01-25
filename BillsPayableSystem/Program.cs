@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BillsPayableSystem.LoginUI;
 
 namespace BillsPayableSystem
 {
@@ -16,7 +17,7 @@ namespace BillsPayableSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmBillEntry());
+            Application.Run(new frmLogin());
         }
     }
 }

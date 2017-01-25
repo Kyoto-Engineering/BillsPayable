@@ -190,11 +190,16 @@
             this.txtContact_no.Name = "txtContact_no";
             this.txtContact_no.Size = new System.Drawing.Size(229, 29);
             this.txtContact_no.TabIndex = 14;
+            this.txtContact_no.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContact_no_KeyPress);
             // 
             // cmbUserType
             // 
+            this.cmbUserType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUserType.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbUserType.FormattingEnabled = true;
+            this.cmbUserType.Items.AddRange(new object[] {
+            "Admin",
+            "User"});
             this.cmbUserType.Location = new System.Drawing.Point(236, 194);
             this.cmbUserType.Name = "cmbUserType";
             this.cmbUserType.Size = new System.Drawing.Size(229, 30);
@@ -236,7 +241,7 @@
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmRegistration";
-            this.Text = "frmRegistration";
+            this.Text = "Registration Form";
             this.Load += new System.EventHandler(this.frmRegistration_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
