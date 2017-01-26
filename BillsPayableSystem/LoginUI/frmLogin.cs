@@ -45,9 +45,7 @@ namespace BillsPayableSystem.LoginUI
             {
                 SqlConnection myConnection = default(SqlConnection);
                 myConnection = new SqlConnection(cs.DBConn);
-
                 SqlCommand myCommand = default(SqlCommand);
-
                 myCommand = new SqlCommand("SELECT UserName,Password FROM Registration WHERE UserName = @username AND Password = @UserPassword", myConnection);
                 SqlParameter uName = new SqlParameter("@username", SqlDbType.VarChar);
                 SqlParameter uPassword = new SqlParameter("@UserPassword", SqlDbType.VarChar);
@@ -56,24 +54,10 @@ namespace BillsPayableSystem.LoginUI
                 myCommand.Parameters.Add(uName);
                 myCommand.Parameters.Add(uPassword);
 
-                myCommand.Connection.Open();
-
-                //SqlDataReader myReader = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                myCommand.Connection.Open();               
                 rdr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
 
-                if (rdr.Read() == true)
-                {
-                    int i;
-                    progressBar2.Visible = true;
-                    progressBar2.Maximum = 3;
-                    progressBar2.Minimum = 0;
-                    progressBar2.Value = 2;
-                    progressBar2.Step = 1;
-
-                    for (i = 0; i <= 3; i++)
-                    {
-                        progressBar2.PerformStep();
-                    }
+               
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
                     string ct = "select UserType,UserId from Registration where Username='" + txtUsername.Text + "'and Password='" + txtPassword.Text + "'";
@@ -96,23 +80,10 @@ namespace BillsPayableSystem.LoginUI
                         this.Hide();
                         MainUI1 frm = new MainUI1();
                         frm.Show();
-
-                        //frm.lblUser.Text = txtUsername.Text;
                         txtPassword.Clear();
                         txtUsername.Clear();
                     }
-                    //if (txtUserType.Text.Trim() == "User")
-                    //{
-
-                    //    MasterPagesForUser frm = new MasterPagesForUser();
-                    //    this.Visible = false;
-                    //    frm.ShowDialog();
-                    //    this.Visible = true;
-
-                    //}
-
-                }
-
+                   
 
                 else
                 {

@@ -75,7 +75,7 @@ namespace BillsPayableSystem.LoginUI
 
                 if (rdr.Read())
                 {
-                    MessageBox.Show("Username Already Exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(" This User Already Exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtUsername.Text = "";
                     txtUsername.Focus();
 
@@ -89,9 +89,7 @@ namespace BillsPayableSystem.LoginUI
 
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-
                 string cb = "insert into Registration(UserName,Email,UserType,Password,Name,Designation,Department,ContactNo) VALUES ('" + txtUsername.Text + "','" + txtEmail.Text + "','" + cmbUserType.Text + "','" + txtPassword.Text + "','" + txtFullName.Text + "','" + designationTextBox.Text + "','" + departmentTextBox.Text + "','" + txtContact_no.Text + "')";
-
                 cmd = new SqlCommand(cb);
                 cmd.Connection = con;
                 cmd.ExecuteReader();
