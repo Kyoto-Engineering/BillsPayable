@@ -10,8 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 using BillsPayableSystem.DbGateway;
-
-
+using BillsPayableSystem.UI;
 
 
 namespace BillsPayableSystem
@@ -379,7 +378,7 @@ namespace BillsPayableSystem
                 try
                 {
                     connection();
-                    String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, PeriodFrom, PeriodTo, SiNo) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12)";
+                    String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, PeriodFrom, PeriodTo, SiNo, UserId) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13)";
                     cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@d1", nameOfBillId);
                     cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
@@ -393,6 +392,8 @@ namespace BillsPayableSystem
                     cmd.Parameters.AddWithValue("@d10", dtpFrom.Value);
                     cmd.Parameters.AddWithValue("@d11", dtpTo.Value);
                     cmd.Parameters.AddWithValue("@d12", txtBillSiNo.Text);
+                    cmd.Parameters.AddWithValue("@d13", user_id);
+
 
 
                     cmd.ExecuteNonQuery();
@@ -416,7 +417,7 @@ namespace BillsPayableSystem
                 try
                 {
                     connection();
-                    String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, SiNo) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10)";
+                    String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, SiNo, UserId) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11)";
                     cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@d1", nameOfBillId);
                     cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
@@ -428,6 +429,7 @@ namespace BillsPayableSystem
                     cmd.Parameters.AddWithValue("@d8", bPayableToId);
                     cmd.Parameters.AddWithValue("@d9", txtNote.Text);
                     cmd.Parameters.AddWithValue("@d10", txtBillSiNo.Text);
+                    cmd.Parameters.AddWithValue("@d11", user_id);
 
                     cmd.ExecuteNonQuery();
                     con.Close();
@@ -478,6 +480,13 @@ namespace BillsPayableSystem
         private void txtBillSiNo_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MainUI1 frm3=new MainUI1();
+            frm3.Show();
         }
     }
  }

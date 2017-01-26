@@ -45,6 +45,7 @@
             this.txtContact_no = new System.Windows.Forms.TextBox();
             this.cmbUserType = new System.Windows.Forms.ComboBox();
             this.userButton = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -150,6 +151,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(229, 29);
             this.txtPassword.TabIndex = 9;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // txtEmail
             // 
@@ -158,6 +160,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(229, 29);
             this.txtEmail.TabIndex = 10;
+            this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Validating);
             // 
             // txtFullName
             // 
@@ -208,6 +211,7 @@
             // userButton
             // 
             this.userButton.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userButton.ForeColor = System.Drawing.Color.Green;
             this.userButton.Location = new System.Drawing.Point(354, 414);
             this.userButton.Name = "userButton";
             this.userButton.Size = new System.Drawing.Size(111, 60);
@@ -216,12 +220,24 @@
             this.userButton.UseVisualStyleBackColor = true;
             this.userButton.Click += new System.EventHandler(this.userButton_Click);
             // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(614, 3);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(48, 34);
+            this.btnClose.TabIndex = 17;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // frmRegistration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkCyan;
+            this.BackColor = System.Drawing.Color.Orchid;
             this.ClientSize = new System.Drawing.Size(664, 503);
+            this.ControlBox = false;
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.userButton);
             this.Controls.Add(this.cmbUserType);
             this.Controls.Add(this.txtContact_no);
@@ -240,7 +256,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.Color.Black;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmRegistration";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registration Form";
             this.Load += new System.EventHandler(this.frmRegistration_Load);
             this.ResumeLayout(false);
@@ -267,5 +287,6 @@
         private System.Windows.Forms.TextBox txtContact_no;
         private System.Windows.Forms.ComboBox cmbUserType;
         private System.Windows.Forms.Button userButton;
+        private System.Windows.Forms.Button btnClose;
     }
 }

@@ -57,6 +57,8 @@
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.lblSiNo = new System.Windows.Forms.Label();
             this.txtBillSiNo = new System.Windows.Forms.TextBox();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.BtnMin = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblBillType
@@ -356,6 +358,25 @@
             this.txtBillSiNo.TabIndex = 44;
             this.txtBillSiNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBillSiNo_KeyPress);
             // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(1168, 5);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(57, 31);
+            this.btnClose.TabIndex = 45;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // BtnMin
+            // 
+            this.BtnMin.Location = new System.Drawing.Point(1094, 5);
+            this.BtnMin.Name = "BtnMin";
+            this.BtnMin.Size = new System.Drawing.Size(60, 31);
+            this.BtnMin.TabIndex = 46;
+            this.BtnMin.Text = "Min";
+            this.BtnMin.UseVisualStyleBackColor = true;
+            // 
             // frmBillEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -364,6 +385,9 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1238, 614);
+            this.ControlBox = false;
+            this.Controls.Add(this.BtnMin);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.txtBillSiNo);
             this.Controls.Add(this.lblSiNo);
             this.Controls.Add(this.dtpTo);
@@ -394,6 +418,7 @@
             this.Controls.Add(this.lblBillType);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmBillEntry";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bill Entry";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -431,6 +456,8 @@
         private System.Windows.Forms.DateTimePicker dtpTo;
         private System.Windows.Forms.Label lblSiNo;
         private System.Windows.Forms.TextBox txtBillSiNo;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button BtnMin;
     }
 }
 

@@ -17,7 +17,6 @@ namespace BillsPayableSystem.LoginUI
     {
         private SqlConnection con;
         private SqlCommand cmd;
-        //private SqlDataAdapter sda;
         private SqlDataReader rdr;
         ConnectionString cs = new ConnectionString();
         public int uId;
@@ -29,13 +28,13 @@ namespace BillsPayableSystem.LoginUI
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            if (txtUsername.Text == "")
+            if (string.IsNullOrWhiteSpace(txtUsername.Text))
             {
                 MessageBox.Show("Please enter user name", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtUsername.Focus();
                 return;
             }
-            if (txtPassword.Text == "")
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
             {
                 MessageBox.Show("Please enter password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPassword.Focus();
@@ -57,26 +56,27 @@ namespace BillsPayableSystem.LoginUI
                 myCommand.Parameters.Add(uPassword);
 
                 myCommand.Connection.Open();
-
-                //SqlDataReader myReader = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
                 rdr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
 
+                //if (rdr.Read() == true)
+                //{
+                //    int i;
+                //    progressBar2.Visible = true;
+                //    progressBar2.Maximum = 3;
+                //    progressBar2.Minimum = 0;
+                //    progressBar2.Value = 2;
+                //    progressBar2.Step = 1;
+
+                //    for (i = 0; i <= 3; i++)
+                //    {
+                //        progressBar2.PerformStep();
+                //    }
                 if (rdr.Read() == true)
                 {
-                    int i;
-                    progressBar2.Visible = true;
-                    progressBar2.Maximum = 3;
-                    progressBar2.Minimum = 0;
-                    progressBar2.Value = 2;
-                    progressBar2.Step = 1;
-
-                    for (i = 0; i <= 3; i++)
-                    {
-                        progressBar2.PerformStep();
-                    }
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
-                    string ct = "select UserType,UserId from Registration where Username='" + txtUsername.Text + "'and Password='" + txtPassword.Text + "'";
+                    string ct = "select UserType,UserId from Registration where Username='" + txtUsername.Text +
+                                "'and Password='" + txtPassword.Text + "'";
                     cmd = new SqlCommand(ct);
                     cmd.Connection = con;
                     rdr = cmd.ExecuteReader();
@@ -96,47 +96,38 @@ namespace BillsPayableSystem.LoginUI
                         this.Hide();
                         MainUI1 frm = new MainUI1();
                         frm.Show();
-
-                        //frm.lblUser.Text = txtUsername.Text;
                         txtPassword.Clear();
                         txtUsername.Clear();
                     }
-                    //if (txtUserType.Text.Trim() == "User")
-                    //{
-
-                    //    MasterPagesForUser frm = new MasterPagesForUser();
-                    //    this.Visible = false;
-                    //    frm.ShowDialog();
-                    //    this.Visible = true;
-
-                    //}
-
                 }
+                //if (txtUserType.Text.Trim() == "User")
+                //{
 
+                //    MasterPagesForUser frm = new MasterPagesForUser();
+                //    this.Visible = false;
+                //    frm.ShowDialog();
+                //    this.Visible = true;
+
+                //}
 
                 else
                 {
-                    MessageBox.Show("Login is Failed...Try again !", "Login Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Login is Failed...Try again !", "Login Denied", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
 
                     txtUsername.Clear();
                     txtPassword.Clear();
                     txtUsername.Focus();
-
                 }
                 if (myConnection.State == ConnectionState.Open)
                 {
                     myConnection.Dispose();
                 }
-
-
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-       
+        }      
     }
 }
