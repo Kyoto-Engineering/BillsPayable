@@ -22,3 +22,8 @@ G:\git\BillsPayable1\BillsPayableSystem\obj\Debug\BillsPayableSystem.frmBillEntr
 G:\git\BillsPayable1\BillsPayableSystem\obj\Debug\BillsPayableSystem.Properties.Resources.resources
 G:\git\BillsPayable1\BillsPayableSystem\obj\Debug\BillsPayableSystem.UI.MainUI1.resources
 G:\git\BillsPayable1\BillsPayableSystem\obj\Debug\BillsPayableSystem.csproj.GenerateResource.Cache
+G:\git\BillsPayable1\BillsPayableSystem\bin\Debug\BillsPayableSystem.exe.manifest
+G:\git\BillsPayable1\BillsPayableSystem\bin\Debug\BillsPayableSystem.application
+G:\git\BillsPayable1\BillsPayableSystem\obj\Debug\BillsPayableSystem.exe.manifest
+G:\git\BillsPayable1\BillsPayableSystem\obj\Debug\BillsPayableSystem.application
+G:\git\BillsPayable1\BillsPayableSystem\obj\Debug\BillsPayableSystem.UI.frmPayment.resources

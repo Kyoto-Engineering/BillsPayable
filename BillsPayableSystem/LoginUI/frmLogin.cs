@@ -19,8 +19,8 @@ namespace BillsPayableSystem.LoginUI
         private SqlCommand cmd;
         private SqlDataReader rdr;
         ConnectionString cs = new ConnectionString();
-        public int uId;
-        public static string userType;
+        public static int uId;
+        public static string userType, userName;
         public frmLogin()
         {
             InitializeComponent();
@@ -58,25 +58,11 @@ namespace BillsPayableSystem.LoginUI
                 myCommand.Connection.Open();
                 rdr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
 
-                //if (rdr.Read() == true)
-                //{
-                //    int i;
-                //    progressBar2.Visible = true;
-                //    progressBar2.Maximum = 3;
-                //    progressBar2.Minimum = 0;
-                //    progressBar2.Value = 2;
-                //    progressBar2.Step = 1;
-
-                //    for (i = 0; i <= 3; i++)
-                //    {
-                //        progressBar2.PerformStep();
-                //    }
                 if (rdr.Read() == true)
                 {
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
-                    string ct = "select UserType,UserId from Registration where Username='" + txtUsername.Text +
-                                "'and Password='" + txtPassword.Text + "'";
+                    string ct = "select UserType,UserId,Name from Registration where Username='" + txtUsername.Text + "'and Password='" + txtPassword.Text + "'";
                     cmd = new SqlCommand(ct);
                     cmd.Connection = con;
                     rdr = cmd.ExecuteReader();
@@ -84,7 +70,7 @@ namespace BillsPayableSystem.LoginUI
                     {
                         userType = (rdr.GetString(0));
                         uId = (rdr.GetInt32(1));
-
+                        userName = (rdr.GetString(2));
                     }
                     if ((rdr != null))
                     {

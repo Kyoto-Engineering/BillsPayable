@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 using BillsPayableSystem.DbGateway;
+using BillsPayableSystem.LoginUI;
 using BillsPayableSystem.UI;
 
 
@@ -21,7 +22,8 @@ namespace BillsPayableSystem
         private SqlCommand cmd;
         private SqlDataReader rdr;
         ConnectionString cs = new ConnectionString();
-        public int btype_id, nameOfBillId, bPayableToId, user_id;
+        public int btype_id, nameOfBillId, bPayableToId;
+        public string user_id;
         private delegate void ChangeFocusDelegate(Control ctl);
         
 
@@ -32,6 +34,7 @@ namespace BillsPayableSystem
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            user_id = frmLogin.uId.ToString();
             BillsType();
             PayableTo();
                        //For Spell check
@@ -39,8 +42,6 @@ namespace BillsPayableSystem
 //System.Windows.Controls.TextBox textBoxz = new System.Windows.Controls.TextBox();
 //textBoxz.SpellCheck.IsEnabled = true;
 //elementHost1.Child = textBoxz;
-         
-
         }
 
         private void changeFocus(Control ctl)
@@ -48,8 +49,7 @@ namespace BillsPayableSystem
             ctl.Focus();
         }
         private void ClearData()
-        {
-        
+        {        
             //cmbPayableTo.Text = "";
             cmbPayableTo.Items.Clear();
             cmbPayableTo.SelectedIndex = -1;
@@ -195,7 +195,6 @@ namespace BillsPayableSystem
             }
         }
 
-
         private void cmbBillsType_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbBillPurpose.Text = "";
@@ -293,26 +292,7 @@ namespace BillsPayableSystem
             }
         }
 
-        //private void SaveNewPayableTo()
-        //{
-        //    try
-        //    {
-        //        con = new SqlConnection(cs.DBConn);
-        //        con.Open();
-        //        string query1 = "insert into BPayableTo (BPayableToName) values (@d1)"; //+"SELECT CONVERT(int,SCOPE_IDENTITY())";
-        //        cmd = new SqlCommand(query1, con);
-        //        cmd.Parameters.AddWithValue("@d1", txtPayableTo.Text);
-        //        //cmd.Parameters.AddWithValue("@d2", nameOfBillId);
-        //        cmd.ExecuteNonQuery();
-        //        //nameOfBPayableId = (int)cmd.ExecuteScalar();
-        //        con.Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
+        
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(cmbPayableTo.Text))
@@ -321,25 +301,6 @@ namespace BillsPayableSystem
                 return;
             }
 
-            ////if (cmbPayableTo.Text == "Not In The List")
-            ////{
-            ////    con = new SqlConnection(cs.DBConn);
-            ////    con.Open();
-            ////    string ct2 = "select BPayableToName from BPayableTo where BPayableToName='" + txtPayableTo.Text + "'";
-            ////    cmd = new SqlCommand(ct2, con);
-            ////    rdr = cmd.ExecuteReader();
-            ////    if (rdr.Read())
-            ////    {
-            ////        MessageBox.Show("This PayableTo Name Already Exists,Please Select From List", "Error",
-            ////            MessageBoxButtons.OK, MessageBoxIcon.Error);
-            ////        txtPayableTo.Clear();
-            ////        return;
-            ////    }
-            ////}
-            ////else
-            ////{
-            ////    nameOfBPayableId = bPayableToId;
-            ////}
 
             if (string.IsNullOrWhiteSpace(txtAmount.Text))
             {
@@ -371,14 +332,12 @@ namespace BillsPayableSystem
                 return;
             }
 
-            
-
             if (cmbBillType.Text == "Recurrent")
             {                
                 try
                 {
                     connection();
-                    String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, PeriodFrom, PeriodTo, SiNo, UserId) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13)";
+                    String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, PeriodFrom, PeriodTo, SiNo, UserId) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                     cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@d1", nameOfBillId);
                     cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
@@ -394,14 +353,8 @@ namespace BillsPayableSystem
                     cmd.Parameters.AddWithValue("@d12", txtBillSiNo.Text);
                     cmd.Parameters.AddWithValue("@d13", user_id);
 
-
-
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    //if (cmbPayableTo.Text == "Not In The List")
-                    //{
-                    //    SaveNewPayableTo();
-                    //}
                     MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearData();
                     PayableTo();
@@ -417,7 +370,7 @@ namespace BillsPayableSystem
                 try
                 {
                     connection();
-                    String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, SiNo, UserId) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11)";
+                    String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, SiNo, UserId) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                     cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@d1", nameOfBillId);
                     cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
@@ -433,11 +386,6 @@ namespace BillsPayableSystem
 
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    //if (cmbPayableTo.Text == "Not In The List")
-                    //{
-                    //    SaveNewPayableTo();
-                    //}
-
                     MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearData();
                     PayableTo();
@@ -449,7 +397,6 @@ namespace BillsPayableSystem
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
         }
 
         private void txtAmount_KeyPress(object sender, KeyPressEventArgs e)
@@ -487,6 +434,11 @@ namespace BillsPayableSystem
             this.Hide();
             MainUI1 frm3=new MainUI1();
             frm3.Show();
+        }
+
+        private void BtnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
  }

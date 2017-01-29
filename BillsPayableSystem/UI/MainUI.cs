@@ -39,5 +39,17 @@ namespace BillsPayableSystem.UI
             frm.Show();
             
         }
+
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmPayment frm1 = new frmPayment();
+            frm1.Show();
+        }
     }
 }

@@ -34,6 +34,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnMin = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
+            this.btnPayment = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,10 +42,11 @@
             // 
             this.btnBillEntry.BackColor = System.Drawing.Color.ForestGreen;
             this.btnBillEntry.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnBillEntry.Location = new System.Drawing.Point(15, 65);
+            this.btnBillEntry.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBillEntry.Location = new System.Drawing.Point(12, 62);
             this.btnBillEntry.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnBillEntry.Name = "btnBillEntry";
-            this.btnBillEntry.Size = new System.Drawing.Size(107, 80);
+            this.btnBillEntry.Size = new System.Drawing.Size(119, 80);
             this.btnBillEntry.TabIndex = 0;
             this.btnBillEntry.Text = "Bill Entry";
             this.btnBillEntry.UseVisualStyleBackColor = false;
@@ -53,10 +55,11 @@
             // btnRegistration
             // 
             this.btnRegistration.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnRegistration.Location = new System.Drawing.Point(15, 172);
+            this.btnRegistration.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistration.Location = new System.Drawing.Point(12, 341);
             this.btnRegistration.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnRegistration.Name = "btnRegistration";
-            this.btnRegistration.Size = new System.Drawing.Size(107, 82);
+            this.btnRegistration.Size = new System.Drawing.Size(119, 82);
             this.btnRegistration.TabIndex = 1;
             this.btnRegistration.Text = "Registration";
             this.btnRegistration.UseVisualStyleBackColor = false;
@@ -77,16 +80,16 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.groupBox1.Controls.Add(this.btnPayment);
             this.groupBox1.Controls.Add(this.btnBillEntry);
             this.groupBox1.Controls.Add(this.btnRegistration);
             this.groupBox1.Location = new System.Drawing.Point(51, 38);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.groupBox1.Size = new System.Drawing.Size(134, 527);
+            this.groupBox1.Size = new System.Drawing.Size(144, 527);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
             // 
             // btnMin
             // 
@@ -96,6 +99,7 @@
             this.btnMin.TabIndex = 4;
             this.btnMin.Text = "Min";
             this.btnMin.UseVisualStyleBackColor = true;
+            this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
             // 
             // btnClose
             // 
@@ -106,6 +110,18 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnPayment
+            // 
+            this.btnPayment.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnPayment.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPayment.Location = new System.Drawing.Point(12, 205);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(119, 83);
+            this.btnPayment.TabIndex = 2;
+            this.btnPayment.Text = "Payment";
+            this.btnPayment.UseVisualStyleBackColor = false;
+            this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
             // 
             // MainUI1
             // 
@@ -138,5 +154,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnMin;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnPayment;
     }
 }

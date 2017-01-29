@@ -376,6 +376,7 @@
             this.BtnMin.TabIndex = 46;
             this.BtnMin.Text = "Min";
             this.BtnMin.UseVisualStyleBackColor = true;
+            this.BtnMin.Click += new System.EventHandler(this.BtnMin_Click);
             // 
             // frmBillEntry
             // 
