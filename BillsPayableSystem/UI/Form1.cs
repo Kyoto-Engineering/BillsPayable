@@ -292,6 +292,73 @@ namespace BillsPayableSystem
             }
         }
 
+        private void SaveBillTransaction2()
+        {
+            try
+            {
+                connection();
+                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, SiNo, UserId,StatusForSN) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@d1", nameOfBillId);
+                cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
+                cmd.Parameters.AddWithValue("@d3", cmbPaymentMethod.Text);
+                cmd.Parameters.AddWithValue("@d4", Convert.ToDecimal(txtAmount.Text));
+                cmd.Parameters.AddWithValue("@d5", dtpBillDate.Value);
+                cmd.Parameters.AddWithValue("@d6", dtpBillReceivedDate.Value);
+                cmd.Parameters.AddWithValue("@d7", dtpDueDate.Value);
+                cmd.Parameters.AddWithValue("@d8", bPayableToId);
+                cmd.Parameters.AddWithValue("@d9", txtNote.Text);
+                cmd.Parameters.AddWithValue("@d10", txtBillSiNo.Text);
+                cmd.Parameters.AddWithValue("@d11", user_id);
+                cmd.Parameters.AddWithValue("@d12", "New");
+                cmd.ExecuteNonQuery();
+                con.Close();
+                MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearData();
+                PayableTo();
+                cmbPayableTo.ResetText();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void SaveBillTransaction()
+        {
+            try
+            {
+                con = new SqlConnection();
+                con.Open();
+                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, PeriodFrom, PeriodTo, SiNo, UserId,StatusForSN) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13,@d14)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@d1", nameOfBillId);
+                cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
+                cmd.Parameters.AddWithValue("@d3", cmbPaymentMethod.Text);
+                cmd.Parameters.AddWithValue("@d4", Convert.ToDecimal(txtAmount.Text));
+                cmd.Parameters.AddWithValue("@d5", dtpBillDate.Value);
+                cmd.Parameters.AddWithValue("@d6", dtpBillReceivedDate.Value);
+                cmd.Parameters.AddWithValue("@d7", dtpDueDate.Value);
+                cmd.Parameters.AddWithValue("@d8", bPayableToId);
+                cmd.Parameters.AddWithValue("@d9", txtNote.Text);
+                cmd.Parameters.AddWithValue("@d10", dtpFrom.Value);
+                cmd.Parameters.AddWithValue("@d11", dtpTo.Value);
+                cmd.Parameters.AddWithValue("@d12", txtBillSiNo.Text);
+                cmd.Parameters.AddWithValue("@d13", user_id);
+                cmd.Parameters.AddWithValue("@d14", "New");
+
+                cmd.ExecuteNonQuery();
+                con.Close();
+                MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearData();
+                PayableTo();
+                cmbPayableTo.ResetText();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         
         private void BtnSave_Click(object sender, EventArgs e)
         {
@@ -333,69 +400,12 @@ namespace BillsPayableSystem
             }
 
             if (cmbBillType.Text == "Recurrent")
-            {                
-                try
-                {
-                    connection();
-                    String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, PeriodFrom, PeriodTo, SiNo, UserId) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
-                    cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@d1", nameOfBillId);
-                    cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
-                    cmd.Parameters.AddWithValue("@d3", cmbPaymentMethod.Text);
-                    cmd.Parameters.AddWithValue("@d4", Convert.ToDecimal(txtAmount.Text));
-                    cmd.Parameters.AddWithValue("@d5", dtpBillDate.Value);
-                    cmd.Parameters.AddWithValue("@d6", dtpBillReceivedDate.Value);
-                    cmd.Parameters.AddWithValue("@d7", dtpDueDate.Value);
-                    cmd.Parameters.AddWithValue("@d8", bPayableToId);
-                    cmd.Parameters.AddWithValue("@d9", txtNote.Text);
-                    cmd.Parameters.AddWithValue("@d10", dtpFrom.Value);
-                    cmd.Parameters.AddWithValue("@d11", dtpTo.Value);
-                    cmd.Parameters.AddWithValue("@d12", txtBillSiNo.Text);
-                    cmd.Parameters.AddWithValue("@d13", user_id);
-
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ClearData();
-                    PayableTo();
-                    cmbPayableTo.ResetText();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            {
+                SaveBillTransaction();
             }
             else
             {
-                try
-                {
-                    connection();
-                    String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, SiNo, UserId) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
-                    cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@d1", nameOfBillId);
-                    cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
-                    cmd.Parameters.AddWithValue("@d3", cmbPaymentMethod.Text);
-                    cmd.Parameters.AddWithValue("@d4", Convert.ToDecimal(txtAmount.Text));
-                    cmd.Parameters.AddWithValue("@d5", dtpBillDate.Value);
-                    cmd.Parameters.AddWithValue("@d6", dtpBillReceivedDate.Value);
-                    cmd.Parameters.AddWithValue("@d7", dtpDueDate.Value);
-                    cmd.Parameters.AddWithValue("@d8", bPayableToId);
-                    cmd.Parameters.AddWithValue("@d9", txtNote.Text);
-                    cmd.Parameters.AddWithValue("@d10", txtBillSiNo.Text);
-                    cmd.Parameters.AddWithValue("@d11", user_id);
-
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ClearData();
-                    PayableTo();
-                    cmbPayableTo.ResetText();
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                SaveBillTransaction2();
             }
         }
 

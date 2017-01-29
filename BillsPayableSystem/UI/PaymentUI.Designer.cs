@@ -40,7 +40,7 @@
             this.btnMin = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblBillSiNo = new System.Windows.Forms.Label();
-            this.txtBillSerialNo = new System.Windows.Forms.TextBox();
+            this.cmbBillSN = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtpictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -153,14 +153,16 @@
             this.lblBillSiNo.TabIndex = 9;
             this.lblBillSiNo.Text = "Bill Serial No :";
             // 
-            // txtBillSerialNo
+            // cmbBillSN
             // 
-            this.txtBillSerialNo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBillSerialNo.Location = new System.Drawing.Point(227, 141);
-            this.txtBillSerialNo.Name = "txtBillSerialNo";
-            this.txtBillSerialNo.Size = new System.Drawing.Size(282, 29);
-            this.txtBillSerialNo.TabIndex = 10;
-            this.txtBillSerialNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBillSerialNo_KeyPress);
+            this.cmbBillSN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBillSN.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbBillSN.FormattingEnabled = true;
+            this.cmbBillSN.Location = new System.Drawing.Point(227, 143);
+            this.cmbBillSN.Name = "cmbBillSN";
+            this.cmbBillSN.Size = new System.Drawing.Size(282, 30);
+            this.cmbBillSN.TabIndex = 10;
+            this.cmbBillSN.SelectedIndexChanged += new System.EventHandler(this.cmbBillSN_SelectedIndexChanged);
             // 
             // frmPayment
             // 
@@ -169,7 +171,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(922, 646);
             this.ControlBox = false;
-            this.Controls.Add(this.txtBillSerialNo);
+            this.Controls.Add(this.cmbBillSN);
             this.Controls.Add(this.lblBillSiNo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnMin);
@@ -203,6 +205,6 @@
         private System.Windows.Forms.Button btnMin;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblBillSiNo;
-        private System.Windows.Forms.TextBox txtBillSerialNo;
+        private System.Windows.Forms.ComboBox cmbBillSN;
     }
 }

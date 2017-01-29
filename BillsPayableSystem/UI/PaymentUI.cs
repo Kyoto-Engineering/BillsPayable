@@ -47,7 +47,7 @@ namespace BillsPayableSystem.UI
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     txtpictureBox.Image = Image.FromFile(openFileDialog1.FileName);
-                    //saveButton.Focus();
+                  
                 }
 
             }
@@ -57,19 +57,56 @@ namespace BillsPayableSystem.UI
             }
         }
 
+        private void BillSerialNoLoad()
+        {
+            try
+            {
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string query = "Select SiNo from BTransaction where StatusForSN!='Used'  order by  BillTransactionId desc";
+                cmd = new SqlCommand(query, con);
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    cmbBillSN.Items.Add(rdr[0]);
+                }
+                con.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void PaymentUI_Load(object sender, EventArgs e)
         {
             userName = frmLogin.uId.ToString();
+            BillSerialNoLoad();
         }
 
+        private void SaveStatus()
+        {
+            try
+            {
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string qry = "Update BTransaction set  StatusForSN='Used'  where BillTransactionId='"+billTransactionId+"' ";
+                cmd = new SqlCommand(qry, con);
+                cmd.ExecuteReader();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string query =
-                    "insert into PaymentRecord(PaymentDate, EntryDateTime, InputBy, BillTransactionId, BillImage) values(@d1,@d2,@d3,@d4,@d5)";
+                string query ="insert into PaymentRecord(PaymentDate, EntryDateTime, InputBy, BillTransactionId, BillImage) values(@d1,@d2,@d3,@d4,@d5)";
                 cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@d1", dtpPaymentDate.Value);
                 cmd.Parameters.AddWithValue("@d2", DateTime.UtcNow.ToLocalTime());
@@ -92,8 +129,9 @@ namespace BillsPayableSystem.UI
                     cmd.Parameters["@d5"].Value = DBNull.Value;
                 }
                 cmd.ExecuteNonQuery();
-                con.Close();
+                con.Close();               
                 MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SaveStatus();
             }
             catch (Exception ex)
             {
@@ -117,13 +155,22 @@ namespace BillsPayableSystem.UI
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
 
+           
+        }
+
+        private void txtBillSerialNo_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cmbBillSN_SelectedIndexChanged(object sender, EventArgs e)
+        {
             try
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = "select BillTransactionId from BTransaction WHERE SiNo= '" + txtBillSerialNo.Text + "'";
-
+                cmd.CommandText = "select BillTransactionId from BTransaction WHERE SiNo= '" + cmbBillSN.Text + "'";
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {

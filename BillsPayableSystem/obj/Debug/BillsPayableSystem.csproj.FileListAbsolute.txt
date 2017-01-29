@@ -27,3 +27,8 @@ G:\git\BillsPayable1\BillsPayableSystem\bin\Debug\BillsPayableSystem.application
 G:\git\BillsPayable1\BillsPayableSystem\obj\Debug\BillsPayableSystem.exe.manifest
 G:\git\BillsPayable1\BillsPayableSystem\obj\Debug\BillsPayableSystem.application
 G:\git\BillsPayable1\BillsPayableSystem\obj\Debug\BillsPayableSystem.UI.frmPayment.resources
+G:\Git\BillsPayable\BillsPayableSystem\bin\Debug\BillsPayableSystem.exe.manifest
+G:\Git\BillsPayable\BillsPayableSystem\bin\Debug\BillsPayableSystem.application
+G:\Git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.UI.frmPayment.resources
+G:\Git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.exe.manifest
+G:\Git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.application
