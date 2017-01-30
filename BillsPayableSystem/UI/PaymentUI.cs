@@ -28,42 +28,13 @@ namespace BillsPayableSystem.UI
             InitializeComponent();
         }
 
-        private void txtpictureBox_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void browseButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var _with1 = openFileDialog1;
-
-                _with1.Filter = ("Image Files |*.png; *.bmp; *.jpg;*.jpeg; *.gif;");
-                _with1.FilterIndex = 4;
-
-                openFileDialog1.FileName = "";
-
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    txtpictureBox.Image = Image.FromFile(openFileDialog1.FileName);
-                  
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void BillSerialNoLoad()
         {
             try
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string query = "Select SiNo from BTransaction where StatusForSN!='Used'  order by  BillTransactionId desc";
+                string query = "Select SiNo from BTransaction where StatusForSN!='Paid'  order by  BillTransactionId desc";
                 cmd = new SqlCommand(query, con);
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -80,7 +51,7 @@ namespace BillsPayableSystem.UI
         }
         private void PaymentUI_Load(object sender, EventArgs e)
         {
-            userName = frmLogin.uId.ToString();
+            userName = frmLogin.userName;
             BillSerialNoLoad();
         }
 
@@ -90,7 +61,7 @@ namespace BillsPayableSystem.UI
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string qry = "Update BTransaction set  StatusForSN='Used'  where BillTransactionId='"+billTransactionId+"' ";
+                string qry = "Update BTransaction set  StatusForSN='Paid'  where BillTransactionId='"+billTransactionId+"' ";
                 cmd = new SqlCommand(qry, con);
                 cmd.ExecuteReader();
                 con.Close();
@@ -102,36 +73,27 @@ namespace BillsPayableSystem.UI
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(cmbBillSN.Text))
+            {
+                MessageBox.Show("Please Select Bill Serial Number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string query ="insert into PaymentRecord(PaymentDate, EntryDateTime, InputBy, BillTransactionId, BillImage) values(@d1,@d2,@d3,@d4,@d5)";
+                string query ="insert into Payment(PaymentDate, EntryDateTime, InputBy, BillTransactionId) values(@d1,@d2,@d3,@d4)";
                 cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@d1", dtpPaymentDate.Value);
                 cmd.Parameters.AddWithValue("@d2", DateTime.UtcNow.ToLocalTime());
                 cmd.Parameters.AddWithValue("@d3", userName);
                 cmd.Parameters.AddWithValue("@d4", billTransactionId);
 
-                if (txtpictureBox.Image != null)
-                {
-                    MemoryStream ms = new MemoryStream();
-                    Bitmap bmpImage = new Bitmap(txtpictureBox.Image);
-                    bmpImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    byte[] data = ms.GetBuffer();
-                    SqlParameter p = new SqlParameter("@d5", SqlDbType.Image);
-                    p.Value = data;
-                    cmd.Parameters.Add(p);
-                }
-                else
-                {
-                    cmd.Parameters.Add("@d5", SqlDbType.VarBinary, -1);
-                    cmd.Parameters["@d5"].Value = DBNull.Value;
-                }
                 cmd.ExecuteNonQuery();
                 con.Close();               
                 MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                SaveStatus();
+                SaveStatus();               
             }
             catch (Exception ex)
             {
@@ -158,13 +120,8 @@ namespace BillsPayableSystem.UI
            
         }
 
-        private void txtBillSerialNo_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void cmbBillSN_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {            
             try
             {
                 con = new SqlConnection(cs.DBConn);
@@ -190,7 +147,6 @@ namespace BillsPayableSystem.UI
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }                       
-        }
-        
+        }       
     }
 }

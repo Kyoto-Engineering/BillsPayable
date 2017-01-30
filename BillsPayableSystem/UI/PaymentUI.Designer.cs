@@ -31,9 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPayment));
             this.dtpPaymentDate = new System.Windows.Forms.DateTimePicker();
             this.lblPaymentDate = new System.Windows.Forms.Label();
-            this.txtpictureBox = new System.Windows.Forms.PictureBox();
-            this.browseButton = new System.Windows.Forms.Button();
-            this.lblBillImage = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
@@ -41,13 +38,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblBillSiNo = new System.Windows.Forms.Label();
             this.cmbBillSN = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.txtpictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // dtpPaymentDate
             // 
             this.dtpPaymentDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpPaymentDate.Location = new System.Drawing.Point(227, 95);
+            this.dtpPaymentDate.Location = new System.Drawing.Point(185, 93);
             this.dtpPaymentDate.Name = "dtpPaymentDate";
             this.dtpPaymentDate.Size = new System.Drawing.Size(282, 29);
             this.dtpPaymentDate.TabIndex = 0;
@@ -56,46 +52,11 @@
             // 
             this.lblPaymentDate.AutoSize = true;
             this.lblPaymentDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPaymentDate.Location = new System.Drawing.Point(76, 99);
+            this.lblPaymentDate.Location = new System.Drawing.Point(38, 97);
             this.lblPaymentDate.Name = "lblPaymentDate";
             this.lblPaymentDate.Size = new System.Drawing.Size(135, 22);
             this.lblPaymentDate.TabIndex = 1;
             this.lblPaymentDate.Text = "Payment Date :";
-            // 
-            // txtpictureBox
-            // 
-            this.txtpictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("txtpictureBox.BackgroundImage")));
-            this.txtpictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.txtpictureBox.Location = new System.Drawing.Point(227, 184);
-            this.txtpictureBox.Name = "txtpictureBox";
-            this.txtpictureBox.Size = new System.Drawing.Size(420, 301);
-            this.txtpictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.txtpictureBox.TabIndex = 2;
-            this.txtpictureBox.TabStop = false;
-            this.txtpictureBox.Click += new System.EventHandler(this.txtpictureBox_Click);
-            // 
-            // browseButton
-            // 
-            this.browseButton.BackColor = System.Drawing.Color.Cyan;
-            this.browseButton.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.browseButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.browseButton.Location = new System.Drawing.Point(227, 492);
-            this.browseButton.Name = "browseButton";
-            this.browseButton.Size = new System.Drawing.Size(219, 31);
-            this.browseButton.TabIndex = 3;
-            this.browseButton.Text = "Browse";
-            this.browseButton.UseVisualStyleBackColor = false;
-            this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
-            // 
-            // lblBillImage
-            // 
-            this.lblBillImage.AutoSize = true;
-            this.lblBillImage.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBillImage.Location = new System.Drawing.Point(107, 187);
-            this.lblBillImage.Name = "lblBillImage";
-            this.lblBillImage.Size = new System.Drawing.Size(104, 22);
-            this.lblBillImage.TabIndex = 4;
-            this.lblBillImage.Text = "Bill Image :";
             // 
             // openFileDialog1
             // 
@@ -103,18 +64,19 @@
             // 
             // btnSave
             // 
+            this.btnSave.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSave.BackgroundImage")));
+            this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSave.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(532, 536);
+            this.btnSave.Location = new System.Drawing.Point(253, 235);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(115, 65);
+            this.btnSave.Size = new System.Drawing.Size(122, 65);
             this.btnSave.TabIndex = 5;
-            this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(858, 7);
+            this.btnClose.Location = new System.Drawing.Point(611, 4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(60, 42);
             this.btnClose.TabIndex = 6;
@@ -124,7 +86,7 @@
             // 
             // btnMin
             // 
-            this.btnMin.Location = new System.Drawing.Point(795, 8);
+            this.btnMin.Location = new System.Drawing.Point(549, 4);
             this.btnMin.Name = "btnMin";
             this.btnMin.Size = new System.Drawing.Size(58, 41);
             this.btnMin.TabIndex = 7;
@@ -137,7 +99,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(412, 9);
+            this.label1.Location = new System.Drawing.Point(269, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(124, 32);
             this.label1.TabIndex = 8;
@@ -147,7 +109,7 @@
             // 
             this.lblBillSiNo.AutoSize = true;
             this.lblBillSiNo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBillSiNo.Location = new System.Drawing.Point(81, 143);
+            this.lblBillSiNo.Location = new System.Drawing.Point(43, 167);
             this.lblBillSiNo.Name = "lblBillSiNo";
             this.lblBillSiNo.Size = new System.Drawing.Size(130, 22);
             this.lblBillSiNo.TabIndex = 9;
@@ -158,7 +120,7 @@
             this.cmbBillSN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBillSN.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBillSN.FormattingEnabled = true;
-            this.cmbBillSN.Location = new System.Drawing.Point(227, 143);
+            this.cmbBillSN.Location = new System.Drawing.Point(185, 164);
             this.cmbBillSN.Name = "cmbBillSN";
             this.cmbBillSN.Size = new System.Drawing.Size(282, 30);
             this.cmbBillSN.TabIndex = 10;
@@ -169,7 +131,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(922, 646);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(675, 367);
             this.ControlBox = false;
             this.Controls.Add(this.cmbBillSN);
             this.Controls.Add(this.lblBillSiNo);
@@ -177,16 +140,12 @@
             this.Controls.Add(this.btnMin);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.lblBillImage);
-            this.Controls.Add(this.browseButton);
-            this.Controls.Add(this.txtpictureBox);
             this.Controls.Add(this.lblPaymentDate);
             this.Controls.Add(this.dtpPaymentDate);
             this.Name = "frmPayment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PaymentUI";
             this.Load += new System.EventHandler(this.PaymentUI_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.txtpictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,9 +155,6 @@
 
         private System.Windows.Forms.DateTimePicker dtpPaymentDate;
         private System.Windows.Forms.Label lblPaymentDate;
-        private System.Windows.Forms.Button browseButton;
-        private System.Windows.Forms.Label lblBillImage;
-        public System.Windows.Forms.PictureBox txtpictureBox;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;

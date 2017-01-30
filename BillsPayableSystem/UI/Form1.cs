@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.IO;
 using System.Runtime.InteropServices;
 using BillsPayableSystem.DbGateway;
 using BillsPayableSystem.LoginUI;
@@ -60,30 +61,20 @@ namespace BillsPayableSystem
             cmbBillPurpose.Text = "";
             cmbBillPurpose.Items.Clear();
             cmbBillPurpose.SelectedIndex = -1;
+            txtpictureBox.Image = null;
             txtBillNarrative.Clear();
             txtNote.Clear();
         }
-
-        private void connection()
-        {
-            con = new SqlConnection(cs.DBConn);
-            con.Open();
-        }
-
-        private void reader()
-        {
-            cmd.Connection = con;
-            rdr = cmd.ExecuteReader();
-        }
-
         private void BillsType()
         {
             try
             {
-                connection();
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
                 string ct = "select BillTypeName from BillsPayableType";
                 cmd = new SqlCommand(ct);
-                reader();
+                cmd.Connection = con;
+                rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
                     cmbBillType.Items.Add(rdr.GetValue(0).ToString());
@@ -99,10 +90,12 @@ namespace BillsPayableSystem
         {
             try
             {
-                connection();
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
                 string ctt = "select BPayableToName from BPayableTo";
                 cmd = new SqlCommand(ctt);
-                reader();
+                cmd.Connection = con;
+                rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
                     cmbPayableTo.Items.Add(rdr.GetValue(0).ToString());
@@ -165,11 +158,10 @@ namespace BillsPayableSystem
             }
             else
             {
-                
-
-                try
+              try
                 {
-                    connection();
+                    con = new SqlConnection(cs.DBConn);
+                    con.Open();
                     cmd = con.CreateCommand();
                     cmd.CommandText = "SELECT BPayableToId from BPayableTo WHERE BPayableToName= '" + cmbPayableTo.Text + "'";
                     
@@ -220,7 +212,8 @@ namespace BillsPayableSystem
 
                 try
                 {
-                    connection();
+                    con = new SqlConnection(cs.DBConn);
+                    con.Open();
                     cmd = con.CreateCommand();
 
                     cmd.CommandText = "SELECT BillTypeId from BillsPayableType WHERE BillTypeName= '" + cmbBillType.Text + "'";
@@ -240,11 +233,13 @@ namespace BillsPayableSystem
                         con.Close();
                     }
 
-                    connection();
+                    con = new SqlConnection(cs.DBConn);
+                    con.Open();
                     string ct = "select distinct RTRIM(BillName) from BillsPayableName where BillTypeId= " + btype_id + "";
 
                     cmd = new SqlCommand(ct);
-                    reader();
+                    cmd.Connection = con;
+                    rdr = cmd.ExecuteReader();
 
                     while (rdr.Read())
                     {
@@ -267,7 +262,8 @@ namespace BillsPayableSystem
         {
             try
             {
-                connection();
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
                 cmd = con.CreateCommand();
                 cmd.CommandText = "select BillId from BillsPayableName WHERE BillName= '" + cmbBillPurpose.Text + "'";
 
@@ -296,8 +292,9 @@ namespace BillsPayableSystem
         {
             try
             {
-                connection();
-                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, SiNo, UserId,StatusForSN) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, SiNo, UserId,StatusForSN,BillImage) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                 cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@d1", nameOfBillId);
                 cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
@@ -311,6 +308,22 @@ namespace BillsPayableSystem
                 cmd.Parameters.AddWithValue("@d10", txtBillSiNo.Text);
                 cmd.Parameters.AddWithValue("@d11", user_id);
                 cmd.Parameters.AddWithValue("@d12", "New");
+
+                if (txtpictureBox.Image != null)
+                {
+                    MemoryStream ms = new MemoryStream();
+                    Bitmap bmpImage = new Bitmap(txtpictureBox.Image);
+                    bmpImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    byte[] data = ms.GetBuffer();
+                    SqlParameter p = new SqlParameter("@d13", SqlDbType.Image);
+                    p.Value = data;
+                    cmd.Parameters.Add(p);
+                }
+                else
+                {
+                    cmd.Parameters.Add("@d13", SqlDbType.VarBinary, -1);
+                    cmd.Parameters["@d13"].Value = DBNull.Value;
+                }
                 cmd.ExecuteNonQuery();
                 con.Close();
                 MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -328,9 +341,9 @@ namespace BillsPayableSystem
         {
             try
             {
-                con = new SqlConnection();
+                con = new SqlConnection(cs.DBConn);
                 con.Open();
-                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, PeriodFrom, PeriodTo, SiNo, UserId,StatusForSN) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13,@d14)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, PeriodFrom, PeriodTo, SiNo, UserId,StatusForSN,BillImage) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13,@d14,@d15)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                 cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@d1", nameOfBillId);
                 cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
@@ -346,6 +359,22 @@ namespace BillsPayableSystem
                 cmd.Parameters.AddWithValue("@d12", txtBillSiNo.Text);
                 cmd.Parameters.AddWithValue("@d13", user_id);
                 cmd.Parameters.AddWithValue("@d14", "New");
+               
+                if (txtpictureBox.Image != null)
+                {
+                    MemoryStream ms = new MemoryStream();
+                    Bitmap bmpImage = new Bitmap(txtpictureBox.Image);
+                    bmpImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    byte[] data = ms.GetBuffer();
+                    SqlParameter p = new SqlParameter("@d15", SqlDbType.Image);
+                    p.Value = data;
+                    cmd.Parameters.Add(p);
+                }
+                else
+                {
+                    cmd.Parameters.Add("@d15", SqlDbType.VarBinary, -1);
+                    cmd.Parameters["@d15"].Value = DBNull.Value;
+                }
 
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -449,6 +478,35 @@ namespace BillsPayableSystem
         private void BtnMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void txtAmount_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void browseButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var _with1 = openFileDialog1;
+
+                _with1.Filter = ("Image Files |*.png; *.bmp; *.jpg;*.jpeg; *.gif;");
+                _with1.FilterIndex = 4;
+
+                openFileDialog1.FileName = "";
+
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    txtpictureBox.Image = Image.FromFile(openFileDialog1.FileName);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
  }
