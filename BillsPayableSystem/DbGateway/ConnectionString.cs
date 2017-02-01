@@ -13,5 +13,7 @@ namespace BillsPayableSystem.DbGateway
        
        //For Local
        //public string DBConn = @"Data Source=KYOTO-PC13;Initial Catalog=BillsPayableDB;Persist Security Info=True;User ID=sa;Password=SystemAdministrator";
+
+        //public string DBConn = @"Data Source=;Initial Catalog=BillsPayableDB;Persist Security Info=True;User ID=;Password=";
     }
 }
