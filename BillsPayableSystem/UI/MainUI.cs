@@ -51,5 +51,14 @@ namespace BillsPayableSystem.UI
             frmPayment frm1 = new frmPayment();
             frm1.Show();
         }
+
+
+        private void MainUI1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+            frmLogin frm = new frmLogin();
+            frm.Show();
+        }
+
     }
 }

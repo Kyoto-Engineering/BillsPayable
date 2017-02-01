@@ -34,7 +34,9 @@ namespace BillsPayableSystem.UI
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string query = "Select SiNo from BTransaction where StatusForSN!='Paid'  order by  BillTransactionId desc";
+
+                string query = "Select BillTransactionId from BTransaction Except Select BillTransactionId from Payment order by  BTransaction.BillTransactionId desc";
+
                 cmd = new SqlCommand(query, con);
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -81,19 +83,27 @@ namespace BillsPayableSystem.UI
 
             try
             {
+
+                int fyr = FiscallYear();
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string query ="insert into Payment(PaymentDate, EntryDateTime, InputBy, BillTransactionId) values(@d1,@d2,@d3,@d4)";
+                string query = "insert into Payment(PaymentDate, EntryDateTime, InputBy, BillTransactionId,Fiscalyr) values(@d1,@d2,@d3,@d4,@d5)";
+
                 cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@d1", dtpPaymentDate.Value);
                 cmd.Parameters.AddWithValue("@d2", DateTime.UtcNow.ToLocalTime());
                 cmd.Parameters.AddWithValue("@d3", userName);
                 cmd.Parameters.AddWithValue("@d4", billTransactionId);
 
+                cmd.Parameters.AddWithValue("@d5",fyr );
+
+
                 cmd.ExecuteNonQuery();
                 con.Close();               
                 MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                SaveStatus();               
+
+                //SaveStatus();               
+
             }
             catch (Exception ex)
             {
@@ -127,7 +137,9 @@ namespace BillsPayableSystem.UI
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = "select BillTransactionId from BTransaction WHERE SiNo= '" + cmbBillSN.Text + "'";
+
+                cmd.CommandText = "select BillTransactionId from BTransaction WHERE BillTransactionId= '" + cmbBillSN.Text + "'";
+
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
@@ -147,6 +159,30 @@ namespace BillsPayableSystem.UI
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }                       
-        }       
+
+        }
+
+        int FiscallYear()
+        {
+            int yr;
+            DateTime x=dtpPaymentDate.Value;
+            if (x.Month >= 7 && x.Month <= 12)
+            {
+                yr = Convert.ToInt32(x.ToString("yy"));
+            }
+            else
+            {
+                yr = Convert.ToInt32(x.ToString("yy")) - 1;
+            }
+            return yr;
+        }
+
+        private void frmPayment_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+            MainUI1 frm3 = new MainUI1();
+            frm3.Show();
+        }
+
     }
 }

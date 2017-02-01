@@ -210,6 +210,7 @@ namespace BillsPayableSystem
                 dtpTo.Visible = false;
             }
 
+
                 try
                 {
                     con = new SqlConnection(cs.DBConn);
@@ -236,6 +237,7 @@ namespace BillsPayableSystem
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
                     string ct = "select distinct RTRIM(BillName) from BillsPayableName where BillTypeId= " + btype_id + "";
+
 
                     cmd = new SqlCommand(ct);
                     cmd.Connection = con;
@@ -397,7 +399,6 @@ namespace BillsPayableSystem
                 return;
             }
 
-
             if (string.IsNullOrWhiteSpace(txtAmount.Text))
             {
                 MessageBox.Show("Please  enter Amount", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -465,14 +466,12 @@ namespace BillsPayableSystem
 
         private void txtBillSiNo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            MainUI1 frm3=new MainUI1();
-            frm3.Show();
+
         }
 
         private void BtnMin_Click(object sender, EventArgs e)
@@ -480,10 +479,6 @@ namespace BillsPayableSystem
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void txtAmount_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void browseButton_Click(object sender, EventArgs e)
         {
@@ -507,6 +502,13 @@ namespace BillsPayableSystem
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void frmBillEntry_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+            MainUI1 frm3 = new MainUI1();
+            frm3.Show();
         }
     }
  }

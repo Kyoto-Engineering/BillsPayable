@@ -34,8 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnPayment = new System.Windows.Forms.Button();
-            this.btnMin = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
+
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,26 +103,7 @@
             this.btnPayment.UseVisualStyleBackColor = false;
             this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
             // 
-            // btnMin
-            // 
-            this.btnMin.Location = new System.Drawing.Point(979, 2);
-            this.btnMin.Name = "btnMin";
-            this.btnMin.Size = new System.Drawing.Size(61, 36);
-            this.btnMin.TabIndex = 4;
-            this.btnMin.Text = "Min";
-            this.btnMin.UseVisualStyleBackColor = true;
-            this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(1046, 2);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(56, 35);
-            this.btnClose.TabIndex = 5;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
+
             // MainUI1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -132,9 +112,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1114, 640);
-            this.ControlBox = false;
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnMin);
+
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -142,6 +120,9 @@
             this.Name = "MainUI1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainUI";
+
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainUI1_FormClosed);
+
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -154,8 +135,7 @@
         private System.Windows.Forms.Button btnRegistration;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnMin;
-        private System.Windows.Forms.Button btnClose;
+
         private System.Windows.Forms.Button btnPayment;
     }
 }
