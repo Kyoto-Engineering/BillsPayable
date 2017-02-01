@@ -33,6 +33,7 @@
             this.lblPaymentDate = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnSave = new System.Windows.Forms.Button();
+
             this.label1 = new System.Windows.Forms.Label();
             this.lblBillSiNo = new System.Windows.Forms.Label();
             this.cmbBillSN = new System.Windows.Forms.ComboBox();
@@ -40,12 +41,14 @@
             // 
             // dtpPaymentDate
             // 
+
             this.dtpPaymentDate.CustomFormat = "dd/MM/yyy";
             this.dtpPaymentDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpPaymentDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpPaymentDate.Location = new System.Drawing.Point(185, 93);
             this.dtpPaymentDate.Name = "dtpPaymentDate";
             this.dtpPaymentDate.Size = new System.Drawing.Size(101, 29);
+
             this.dtpPaymentDate.TabIndex = 0;
             // 
             // lblPaymentDate
@@ -74,6 +77,7 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+
             // label1
             // 
             this.label1.AutoSize = true;
@@ -113,16 +117,21 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(675, 367);
+
             this.Controls.Add(this.cmbBillSN);
             this.Controls.Add(this.lblBillSiNo);
             this.Controls.Add(this.label1);
+
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblPaymentDate);
             this.Controls.Add(this.dtpPaymentDate);
             this.Name = "frmPayment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PaymentUI";
+
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPayment_FormClosed);
+
+
             this.Load += new System.EventHandler(this.PaymentUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -135,6 +144,7 @@
         private System.Windows.Forms.Label lblPaymentDate;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnSave;
+
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblBillSiNo;
         private System.Windows.Forms.ComboBox cmbBillSN;

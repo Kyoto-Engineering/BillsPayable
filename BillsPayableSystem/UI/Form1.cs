@@ -210,6 +210,7 @@ namespace BillsPayableSystem
                 dtpTo.Visible = false;
             }
 
+
                 try
                 {
                     con = new SqlConnection(cs.DBConn);
@@ -236,6 +237,7 @@ namespace BillsPayableSystem
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
                     string ct = "select distinct RTRIM(BillName) from BillsPayableName where BillTypeId= " + btype_id + "";
+
 
                     cmd = new SqlCommand(ct);
                     cmd.Connection = con;
@@ -397,7 +399,6 @@ namespace BillsPayableSystem
                 return;
             }
 
-
             if (string.IsNullOrWhiteSpace(txtAmount.Text))
             {
                 MessageBox.Show("Please  enter Amount", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -470,13 +471,14 @@ namespace BillsPayableSystem
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void BtnMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
 
         private void browseButton_Click(object sender, EventArgs e)
         {

@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblNote = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.RichTextBox();
+
             this.lblBillType = new System.Windows.Forms.Label();
             this.lblBillsName = new System.Windows.Forms.Label();
             this.lblBillDate = new System.Windows.Forms.Label();
@@ -127,6 +128,7 @@
             this.txtNote.TabIndex = 37;
             this.txtNote.Text = "";
             // 
+
             // lblBillType
             // 
             this.lblBillType.AutoSize = true;
@@ -185,12 +187,14 @@
             // dtpBillDate
             // 
             this.dtpBillDate.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+
             this.dtpBillDate.CustomFormat = " dd/MM/yyyy";
             this.dtpBillDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpBillDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpBillDate.Location = new System.Drawing.Point(272, 76);
             this.dtpBillDate.Name = "dtpBillDate";
             this.dtpBillDate.Size = new System.Drawing.Size(115, 29);
+
             this.dtpBillDate.TabIndex = 8;
             // 
             // lblPayableTo
@@ -246,6 +250,7 @@
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(267, 29);
             this.txtAmount.TabIndex = 25;
+
             this.txtAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAmount_KeyPress);
             // 
             // lblDueDate
@@ -261,12 +266,14 @@
             // 
             // dtpDueDate
             // 
+
             this.dtpDueDate.CustomFormat = "dd/MM/yyyy";
             this.dtpDueDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDueDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDueDate.Location = new System.Drawing.Point(272, 169);
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Size = new System.Drawing.Size(117, 29);
+
             this.dtpDueDate.TabIndex = 29;
             // 
             // lblBillReceivedDate
@@ -282,12 +289,14 @@
             // 
             // dtpBillReceivedDate
             // 
+
             this.dtpBillReceivedDate.CustomFormat = "dd/MM/yyyy";
             this.dtpBillReceivedDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpBillReceivedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpBillReceivedDate.Location = new System.Drawing.Point(272, 122);
             this.dtpBillReceivedDate.Name = "dtpBillReceivedDate";
             this.dtpBillReceivedDate.Size = new System.Drawing.Size(117, 29);
+
             this.dtpBillReceivedDate.TabIndex = 31;
             // 
             // cmbPayableTo
@@ -365,6 +374,7 @@
             this.txtBillSiNo.Name = "txtBillSiNo";
             this.txtBillSiNo.Size = new System.Drawing.Size(267, 29);
             this.txtBillSiNo.TabIndex = 44;
+
             // 
             // lblBillImage
             // 
@@ -412,10 +422,12 @@
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+
             this.ClientSize = new System.Drawing.Size(1238, 655);
             this.Controls.Add(this.lblBillImage);
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.txtpictureBox);
+
             this.Controls.Add(this.txtBillSiNo);
             this.Controls.Add(this.lblSiNo);
             this.Controls.Add(this.dtpTo);
@@ -464,6 +476,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblNote;
         private System.Windows.Forms.RichTextBox txtNote;
+
         private System.Windows.Forms.Label lblBillType;
         private System.Windows.Forms.Label lblBillsName;
         private System.Windows.Forms.Label lblBillDate;
