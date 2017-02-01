@@ -35,3 +35,12 @@ G:\Git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.application
 C:\Users\KYOTO\Documents\GitHub\BillsPayable\BillsPayableSystem\bin\Debug\BillsPayableSystem.exe.config
 C:\Users\KYOTO\Documents\GitHub\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.exe
 C:\Users\KYOTO\Documents\GitHub\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.pdb
+C:\Users\KYOTO\Documents\GitHub\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.csprojResolveAssemblyReference.cache
+C:\Users\KYOTO\Documents\GitHub\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.LoginUI.frmLogin.resources
+C:\Users\KYOTO\Documents\GitHub\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.LoginUI.frmRegistration.resources
+C:\Users\KYOTO\Documents\GitHub\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.frmBillEntry.resources
+C:\Users\KYOTO\Documents\GitHub\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.Properties.Resources.resources
+C:\Users\KYOTO\Documents\GitHub\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.UI.MainUI1.resources
+C:\Users\KYOTO\Documents\GitHub\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.UI.frmPayment.resources
+C:\Users\KYOTO\Documents\GitHub\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.csproj.GenerateResource.Cache
+C:\Users\KYOTO\Documents\GitHub\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.Reports.List_of_Bills.resources

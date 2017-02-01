@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BillsPayableSystem.LoginUI;
-using BillsPayableSystem.UI;
 
 namespace BillsPayableSystem
 {
@@ -19,6 +17,7 @@ namespace BillsPayableSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
             Application.Run(new frmLogin());
             //Application.Run(new frmRegistration());
             //Application.Run(new frmPayment());
@@ -32,6 +31,9 @@ namespace BillsPayableSystem
             Application.Run(new MainUI1());  
 >>>>>>> origin/master
 
+=======
+            Application.Run(new frmBillEntry());
+>>>>>>> parent of 9ee5e2d... Fix Some Error And Design
         }
     }
 }
