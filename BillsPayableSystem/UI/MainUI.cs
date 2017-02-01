@@ -51,6 +51,7 @@ namespace BillsPayableSystem.UI
             frmPayment frm1 = new frmPayment();
             frm1.Show();
         }
+<<<<<<< HEAD
 
         private void MainUI1_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -58,5 +59,7 @@ namespace BillsPayableSystem.UI
             frmLogin frm = new frmLogin();
             frm.Show();
         }
+=======
+>>>>>>> origin/master
     }
 }
