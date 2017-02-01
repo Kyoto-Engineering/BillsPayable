@@ -114,11 +114,14 @@ namespace BillsPayableSystem.LoginUI
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+<<<<<<< HEAD
         }
 
         private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+=======
+>>>>>>> origin/master
         }      
     }
 }

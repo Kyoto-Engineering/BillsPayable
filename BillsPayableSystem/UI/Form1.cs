@@ -209,6 +209,7 @@ namespace BillsPayableSystem
                 lblTo.Visible = false;
                 dtpTo.Visible = false;
             }
+<<<<<<< HEAD
 
                 try
                 {
@@ -237,6 +238,36 @@ namespace BillsPayableSystem
                     con.Open();
                     string ct = "select distinct RTRIM(BillName) from BillsPayableName where BillTypeId= " + btype_id + "";
 
+=======
+
+                try
+                {
+                    con = new SqlConnection(cs.DBConn);
+                    con.Open();
+                    cmd = con.CreateCommand();
+
+                    cmd.CommandText = "SELECT BillTypeId from BillsPayableType WHERE BillTypeName= '" + cmbBillType.Text + "'";
+
+                    rdr = cmd.ExecuteReader();
+
+                    if (rdr.Read())
+                    {
+                        btype_id = rdr.GetInt32(0);
+                    }
+                    if ((rdr != null))
+                    {
+                        rdr.Close();
+                    }
+                    if (con.State == ConnectionState.Open)
+                    {
+                        con.Close();
+                    }
+
+                    con = new SqlConnection(cs.DBConn);
+                    con.Open();
+                    string ct = "select distinct RTRIM(BillName) from BillsPayableName where BillTypeId= " + btype_id + "";
+
+>>>>>>> origin/master
                     cmd = new SqlCommand(ct);
                     cmd.Connection = con;
                     rdr = cmd.ExecuteReader();
@@ -396,8 +427,13 @@ namespace BillsPayableSystem
                 MessageBox.Show("Please  enter PayableTo Name", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> origin/master
             if (string.IsNullOrWhiteSpace(txtAmount.Text))
             {
                 MessageBox.Show("Please  enter Amount", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -465,12 +501,22 @@ namespace BillsPayableSystem
 
         private void txtBillSiNo_KeyPress(object sender, KeyPressEventArgs e)
         {
+<<<<<<< HEAD
 
+=======
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+>>>>>>> origin/master
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             
+=======
+            this.Hide();
+            MainUI1 frm3=new MainUI1();
+            frm3.Show();
+>>>>>>> origin/master
         }
 
         private void BtnMin_Click(object sender, EventArgs e)
@@ -478,6 +524,14 @@ namespace BillsPayableSystem
             this.WindowState = FormWindowState.Minimized;
         }
 
+<<<<<<< HEAD
+=======
+        private void txtAmount_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+>>>>>>> origin/master
         private void browseButton_Click(object sender, EventArgs e)
         {
             try

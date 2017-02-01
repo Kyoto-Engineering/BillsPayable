@@ -1,0 +1,28 @@
+create table BillsPayableType(
+BTypeId int Identity(1,1) NOT NULL,
+BTypeName nvarchar(200) NOT NULL,
+Primary Key Clustered([BTypeId]asc) 
+)
+
+create table BillsPayableName(
+BNId int Identity(1,1) NOT NULL,
+BTypeId int NOT NULL,
+BillName nvarchar(200) NOT NULL,
+Primary Key Clustered([BNId]asc) 
+)
+
+create table BTransaction(
+BTId int Identity(1,1) NOT NULL,
+BNId int NOT NULL,
+Descriptions nvarchar(500) NOT NULL,
+TransactionName nvarchar(200) NOT NULL,
+Amount decimal NOT NULL,
+Primary Key Clustered([BTId]asc) 
+)
+
+create table BPayableTo(
+BPayableToId int Identity(1,1) NOT NULL,
+BPayableToName nvarchar(200) NOT NULL,
+UserId int NULL,
+Primary Key Clustered([BPayableToId]asc) 
+)

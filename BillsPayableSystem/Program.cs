@@ -18,11 +18,19 @@ namespace BillsPayableSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+<<<<<<< HEAD
             Application.Run(new frmLogin());
             //Application.Run(new frmRegistration());
             //Application.Run(new frmPayment());
             //Application.Run(new frmBillEntry());
             //Application.Run(new MainUI1());  
+=======
+            //Application.Run(new frmLogin());
+            //Application.Run(new frmRegistration());
+            //Application.Run(new frmPayment());
+            //Application.Run(new frmBillEntry());
+            Application.Run(new MainUI1());  
+>>>>>>> origin/master
 
         }
     }

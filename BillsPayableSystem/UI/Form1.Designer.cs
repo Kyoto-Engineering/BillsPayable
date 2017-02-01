@@ -35,6 +35,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblNote = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.RichTextBox();
+<<<<<<< HEAD
+=======
+            this.btnClose = new System.Windows.Forms.Button();
+            this.BtnMin = new System.Windows.Forms.Button();
+>>>>>>> origin/master
             this.lblBillType = new System.Windows.Forms.Label();
             this.lblBillsName = new System.Windows.Forms.Label();
             this.lblBillDate = new System.Windows.Forms.Label();
@@ -127,6 +132,29 @@
             this.txtNote.TabIndex = 37;
             this.txtNote.Text = "";
             // 
+<<<<<<< HEAD
+=======
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(1165, 5);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(57, 31);
+            this.btnClose.TabIndex = 45;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // BtnMin
+            // 
+            this.BtnMin.Location = new System.Drawing.Point(1097, 5);
+            this.BtnMin.Name = "BtnMin";
+            this.BtnMin.Size = new System.Drawing.Size(60, 31);
+            this.BtnMin.TabIndex = 46;
+            this.BtnMin.Text = "Min";
+            this.BtnMin.UseVisualStyleBackColor = true;
+            this.BtnMin.Click += new System.EventHandler(this.BtnMin_Click);
+            // 
+>>>>>>> origin/master
             // lblBillType
             // 
             this.lblBillType.AutoSize = true;
@@ -185,12 +213,19 @@
             // dtpBillDate
             // 
             this.dtpBillDate.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+<<<<<<< HEAD
             this.dtpBillDate.CustomFormat = " dd/MM/yyyy";
             this.dtpBillDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpBillDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpBillDate.Location = new System.Drawing.Point(272, 76);
             this.dtpBillDate.Name = "dtpBillDate";
             this.dtpBillDate.Size = new System.Drawing.Size(115, 29);
+=======
+            this.dtpBillDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpBillDate.Location = new System.Drawing.Point(272, 76);
+            this.dtpBillDate.Name = "dtpBillDate";
+            this.dtpBillDate.Size = new System.Drawing.Size(291, 29);
+>>>>>>> origin/master
             this.dtpBillDate.TabIndex = 8;
             // 
             // lblPayableTo
@@ -246,6 +281,10 @@
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(267, 29);
             this.txtAmount.TabIndex = 25;
+<<<<<<< HEAD
+=======
+            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
+>>>>>>> origin/master
             this.txtAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAmount_KeyPress);
             // 
             // lblDueDate
@@ -261,12 +300,19 @@
             // 
             // dtpDueDate
             // 
+<<<<<<< HEAD
             this.dtpDueDate.CustomFormat = "dd/MM/yyyy";
             this.dtpDueDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDueDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDueDate.Location = new System.Drawing.Point(272, 169);
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Size = new System.Drawing.Size(117, 29);
+=======
+            this.dtpDueDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpDueDate.Location = new System.Drawing.Point(272, 169);
+            this.dtpDueDate.Name = "dtpDueDate";
+            this.dtpDueDate.Size = new System.Drawing.Size(291, 29);
+>>>>>>> origin/master
             this.dtpDueDate.TabIndex = 29;
             // 
             // lblBillReceivedDate
@@ -282,12 +328,19 @@
             // 
             // dtpBillReceivedDate
             // 
+<<<<<<< HEAD
             this.dtpBillReceivedDate.CustomFormat = "dd/MM/yyyy";
             this.dtpBillReceivedDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpBillReceivedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpBillReceivedDate.Location = new System.Drawing.Point(272, 122);
             this.dtpBillReceivedDate.Name = "dtpBillReceivedDate";
             this.dtpBillReceivedDate.Size = new System.Drawing.Size(117, 29);
+=======
+            this.dtpBillReceivedDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpBillReceivedDate.Location = new System.Drawing.Point(272, 122);
+            this.dtpBillReceivedDate.Name = "dtpBillReceivedDate";
+            this.dtpBillReceivedDate.Size = new System.Drawing.Size(291, 29);
+>>>>>>> origin/master
             this.dtpBillReceivedDate.TabIndex = 31;
             // 
             // cmbPayableTo
@@ -365,6 +418,10 @@
             this.txtBillSiNo.Name = "txtBillSiNo";
             this.txtBillSiNo.Size = new System.Drawing.Size(267, 29);
             this.txtBillSiNo.TabIndex = 44;
+<<<<<<< HEAD
+=======
+            this.txtBillSiNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBillSiNo_KeyPress);
+>>>>>>> origin/master
             // 
             // lblBillImage
             // 
@@ -412,10 +469,20 @@
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(1238, 655);
             this.Controls.Add(this.lblBillImage);
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.txtpictureBox);
+=======
+            this.ClientSize = new System.Drawing.Size(1243, 655);
+            this.ControlBox = false;
+            this.Controls.Add(this.lblBillImage);
+            this.Controls.Add(this.browseButton);
+            this.Controls.Add(this.txtpictureBox);
+            this.Controls.Add(this.BtnMin);
+            this.Controls.Add(this.btnClose);
+>>>>>>> origin/master
             this.Controls.Add(this.txtBillSiNo);
             this.Controls.Add(this.lblSiNo);
             this.Controls.Add(this.dtpTo);
@@ -464,6 +531,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblNote;
         private System.Windows.Forms.RichTextBox txtNote;
+<<<<<<< HEAD
+=======
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button BtnMin;
+>>>>>>> origin/master
         private System.Windows.Forms.Label lblBillType;
         private System.Windows.Forms.Label lblBillsName;
         private System.Windows.Forms.Label lblBillDate;
