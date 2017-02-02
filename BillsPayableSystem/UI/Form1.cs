@@ -23,7 +23,7 @@ namespace BillsPayableSystem
         private SqlCommand cmd;
         private SqlDataReader rdr;
         ConnectionString cs = new ConnectionString();
-        public int btype_id, nameOfBillId, bPayableToId;
+        public int btype_id, nameOfBillId, bPayableToId, billId;
         public string user_id;
         private delegate void ChangeFocusDelegate(Control ctl);
         
@@ -38,7 +38,8 @@ namespace BillsPayableSystem
             user_id = frmLogin.uId.ToString();
             BillsType();
             PayableTo();
-                       //For Spell check
+            //BillPurpose();
+            //For Spell check
 //System.Windows.Forms.Integration.ElementHost elementHost1 = new System.Windows.Forms.Integration.ElementHost();
 //System.Windows.Controls.TextBox textBoxz = new System.Windows.Controls.TextBox();
 //textBoxz.SpellCheck.IsEnabled = true;
@@ -101,6 +102,28 @@ namespace BillsPayableSystem
                     cmbPayableTo.Items.Add(rdr.GetValue(0).ToString());
                 }
                 cmbPayableTo.Items.Add("Not In The List");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void BillPurpose()
+        {
+            try
+            {
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string cty = "select BillName from BillsPayableName";
+                cmd = new SqlCommand(cty);
+                cmd.Connection = con;
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    cmbBillPurpose.Items.Add(rdr.GetValue(0).ToString());
+                }
+                cmbBillPurpose.Items.Add("Not In The List");
             }
             catch (Exception ex)
             {
@@ -257,37 +280,117 @@ namespace BillsPayableSystem
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
+            BillPurpose();
+        }
         
 
         private void cmbBillPurpose_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            try
+            if (cmbBillPurpose.Text == "Not In The List")
             {
-                con = new SqlConnection(cs.DBConn);
-                con.Open();
-                cmd = con.CreateCommand();
-                cmd.CommandText = "select BillId from BillsPayableName WHERE BillName= '" + cmbBillPurpose.Text + "'";
+                string input = Microsoft.VisualBasic.Interaction.InputBox("Please Input Bill Purpose Here", "Input Here", "", -1, -1);
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    cmbBillPurpose.SelectedIndex = -1;
+                }
+                else
+                {
+                    con = new SqlConnection(cs.DBConn);
+                    con.Open();
+                    string ct3 = "select BillName from BillsPayableName where BillName='" + input + "'";
+                    cmd = new SqlCommand(ct3, con);
+                    rdr = cmd.ExecuteReader();
+                    if (rdr.Read() && !rdr.IsDBNull(0))
+                    {
+                        MessageBox.Show("This Bill Purpose Name Already Exists,Please Select From List", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        con.Close();
+                        cmbBillPurpose.SelectedIndex = -1;
+                    }
+                    else
+                    {
+                        try
+                        {
+                            con = new SqlConnection(cs.DBConn);
+                            con.Open();
+                            string query4 = "insert into BillsPayableName (BillName) values (@d1)";
+                            cmd = new SqlCommand(query4, con);
+                            cmd.Parameters.AddWithValue("@d1", input);
+                            cmd.ExecuteNonQuery();
 
-                rdr = cmd.ExecuteReader();
-                if (rdr.Read())
-                {
-                    nameOfBillId = rdr.GetInt32(0);
+                            con.Close();
+                            cmbBillPurpose.Items.Clear();
+                            BillPurpose();                            
+                            cmbBillPurpose.SelectedText = input;
+                            
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
                 }
-                if ((rdr != null))
+
+            }
+            else
+            {
+                try
                 {
-                    rdr.Close();
+                    con = new SqlConnection(cs.DBConn);
+                    con.Open();
+                    cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT BillId from BillsPayableName WHERE BillName= '" + cmbBillPurpose.Text + "'";
+
+                    rdr = cmd.ExecuteReader();
+                    if (rdr.Read())
+                    {
+                        billId = rdr.GetInt32(0);
+                    }
+                    if ((rdr != null))
+                    {
+                        rdr.Close();
+                    }
+                    if (con.State == ConnectionState.Open)
+                    {
+                        con.Close();
+                    }
+
                 }
-                if (con.State == ConnectionState.Open)
+                catch (Exception ex)
                 {
-                    con.Close();
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            
+            
+            
+            
+            //try
+            //{
+            //    con = new SqlConnection(cs.DBConn);
+            //    con.Open();
+            //    cmd = con.CreateCommand();
+            //    cmd.CommandText = "select BillId from BillsPayableName WHERE BillName= '" + cmbBillPurpose.Text + "'";
 
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //    rdr = cmd.ExecuteReader();
+            //    if (rdr.Read())
+            //    {
+            //        nameOfBillId = rdr.GetInt32(0);
+            //    }
+            //    if ((rdr != null))
+            //    {
+            //        rdr.Close();
+            //    }
+            //    if (con.State == ConnectionState.Open)
+            //    {
+            //        con.Close();
+            //    }
+            //}
+
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         private void SaveBillTransaction2()
@@ -509,6 +612,17 @@ namespace BillsPayableSystem
             this.Dispose();
             MainUI1 frm3 = new MainUI1();
             frm3.Show();
+        }
+
+        private void cmbBillPurpose_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(cmbBillPurpose.Text) && !cmbBillPurpose.Items.Contains(cmbBillPurpose.Text))
+            {
+                MessageBox.Show("Please Select A Valid Bill Purpose", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbBillPurpose.ResetText();
+                this.BeginInvoke(new ChangeFocusDelegate(changeFocus), cmbBillPurpose);
+
+            }
         }
     }
  }

@@ -173,7 +173,8 @@
             // 
             // cmbBillPurpose
             // 
-            this.cmbBillPurpose.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBillPurpose.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbBillPurpose.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbBillPurpose.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBillPurpose.FormattingEnabled = true;
             this.cmbBillPurpose.Location = new System.Drawing.Point(272, 458);
@@ -181,6 +182,7 @@
             this.cmbBillPurpose.Size = new System.Drawing.Size(267, 30);
             this.cmbBillPurpose.TabIndex = 7;
             this.cmbBillPurpose.SelectedIndexChanged += new System.EventHandler(this.cmbBillPurpose_SelectedIndexChanged_1);
+            this.cmbBillPurpose.Leave += new System.EventHandler(this.cmbBillPurpose_Leave);
             // 
             // dtpBillDate
             // 
