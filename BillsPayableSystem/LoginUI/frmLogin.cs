@@ -121,6 +121,23 @@ namespace BillsPayableSystem.LoginUI
         {
             Application.Exit();
 
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                loginButton_Click(this, new EventArgs());
+            }
+        }
+
+        private void txtUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+                if (e.KeyCode == Keys.Enter)
+                {
+                    txtPassword.Focus();
+                }
         }      
     }
 }

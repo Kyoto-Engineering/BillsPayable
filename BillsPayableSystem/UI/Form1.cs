@@ -24,7 +24,7 @@ namespace BillsPayableSystem
         private SqlDataReader rdr;
         ConnectionString cs = new ConnectionString();
         public int btype_id, nameOfBillId, bPayableToId, billId;
-        public string user_id;
+        public string user_id,inpb=null;
         private delegate void ChangeFocusDelegate(Control ctl);
         
 
@@ -37,13 +37,7 @@ namespace BillsPayableSystem
         {
             user_id = frmLogin.uId.ToString();
             BillsType();
-            PayableTo();
-            //BillPurpose();
-            //For Spell check
-//System.Windows.Forms.Integration.ElementHost elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-//System.Windows.Controls.TextBox textBoxz = new System.Windows.Controls.TextBox();
-//textBoxz.SpellCheck.IsEnabled = true;
-//elementHost1.Child = textBoxz;
+            PayableTo();          
         }
 
         private void changeFocus(Control ctl)
@@ -52,7 +46,6 @@ namespace BillsPayableSystem
         }
         private void ClearData()
         {        
-            //cmbPayableTo.Text = "";
             cmbPayableTo.Items.Clear();
             cmbPayableTo.SelectedIndex = -1;
             txtBillSiNo.Clear();
@@ -66,6 +59,7 @@ namespace BillsPayableSystem
             txtBillNarrative.Clear();
             txtNote.Clear();
         }
+        
         private void BillsType()
         {
             try
@@ -109,22 +103,50 @@ namespace BillsPayableSystem
             }
         }
 
-        public void BillPurpose()
+        public void BillPurposeLoad()
         {
             try
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string cty = "select BillName from BillsPayableName";
-                cmd = new SqlCommand(cty);
+                cmd = con.CreateCommand();
+
+                cmd.CommandText = "SELECT BillTypeId from BillsPayableType WHERE BillTypeName= '" + cmbBillType.Text + "'";
+                rdr = cmd.ExecuteReader();
+
+                if (rdr.Read())
+                {
+                    btype_id = rdr.GetInt32(0);
+                }
+                if ((rdr != null))
+                {
+                    rdr.Close();
+                }
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string ct = "select distinct RTRIM(BillName) from BillsPayableName where BillTypeId= " + btype_id + "";
+
+                cmd = new SqlCommand(ct);
                 cmd.Connection = con;
                 rdr = cmd.ExecuteReader();
+
                 while (rdr.Read())
                 {
-                    cmbBillPurpose.Items.Add(rdr.GetValue(0).ToString());
+                    cmbBillPurpose.Items.Add(rdr[0]);
                 }
                 cmbBillPurpose.Items.Add("Not In The List");
+
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -160,9 +182,10 @@ namespace BillsPayableSystem
                         {
                             con = new SqlConnection(cs.DBConn);
                             con.Open();
-                            string query1 = "insert into BPayableTo (BPayableToName) values (@d1)" ;
+                            string query1 = "insert into BPayableTo (BPayableToName, UserId) values (@d1,@d2)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                             cmd = new SqlCommand(query1, con);
                             cmd.Parameters.AddWithValue("@d1", input);
+                            cmd.Parameters.AddWithValue("@d2", user_id);
                             cmd.ExecuteNonQuery();
                             
                             con.Close();
@@ -176,8 +199,7 @@ namespace BillsPayableSystem
                             MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                }
-                
+                }                
             }
             else
             {
@@ -201,7 +223,6 @@ namespace BillsPayableSystem
                     {
                         con.Close();
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -215,11 +236,10 @@ namespace BillsPayableSystem
             cmbBillPurpose.Text = "";
             cmbBillPurpose.Items.Clear();
             cmbBillPurpose.SelectedIndex = -1;
-
             txtBillNarrative.Clear();
 
             if (cmbBillType.Text == "Recurrent")
-            {
+            { 
                 lblFrom.Visible = true;
                 dtpFrom.Visible = true;
                 lblTo.Visible = true;
@@ -232,55 +252,7 @@ namespace BillsPayableSystem
                 lblTo.Visible = false;
                 dtpTo.Visible = false;
             }
-
-
-                try
-                {
-                    con = new SqlConnection(cs.DBConn);
-                    con.Open();
-                    cmd = con.CreateCommand();
-
-                    cmd.CommandText = "SELECT BillTypeId from BillsPayableType WHERE BillTypeName= '" + cmbBillType.Text + "'";
-
-                    rdr = cmd.ExecuteReader();
-
-                    if (rdr.Read())
-                    {
-                        btype_id = rdr.GetInt32(0);
-                    }
-                    if ((rdr != null))
-                    {
-                        rdr.Close();
-                    }
-                    if (con.State == ConnectionState.Open)
-                    {
-                        con.Close();
-                    }
-
-                    con = new SqlConnection(cs.DBConn);
-                    con.Open();
-                    string ct = "select distinct RTRIM(BillName) from BillsPayableName where BillTypeId= " + btype_id + "";
-
-
-                    cmd = new SqlCommand(ct);
-                    cmd.Connection = con;
-                    rdr = cmd.ExecuteReader();
-
-                    while (rdr.Read())
-                    {
-                        cmbBillPurpose.Items.Add(rdr[0]);
-                    }
-                    if (con.State == ConnectionState.Open)
-                    {
-                        con.Close();
-                    }
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            BillPurpose();
+               BillPurposeLoad();
         }
         
 
@@ -288,8 +260,8 @@ namespace BillsPayableSystem
         {
             if (cmbBillPurpose.Text == "Not In The List")
             {
-                string input = Microsoft.VisualBasic.Interaction.InputBox("Please Input Bill Purpose Here", "Input Here", "", -1, -1);
-                if (string.IsNullOrWhiteSpace(input))
+                 inpb = Microsoft.VisualBasic.Interaction.InputBox("Please Input Bill Purpose Here", "Input Here", "", -1, -1);
+                if (string.IsNullOrWhiteSpace(inpb))
                 {
                     cmbBillPurpose.SelectedIndex = -1;
                 }
@@ -297,7 +269,7 @@ namespace BillsPayableSystem
                 {
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
-                    string ct3 = "select BillName from BillsPayableName where BillName='" + input + "'";
+                    string ct3 = "select BillName from BillsPayableName where BillName='" + inpb + "'";
                     cmd = new SqlCommand(ct3, con);
                     rdr = cmd.ExecuteReader();
                     if (rdr.Read() && !rdr.IsDBNull(0))
@@ -313,16 +285,17 @@ namespace BillsPayableSystem
                         {
                             con = new SqlConnection(cs.DBConn);
                             con.Open();
-                            string query4 = "insert into BillsPayableName (BillName) values (@d1)";
+                            string query4 = "insert into BillsPayableName (BillName, BillTypeId, UserId) values (@d1,@d2,@d3)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                             cmd = new SqlCommand(query4, con);
-                            cmd.Parameters.AddWithValue("@d1", input);
+                            cmd.Parameters.AddWithValue("@d1", inpb);
+                            cmd.Parameters.AddWithValue("@d2", btype_id);
+                            cmd.Parameters.AddWithValue("@d3", user_id);
                             cmd.ExecuteNonQuery();
-
                             con.Close();
+
                             cmbBillPurpose.Items.Clear();
-                            BillPurpose();                            
-                            cmbBillPurpose.SelectedText = input;
-                            
+                            BillPurposeLoad();
+                            cmbBillPurpose.SelectedText = inpb;                            
                         }
                         catch (Exception ex)
                         {
@@ -330,7 +303,6 @@ namespace BillsPayableSystem
                         }
                     }
                 }
-
             }
             else
             {
@@ -354,43 +326,12 @@ namespace BillsPayableSystem
                     {
                         con.Close();
                     }
-
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            
-            
-            
-            
-            //try
-            //{
-            //    con = new SqlConnection(cs.DBConn);
-            //    con.Open();
-            //    cmd = con.CreateCommand();
-            //    cmd.CommandText = "select BillId from BillsPayableName WHERE BillName= '" + cmbBillPurpose.Text + "'";
-
-            //    rdr = cmd.ExecuteReader();
-            //    if (rdr.Read())
-            //    {
-            //        nameOfBillId = rdr.GetInt32(0);
-            //    }
-            //    if ((rdr != null))
-            //    {
-            //        rdr.Close();
-            //    }
-            //    if (con.State == ConnectionState.Open)
-            //    {
-            //        con.Close();
-            //    }
-            //}
-
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
         }
 
         private void SaveBillTransaction2()
@@ -401,7 +342,7 @@ namespace BillsPayableSystem
                 con.Open();
                 String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, SiNo, UserId,StatusForSN,BillImage) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                 cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@d1", nameOfBillId);
+                cmd.Parameters.AddWithValue("@d1", billId);
                 cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
                 cmd.Parameters.AddWithValue("@d3", cmbPaymentMethod.Text);
                 cmd.Parameters.AddWithValue("@d4", Convert.ToDecimal(txtAmount.Text));
@@ -450,7 +391,7 @@ namespace BillsPayableSystem
                 con.Open();
                 String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, PeriodFrom, PeriodTo, SiNo, UserId,StatusForSN,BillImage) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13,@d14,@d15)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                 cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@d1", nameOfBillId);
+                cmd.Parameters.AddWithValue("@d1", billId);
                 cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
                 cmd.Parameters.AddWithValue("@d3", cmbPaymentMethod.Text);
                 cmd.Parameters.AddWithValue("@d4", Convert.ToDecimal(txtAmount.Text));
@@ -567,21 +508,10 @@ namespace BillsPayableSystem
             }
         }
 
-        private void txtBillSiNo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void BtnMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
 
         private void browseButton_Click(object sender, EventArgs e)
         {
@@ -597,9 +527,7 @@ namespace BillsPayableSystem
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     txtpictureBox.Image = Image.FromFile(openFileDialog1.FileName);
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -621,7 +549,6 @@ namespace BillsPayableSystem
                 MessageBox.Show("Please Select A Valid Bill Purpose", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbBillPurpose.ResetText();
                 this.BeginInvoke(new ChangeFocusDelegate(changeFocus), cmbBillPurpose);
-
             }
         }
     }

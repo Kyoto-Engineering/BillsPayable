@@ -72,7 +72,7 @@
             this.BtnSave.Location = new System.Drawing.Point(555, 502);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(112, 60);
-            this.BtnSave.TabIndex = 12;
+            this.BtnSave.TabIndex = 14;
             this.BtnSave.UseVisualStyleBackColor = true;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
@@ -82,7 +82,7 @@
             this.txtBillNarrative.Location = new System.Drawing.Point(813, 298);
             this.txtBillNarrative.Name = "txtBillNarrative";
             this.txtBillNarrative.Size = new System.Drawing.Size(363, 112);
-            this.txtBillNarrative.TabIndex = 23;
+            this.txtBillNarrative.TabIndex = 12;
             this.txtBillNarrative.Text = "";
             // 
             // lblDescription
@@ -120,11 +120,12 @@
             // 
             // txtNote
             // 
+            this.txtNote.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtNote.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNote.Location = new System.Drawing.Point(813, 416);
             this.txtNote.Name = "txtNote";
             this.txtNote.Size = new System.Drawing.Size(363, 63);
-            this.txtNote.TabIndex = 37;
+            this.txtNote.TabIndex = 13;
             this.txtNote.Text = "";
             // 
             // lblBillType
@@ -168,7 +169,7 @@
             this.cmbBillType.Location = new System.Drawing.Point(272, 383);
             this.cmbBillType.Name = "cmbBillType";
             this.cmbBillType.Size = new System.Drawing.Size(267, 30);
-            this.cmbBillType.TabIndex = 6;
+            this.cmbBillType.TabIndex = 7;
             this.cmbBillType.SelectedIndexChanged += new System.EventHandler(this.cmbBillsType_SelectedIndexChanged);
             // 
             // cmbBillPurpose
@@ -180,7 +181,7 @@
             this.cmbBillPurpose.Location = new System.Drawing.Point(272, 458);
             this.cmbBillPurpose.Name = "cmbBillPurpose";
             this.cmbBillPurpose.Size = new System.Drawing.Size(267, 30);
-            this.cmbBillPurpose.TabIndex = 7;
+            this.cmbBillPurpose.TabIndex = 10;
             this.cmbBillPurpose.SelectedIndexChanged += new System.EventHandler(this.cmbBillPurpose_SelectedIndexChanged_1);
             this.cmbBillPurpose.Leave += new System.EventHandler(this.cmbBillPurpose_Leave);
             // 
@@ -193,7 +194,7 @@
             this.dtpBillDate.Location = new System.Drawing.Point(272, 76);
             this.dtpBillDate.Name = "dtpBillDate";
             this.dtpBillDate.Size = new System.Drawing.Size(115, 29);
-            this.dtpBillDate.TabIndex = 8;
+            this.dtpBillDate.TabIndex = 0;
             // 
             // lblPayableTo
             // 
@@ -239,7 +240,7 @@
             this.cmbPaymentMethod.Location = new System.Drawing.Point(272, 342);
             this.cmbPaymentMethod.Name = "cmbPaymentMethod";
             this.cmbPaymentMethod.Size = new System.Drawing.Size(267, 30);
-            this.cmbPaymentMethod.TabIndex = 24;
+            this.cmbPaymentMethod.TabIndex = 6;
             // 
             // txtAmount
             // 
@@ -247,7 +248,7 @@
             this.txtAmount.Location = new System.Drawing.Point(272, 301);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(267, 29);
-            this.txtAmount.TabIndex = 25;
+            this.txtAmount.TabIndex = 5;
             this.txtAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAmount_KeyPress);
             // 
             // lblDueDate
@@ -269,7 +270,7 @@
             this.dtpDueDate.Location = new System.Drawing.Point(272, 169);
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Size = new System.Drawing.Size(117, 29);
-            this.dtpDueDate.TabIndex = 29;
+            this.dtpDueDate.TabIndex = 2;
             // 
             // lblBillReceivedDate
             // 
@@ -290,7 +291,7 @@
             this.dtpBillReceivedDate.Location = new System.Drawing.Point(272, 122);
             this.dtpBillReceivedDate.Name = "dtpBillReceivedDate";
             this.dtpBillReceivedDate.Size = new System.Drawing.Size(117, 29);
-            this.dtpBillReceivedDate.TabIndex = 31;
+            this.dtpBillReceivedDate.TabIndex = 1;
             // 
             // cmbPayableTo
             // 
@@ -303,7 +304,7 @@
             this.cmbPayableTo.Location = new System.Drawing.Point(272, 255);
             this.cmbPayableTo.Name = "cmbPayableTo";
             this.cmbPayableTo.Size = new System.Drawing.Size(267, 30);
-            this.cmbPayableTo.TabIndex = 38;
+            this.cmbPayableTo.TabIndex = 4;
             this.cmbPayableTo.SelectedIndexChanged += new System.EventHandler(this.cmbPayableTo_SelectedIndexChanged);
             this.cmbPayableTo.Leave += new System.EventHandler(this.cmbPayableTo_Leave);
             // 
@@ -339,7 +340,7 @@
             this.dtpFrom.Location = new System.Drawing.Point(235, 422);
             this.dtpFrom.Name = "dtpFrom";
             this.dtpFrom.Size = new System.Drawing.Size(121, 29);
-            this.dtpFrom.TabIndex = 41;
+            this.dtpFrom.TabIndex = 8;
             this.dtpFrom.Visible = false;
             // 
             // dtpTo
@@ -350,7 +351,7 @@
             this.dtpTo.Location = new System.Drawing.Point(422, 422);
             this.dtpTo.Name = "dtpTo";
             this.dtpTo.Size = new System.Drawing.Size(117, 29);
-            this.dtpTo.TabIndex = 42;
+            this.dtpTo.TabIndex = 9;
             this.dtpTo.Visible = false;
             // 
             // lblSiNo
@@ -370,7 +371,7 @@
             this.txtBillSiNo.Location = new System.Drawing.Point(272, 211);
             this.txtBillSiNo.Name = "txtBillSiNo";
             this.txtBillSiNo.Size = new System.Drawing.Size(267, 29);
-            this.txtBillSiNo.TabIndex = 44;
+            this.txtBillSiNo.TabIndex = 3;
             // 
             // lblBillImage
             // 
@@ -391,7 +392,7 @@
             this.browseButton.Location = new System.Drawing.Point(813, 260);
             this.browseButton.Name = "browseButton";
             this.browseButton.Size = new System.Drawing.Size(144, 33);
-            this.browseButton.TabIndex = 48;
+            this.browseButton.TabIndex = 11;
             this.browseButton.Text = "Browse";
             this.browseButton.UseVisualStyleBackColor = false;
             this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
