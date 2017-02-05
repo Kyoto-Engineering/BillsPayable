@@ -35,7 +35,7 @@ namespace BillsPayableSystem.UI
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
 
-                string query = "Select BillTransactionId from BTransaction Except Select BillTransactionId from Payment order by  BTransaction.BillTransactionId desc";
+                string query = "Select SiNo from BTransaction";
 
                 cmd = new SqlCommand(query, con);
                 rdr = cmd.ExecuteReader();
@@ -63,7 +63,7 @@ namespace BillsPayableSystem.UI
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string qry = "Update BTransaction set  StatusForSN='Paid'  where BillTransactionId='"+billTransactionId+"' ";
+                string qry = "Update BTransaction set  StatusForSN='Paid'  where BillTransactionId='" + billTransactionId + "' ";
                 cmd = new SqlCommand(qry, con);
                 cmd.ExecuteReader();
                 con.Close();
@@ -94,12 +94,11 @@ namespace BillsPayableSystem.UI
                 cmd.Parameters.AddWithValue("@d2", DateTime.UtcNow.ToLocalTime());
                 cmd.Parameters.AddWithValue("@d3", userName);
                 cmd.Parameters.AddWithValue("@d4", billTransactionId);
-
-                cmd.Parameters.AddWithValue("@d5",fyr );
+                cmd.Parameters.AddWithValue("@d5", fyr);
 
 
                 cmd.ExecuteNonQuery();
-                con.Close();               
+                con.Close();
                 MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //SaveStatus();               
@@ -127,45 +126,45 @@ namespace BillsPayableSystem.UI
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
 
-           
+
         }
 
         private void cmbBillSN_SelectedIndexChanged(object sender, EventArgs e)
-        {            
+        {
+
             try
             {
                 con = new SqlConnection(cs.DBConn);
+                string query = "SELECT dbo.BPayableTo.BPayableToName, dbo.BTransaction.BIssueDate, dbo.BTransaction.Amount, dbo.BillsPayableName.BillName FROM dbo.BPayableTo INNER JOIN dbo.BTransaction ON dbo.BPayableTo.BPayableToId = dbo.BTransaction.BPayableToId INNER JOIN dbo.BillsPayableName ON dbo.BTransaction.BillId = dbo.BillsPayableName.BillId";          
+                SqlCommand command = new SqlCommand(query, con);
                 con.Open();
-                cmd = con.CreateCommand();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        payableTextBox.Text = reader["BPayableToName"].ToString();
+                        billEntryDateTextBox.Text = reader["BIssueDate"].ToString();
+                        amountTextBox.Text = reader["Amount"].ToString();
+                        billPurposeTextBox.Text = reader["BillName"].ToString();
 
-                cmd.CommandText = "select BillTransactionId from BTransaction WHERE BillTransactionId= '" + cmbBillSN.Text + "'";
-
-                rdr = cmd.ExecuteReader();
-                if (rdr.Read())
-                {
-                    billTransactionId = rdr.GetInt32(0);
+                    }
                 }
-                if ((rdr != null))
-                {
-                    rdr.Close();
-                }
-                if (con.State == ConnectionState.Open)
-                {
-                    con.Close();
-                }
+                con.Close();
             }
-
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }                       
+                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        
 
         }
 
         int FiscallYear()
         {
             int yr;
-            DateTime x=dtpPaymentDate.Value;
+            DateTime x = dtpPaymentDate.Value;
             if (x.Month >= 7 && x.Month <= 12)
             {
                 yr = Convert.ToInt32(x.ToString("yy"));

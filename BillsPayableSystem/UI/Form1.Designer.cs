@@ -241,6 +241,7 @@
             this.cmbPaymentMethod.Name = "cmbPaymentMethod";
             this.cmbPaymentMethod.Size = new System.Drawing.Size(267, 30);
             this.cmbPaymentMethod.TabIndex = 6;
+        
             // 
             // txtAmount
             // 
