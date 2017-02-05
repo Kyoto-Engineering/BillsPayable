@@ -35,7 +35,8 @@ namespace BillsPayableSystem.UI
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
 
-                string query = "Select SiNo from BTransaction";
+                //string query = "Select SiNo from BTransaction except Select SiNo from BTransaction where StatusForSN='Paid'";
+                string query = "Select SiNo from BTransaction LEFT JOIN Payment ON BTransaction.BillTransactionId = Payment.BillTransactionId EXCEPT Select SiNo from BTransaction RIGHT JOIN Payment ON BTransaction.BillTransactionId = Payment.BillTransactionId";
 
                 cmd = new SqlCommand(query, con);
                 rdr = cmd.ExecuteReader();
@@ -57,22 +58,7 @@ namespace BillsPayableSystem.UI
             BillSerialNoLoad();
         }
 
-        private void SaveStatus()
-        {
-            try
-            {
-                con = new SqlConnection(cs.DBConn);
-                con.Open();
-                string qry = "Update BTransaction set  StatusForSN='Paid'  where BillTransactionId='" + billTransactionId + "' ";
-                cmd = new SqlCommand(qry, con);
-                cmd.ExecuteReader();
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+       
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(cmbBillSN.Text))
@@ -87,7 +73,7 @@ namespace BillsPayableSystem.UI
                 int fyr = FiscallYear();
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string query = "insert into Payment(PaymentDate, EntryDateTime, InputBy, BillTransactionId,Fiscalyr) values(@d1,@d2,@d3,@d4,@d5)";
+                string query = "insert into Payment(PaymentDate, EntryDateTime, InputBy, BillTransactionId,Fiscalyr) values(@d1,@d2,@d3,@d4,@d5)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
 
                 cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@d1", dtpPaymentDate.Value);
@@ -96,13 +82,9 @@ namespace BillsPayableSystem.UI
                 cmd.Parameters.AddWithValue("@d4", billTransactionId);
                 cmd.Parameters.AddWithValue("@d5", fyr);
 
-
                 cmd.ExecuteNonQuery();
                 con.Close();
-                MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                //SaveStatus();               
-
+                MessageBox.Show("Paid successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -131,34 +113,66 @@ namespace BillsPayableSystem.UI
 
         private void cmbBillSN_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             try
             {
                 con = new SqlConnection(cs.DBConn);
-                string query = "SELECT dbo.BPayableTo.BPayableToName, dbo.BTransaction.BIssueDate, dbo.BTransaction.Amount, dbo.BillsPayableName.BillName FROM dbo.BPayableTo INNER JOIN dbo.BTransaction ON dbo.BPayableTo.BPayableToId = dbo.BTransaction.BPayableToId INNER JOIN dbo.BillsPayableName ON dbo.BTransaction.BillId = dbo.BillsPayableName.BillId";          
-                SqlCommand command = new SqlCommand(query, con);
                 con.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        payableTextBox.Text = reader["BPayableToName"].ToString();
-                        billEntryDateTextBox.Text = reader["BIssueDate"].ToString();
-                        amountTextBox.Text = reader["Amount"].ToString();
-                        billPurposeTextBox.Text = reader["BillName"].ToString();
+                cmd = con.CreateCommand();
 
-                    }
+                cmd.CommandText = "select BillTransactionId,SiNo from BTransaction WHERE SiNo= '" + cmbBillSN.Text + "'";
+
+                rdr = cmd.ExecuteReader();
+                if (rdr.Read())
+                {
+                    billTransactionId = rdr.GetInt32(0);
                 }
-                con.Close();
+                if ((rdr != null))
+                {
+                    rdr.Close();
+                }
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
             }
+
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-        
-
+            if (!string.IsNullOrWhiteSpace(cmbBillSN.Text))
+            {
+                try
+                {
+                    con = new SqlConnection(cs.DBConn);
+                    con.Open();
+                    cmd = con.CreateCommand();
+                    string query = "SELECT dbo.BPayableTo.BPayableToName, dbo.BTransaction.BIssueDate, dbo.BTransaction.Amount, dbo.BillsPayableName.BillName FROM dbo.BPayableTo INNER JOIN dbo.BTransaction ON dbo.BPayableTo.BPayableToId = dbo.BTransaction.BPayableToId INNER JOIN dbo.BillsPayableName ON dbo.BTransaction.BillId = dbo.BillsPayableName.BillId where SiNo= '" + cmbBillSN.Text + "'";                  
+                    cmd = new SqlCommand(query, con);                   
+                    rdr = cmd.ExecuteReader();
+                    if (rdr.Read())
+                    {
+                        payableTextBox.Text = rdr["BPayableToName"].ToString();
+                        billEntryDateTextBox.Text = rdr["BIssueDate"].ToString();
+                        amountTextBox.Text = rdr["Amount"].ToString();
+                        billPurposeTextBox.Text = rdr["BillName"].ToString();
+                    }
+                    if ((rdr != null))
+                    {
+                        rdr.Close();
+                    }
+                    if (con.State == ConnectionState.Open)
+                    {
+                        con.Close();
+                    }
+                }
+             
+               catch(Exception ex)
+               {
+                  MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               }
+            }           
         }
 
         int FiscallYear()

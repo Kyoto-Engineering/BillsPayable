@@ -97,7 +97,7 @@
             // 
             this.lblBillSiNo.AutoSize = true;
             this.lblBillSiNo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBillSiNo.Location = new System.Drawing.Point(43, 167);
+            this.lblBillSiNo.Location = new System.Drawing.Point(43, 143);
             this.lblBillSiNo.Name = "lblBillSiNo";
             this.lblBillSiNo.Size = new System.Drawing.Size(130, 22);
             this.lblBillSiNo.TabIndex = 9;
@@ -108,7 +108,7 @@
             this.cmbBillSN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBillSN.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBillSN.FormattingEnabled = true;
-            this.cmbBillSN.Location = new System.Drawing.Point(185, 164);
+            this.cmbBillSN.Location = new System.Drawing.Point(185, 140);
             this.cmbBillSN.Name = "cmbBillSN";
             this.cmbBillSN.Size = new System.Drawing.Size(282, 30);
             this.cmbBillSN.TabIndex = 10;
@@ -116,69 +116,77 @@
             // 
             // payableTextBox
             // 
-            this.payableTextBox.Location = new System.Drawing.Point(275, 216);
+            this.payableTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.payableTextBox.Location = new System.Drawing.Point(185, 188);
             this.payableTextBox.Name = "payableTextBox";
             this.payableTextBox.ReadOnly = true;
-            this.payableTextBox.Size = new System.Drawing.Size(192, 20);
+            this.payableTextBox.Size = new System.Drawing.Size(192, 29);
             this.payableTextBox.TabIndex = 11;
             // 
             // amountTextBox
             // 
-            this.amountTextBox.Location = new System.Drawing.Point(275, 266);
+            this.amountTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.amountTextBox.Location = new System.Drawing.Point(185, 238);
             this.amountTextBox.Name = "amountTextBox";
             this.amountTextBox.ReadOnly = true;
-            this.amountTextBox.Size = new System.Drawing.Size(192, 20);
+            this.amountTextBox.Size = new System.Drawing.Size(192, 29);
             this.amountTextBox.TabIndex = 12;
             // 
             // billEntryDateTextBox
             // 
-            this.billEntryDateTextBox.Location = new System.Drawing.Point(275, 312);
+            this.billEntryDateTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.billEntryDateTextBox.Location = new System.Drawing.Point(185, 285);
             this.billEntryDateTextBox.Name = "billEntryDateTextBox";
             this.billEntryDateTextBox.ReadOnly = true;
-            this.billEntryDateTextBox.Size = new System.Drawing.Size(192, 20);
+            this.billEntryDateTextBox.Size = new System.Drawing.Size(192, 29);
             this.billEntryDateTextBox.TabIndex = 13;
             // 
             // billPurposeTextBox
             // 
-            this.billPurposeTextBox.Location = new System.Drawing.Point(275, 355);
+            this.billPurposeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.billPurposeTextBox.Location = new System.Drawing.Point(185, 334);
             this.billPurposeTextBox.Name = "billPurposeTextBox";
             this.billPurposeTextBox.ReadOnly = true;
-            this.billPurposeTextBox.Size = new System.Drawing.Size(192, 20);
+            this.billPurposeTextBox.Size = new System.Drawing.Size(192, 29);
             this.billPurposeTextBox.TabIndex = 14;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(189, 216);
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(66, 188);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 13);
+            this.label2.Size = new System.Drawing.Size(106, 22);
             this.label2.TabIndex = 15;
             this.label2.Text = "Payable To:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(207, 266);
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(93, 238);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 13);
+            this.label3.Size = new System.Drawing.Size(79, 22);
             this.label3.TabIndex = 16;
             this.label3.Text = "Amount:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(183, 312);
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(34, 285);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(76, 13);
+            this.label4.Size = new System.Drawing.Size(138, 22);
             this.label4.TabIndex = 17;
             this.label4.Text = "Bill Entry Date:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(188, 361);
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(57, 334);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 13);
+            this.label5.Size = new System.Drawing.Size(115, 22);
             this.label5.TabIndex = 18;
             this.label5.Text = "Bill Purpose:";
             // 
