@@ -90,6 +90,7 @@ namespace BillsPayableSystem.UI
             {
                 MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            ClearData();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -174,7 +175,14 @@ namespace BillsPayableSystem.UI
                }
             }           
         }
-
+        private void ClearData()
+        {
+            cmbBillSN.SelectedIndex = -1;
+            amountTextBox.Clear();
+            billPurposeTextBox.Clear();
+            billEntryDateTextBox.Clear();
+            payableTextBox.Clear();
+        }
         int FiscallYear()
         {
             int yr;
