@@ -101,7 +101,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DarkOrange;
-            this.label1.Location = new System.Drawing.Point(524, 18);
+            this.label1.Location = new System.Drawing.Point(524, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 31);
             this.label1.TabIndex = 35;
@@ -193,7 +193,7 @@
             this.dtpBillDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpBillDate.Location = new System.Drawing.Point(272, 76);
             this.dtpBillDate.Name = "dtpBillDate";
-            this.dtpBillDate.Size = new System.Drawing.Size(115, 29);
+            this.dtpBillDate.Size = new System.Drawing.Size(142, 29);
             this.dtpBillDate.TabIndex = 0;
             // 
             // lblPayableTo
@@ -241,7 +241,6 @@
             this.cmbPaymentMethod.Name = "cmbPaymentMethod";
             this.cmbPaymentMethod.Size = new System.Drawing.Size(267, 30);
             this.cmbPaymentMethod.TabIndex = 6;
-        
             // 
             // txtAmount
             // 
@@ -270,7 +269,7 @@
             this.dtpDueDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDueDate.Location = new System.Drawing.Point(272, 169);
             this.dtpDueDate.Name = "dtpDueDate";
-            this.dtpDueDate.Size = new System.Drawing.Size(117, 29);
+            this.dtpDueDate.Size = new System.Drawing.Size(144, 29);
             this.dtpDueDate.TabIndex = 2;
             // 
             // lblBillReceivedDate
@@ -291,7 +290,7 @@
             this.dtpBillReceivedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpBillReceivedDate.Location = new System.Drawing.Point(272, 122);
             this.dtpBillReceivedDate.Name = "dtpBillReceivedDate";
-            this.dtpBillReceivedDate.Size = new System.Drawing.Size(117, 29);
+            this.dtpBillReceivedDate.Size = new System.Drawing.Size(144, 29);
             this.dtpBillReceivedDate.TabIndex = 1;
             // 
             // cmbPayableTo
@@ -314,7 +313,7 @@
             this.lblFrom.AutoSize = true;
             this.lblFrom.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFrom.ForeColor = System.Drawing.Color.Blue;
-            this.lblFrom.Location = new System.Drawing.Point(166, 424);
+            this.lblFrom.Location = new System.Drawing.Point(140, 424);
             this.lblFrom.Name = "lblFrom";
             this.lblFrom.Size = new System.Drawing.Size(65, 22);
             this.lblFrom.TabIndex = 39;
@@ -326,7 +325,7 @@
             this.lblTo.AutoSize = true;
             this.lblTo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTo.ForeColor = System.Drawing.Color.Blue;
-            this.lblTo.Location = new System.Drawing.Point(375, 424);
+            this.lblTo.Location = new System.Drawing.Point(358, 424);
             this.lblTo.Name = "lblTo";
             this.lblTo.Size = new System.Drawing.Size(41, 22);
             this.lblTo.TabIndex = 40;
@@ -338,9 +337,9 @@
             this.dtpFrom.CustomFormat = " dd/MM/yyyy";
             this.dtpFrom.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFrom.Location = new System.Drawing.Point(235, 422);
+            this.dtpFrom.Location = new System.Drawing.Point(209, 422);
             this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(121, 29);
+            this.dtpFrom.Size = new System.Drawing.Size(134, 29);
             this.dtpFrom.TabIndex = 8;
             this.dtpFrom.Visible = false;
             // 
@@ -349,11 +348,12 @@
             this.dtpTo.CustomFormat = " dd/MM/yyyy";
             this.dtpTo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTo.Location = new System.Drawing.Point(422, 422);
+            this.dtpTo.Location = new System.Drawing.Point(405, 422);
             this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(117, 29);
+            this.dtpTo.Size = new System.Drawing.Size(134, 29);
             this.dtpTo.TabIndex = 9;
             this.dtpTo.Visible = false;
+        
             // 
             // lblSiNo
             // 

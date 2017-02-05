@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace BillsPayableSystem.LoginUI
         private SqlDataReader rdr;
         //private SqlDataAdapter sda;
         ConnectionString cs = new ConnectionString();
+
+        //public string readyPassword;
         public frmRegistration()
         {
             InitializeComponent();
@@ -51,6 +54,15 @@ namespace BillsPayableSystem.LoginUI
         {
 
         }
+
+        //public string EncodePasswordToBase64(string password)
+        //{
+        //    byte[] bytes = Encoding.Unicode.GetBytes(password);
+        //    byte[] inArray = HashAlgorithm.Create("SHA1").ComputeHash(bytes);
+        //    string readyPassword1 = Convert.ToBase64String(inArray);
+        //    readyPassword = readyPassword1;
+        //    return readyPassword1;
+        //}
 
         private void userButton_Click(object sender, EventArgs e)
         {
@@ -106,6 +118,9 @@ namespace BillsPayableSystem.LoginUI
                 txtContact_no.Focus();
                 return;
             }
+
+            //string password = txtPassword.Text.Trim();
+            //EncodePasswordToBase64(password);
 
             try
             {

@@ -28,6 +28,16 @@ namespace BillsPayableSystem.UI
             InitializeComponent();
         }
 
+        private void ClearData()
+         {
+             cmbBillSN.Items.Clear();
+             cmbBillSN.SelectedIndex = -1;
+             amountTextBox.Clear();
+             billPurposeTextBox.Clear();
+             billEntryDateTextBox.Clear();
+             payableTextBox.Clear();
+        }
+
         private void BillSerialNoLoad()
         {
             try
@@ -61,34 +71,44 @@ namespace BillsPayableSystem.UI
        
         private void btnSave_Click(object sender, EventArgs e)
         {
+           
+            
+            
             if (string.IsNullOrWhiteSpace(cmbBillSN.Text))
             {
                 MessageBox.Show("Please Select Bill Serial Number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            try
+            DialogResult dialogResult = MessageBox.Show("Are you Sure want To Pay Now", "Confirm", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
+                try
+                {
+                    int fyr = FiscallYear();
+                    con = new SqlConnection(cs.DBConn);
+                    con.Open();
+                    string query ="insert into Payment(PaymentDate, EntryDateTime, InputBy, BillTransactionId,Fiscalyr) values(@d1,@d2,@d3,@d4,@d5)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
 
-                int fyr = FiscallYear();
-                con = new SqlConnection(cs.DBConn);
-                con.Open();
-                string query = "insert into Payment(PaymentDate, EntryDateTime, InputBy, BillTransactionId,Fiscalyr) values(@d1,@d2,@d3,@d4,@d5)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                    cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@d1", dtpPaymentDate.Value);
+                    cmd.Parameters.AddWithValue("@d2", DateTime.UtcNow.ToLocalTime());
+                    cmd.Parameters.AddWithValue("@d3", userName);
+                    cmd.Parameters.AddWithValue("@d4", billTransactionId);
+                    cmd.Parameters.AddWithValue("@d5", fyr);
 
-                cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@d1", dtpPaymentDate.Value);
-                cmd.Parameters.AddWithValue("@d2", DateTime.UtcNow.ToLocalTime());
-                cmd.Parameters.AddWithValue("@d3", userName);
-                cmd.Parameters.AddWithValue("@d4", billTransactionId);
-                cmd.Parameters.AddWithValue("@d5", fyr);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    MessageBox.Show("Paid successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearData();
+                    BillSerialNoLoad();
+                    cmbBillSN.ResetText();
 
-                cmd.ExecuteNonQuery();
-                con.Close();
-                MessageBox.Show("Paid successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -195,6 +215,16 @@ namespace BillsPayableSystem.UI
             this.Dispose();
             MainUI1 frm3 = new MainUI1();
             frm3.Show();
+        }
+
+        private void amountTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpPaymentDate_ValueChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

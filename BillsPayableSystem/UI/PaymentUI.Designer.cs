@@ -51,16 +51,17 @@
             this.dtpPaymentDate.CustomFormat = "dd/MM/yyy";
             this.dtpPaymentDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpPaymentDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpPaymentDate.Location = new System.Drawing.Point(185, 93);
+            this.dtpPaymentDate.Location = new System.Drawing.Point(328, 93);
             this.dtpPaymentDate.Name = "dtpPaymentDate";
-            this.dtpPaymentDate.Size = new System.Drawing.Size(101, 29);
+            this.dtpPaymentDate.Size = new System.Drawing.Size(126, 29);
             this.dtpPaymentDate.TabIndex = 0;
+            this.dtpPaymentDate.ValueChanged += new System.EventHandler(this.dtpPaymentDate_ValueChanged);
             // 
             // lblPaymentDate
             // 
             this.lblPaymentDate.AutoSize = true;
             this.lblPaymentDate.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPaymentDate.Location = new System.Drawing.Point(38, 97);
+            this.lblPaymentDate.Location = new System.Drawing.Point(181, 97);
             this.lblPaymentDate.Name = "lblPaymentDate";
             this.lblPaymentDate.Size = new System.Drawing.Size(135, 22);
             this.lblPaymentDate.TabIndex = 1;
@@ -75,7 +76,7 @@
             this.btnSave.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSave.BackgroundImage")));
             this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSave.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(562, 341);
+            this.btnSave.Location = new System.Drawing.Point(403, 396);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(122, 65);
             this.btnSave.TabIndex = 5;
@@ -87,7 +88,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(269, 14);
+            this.label1.Location = new System.Drawing.Point(330, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(124, 32);
             this.label1.TabIndex = 8;
@@ -97,7 +98,7 @@
             // 
             this.lblBillSiNo.AutoSize = true;
             this.lblBillSiNo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBillSiNo.Location = new System.Drawing.Point(43, 143);
+            this.lblBillSiNo.Location = new System.Drawing.Point(186, 143);
             this.lblBillSiNo.Name = "lblBillSiNo";
             this.lblBillSiNo.Size = new System.Drawing.Size(130, 22);
             this.lblBillSiNo.TabIndex = 9;
@@ -108,7 +109,7 @@
             this.cmbBillSN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBillSN.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBillSN.FormattingEnabled = true;
-            this.cmbBillSN.Location = new System.Drawing.Point(185, 140);
+            this.cmbBillSN.Location = new System.Drawing.Point(328, 140);
             this.cmbBillSN.Name = "cmbBillSN";
             this.cmbBillSN.Size = new System.Drawing.Size(282, 30);
             this.cmbBillSN.TabIndex = 10;
@@ -117,44 +118,45 @@
             // payableTextBox
             // 
             this.payableTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.payableTextBox.Location = new System.Drawing.Point(185, 188);
+            this.payableTextBox.Location = new System.Drawing.Point(328, 188);
             this.payableTextBox.Name = "payableTextBox";
             this.payableTextBox.ReadOnly = true;
-            this.payableTextBox.Size = new System.Drawing.Size(192, 29);
+            this.payableTextBox.Size = new System.Drawing.Size(282, 29);
             this.payableTextBox.TabIndex = 11;
             // 
             // amountTextBox
             // 
             this.amountTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.amountTextBox.Location = new System.Drawing.Point(185, 238);
+            this.amountTextBox.Location = new System.Drawing.Point(328, 238);
             this.amountTextBox.Name = "amountTextBox";
             this.amountTextBox.ReadOnly = true;
-            this.amountTextBox.Size = new System.Drawing.Size(192, 29);
+            this.amountTextBox.Size = new System.Drawing.Size(282, 29);
             this.amountTextBox.TabIndex = 12;
+            this.amountTextBox.TextChanged += new System.EventHandler(this.amountTextBox_TextChanged);
             // 
             // billEntryDateTextBox
             // 
             this.billEntryDateTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.billEntryDateTextBox.Location = new System.Drawing.Point(185, 285);
+            this.billEntryDateTextBox.Location = new System.Drawing.Point(328, 285);
             this.billEntryDateTextBox.Name = "billEntryDateTextBox";
             this.billEntryDateTextBox.ReadOnly = true;
-            this.billEntryDateTextBox.Size = new System.Drawing.Size(192, 29);
+            this.billEntryDateTextBox.Size = new System.Drawing.Size(282, 29);
             this.billEntryDateTextBox.TabIndex = 13;
             // 
             // billPurposeTextBox
             // 
             this.billPurposeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.billPurposeTextBox.Location = new System.Drawing.Point(185, 334);
+            this.billPurposeTextBox.Location = new System.Drawing.Point(328, 334);
             this.billPurposeTextBox.Name = "billPurposeTextBox";
             this.billPurposeTextBox.ReadOnly = true;
-            this.billPurposeTextBox.Size = new System.Drawing.Size(192, 29);
+            this.billPurposeTextBox.Size = new System.Drawing.Size(282, 29);
             this.billPurposeTextBox.TabIndex = 14;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(66, 188);
+            this.label2.Location = new System.Drawing.Point(209, 188);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 22);
             this.label2.TabIndex = 15;
@@ -164,7 +166,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(93, 238);
+            this.label3.Location = new System.Drawing.Point(236, 238);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(79, 22);
             this.label3.TabIndex = 16;
@@ -174,7 +176,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(34, 285);
+            this.label4.Location = new System.Drawing.Point(177, 285);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(138, 22);
             this.label4.TabIndex = 17;
@@ -184,7 +186,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(57, 334);
+            this.label5.Location = new System.Drawing.Point(200, 334);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(115, 22);
             this.label5.TabIndex = 18;
@@ -196,7 +198,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(940, 418);
+            this.ClientSize = new System.Drawing.Size(857, 534);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);

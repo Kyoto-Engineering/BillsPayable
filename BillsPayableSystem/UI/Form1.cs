@@ -44,6 +44,7 @@ namespace BillsPayableSystem
         {
             ctl.Focus();
         }
+       
         private void ClearData()
         {        
             cmbPayableTo.Items.Clear();
@@ -146,7 +147,6 @@ namespace BillsPayableSystem
                     con.Close();
                 }
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -255,7 +255,6 @@ namespace BillsPayableSystem
                BillPurposeLoad();
         }
         
-
         private void cmbBillPurpose_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             if (cmbBillPurpose.Text == "Not In The List")
@@ -340,7 +339,7 @@ namespace BillsPayableSystem
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, SiNo, UserId,StatusForSN,BillImage) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, SiNo, UserId, BillImage) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                 cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@d1", billId);
                 cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
@@ -353,7 +352,7 @@ namespace BillsPayableSystem
                 cmd.Parameters.AddWithValue("@d9", txtNote.Text);
                 cmd.Parameters.AddWithValue("@d10", txtBillSiNo.Text);
                 cmd.Parameters.AddWithValue("@d11", user_id);
-                cmd.Parameters.AddWithValue("@d12", "New");
+                
 
                 if (txtpictureBox.Image != null)
                 {
@@ -361,14 +360,14 @@ namespace BillsPayableSystem
                     Bitmap bmpImage = new Bitmap(txtpictureBox.Image);
                     bmpImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                     byte[] data = ms.GetBuffer();
-                    SqlParameter p = new SqlParameter("@d13", SqlDbType.Image);
+                    SqlParameter p = new SqlParameter("@d12", SqlDbType.Image);
                     p.Value = data;
                     cmd.Parameters.Add(p);
                 }
                 else
                 {
-                    cmd.Parameters.Add("@d13", SqlDbType.VarBinary, -1);
-                    cmd.Parameters["@d13"].Value = DBNull.Value;
+                    cmd.Parameters.Add("@d12", SqlDbType.VarBinary, -1);
+                    cmd.Parameters["@d12"].Value = DBNull.Value;
                 }
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -383,13 +382,14 @@ namespace BillsPayableSystem
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+       
         private void SaveBillTransaction()
         {
             try
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, PeriodFrom, PeriodTo, SiNo, UserId,StatusForSN,BillImage) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13,@d14,@d15)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, PeriodFrom, PeriodTo, SiNo, UserId, BillImage) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13,@d14)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                 cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@d1", billId);
                 cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
@@ -404,22 +404,21 @@ namespace BillsPayableSystem
                 cmd.Parameters.AddWithValue("@d11", dtpTo.Value);
                 cmd.Parameters.AddWithValue("@d12", txtBillSiNo.Text);
                 cmd.Parameters.AddWithValue("@d13", user_id);
-                cmd.Parameters.AddWithValue("@d14", "New");
-               
+                             
                 if (txtpictureBox.Image != null)
                 {
                     MemoryStream ms = new MemoryStream();
                     Bitmap bmpImage = new Bitmap(txtpictureBox.Image);
                     bmpImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                     byte[] data = ms.GetBuffer();
-                    SqlParameter p = new SqlParameter("@d15", SqlDbType.Image);
+                    SqlParameter p = new SqlParameter("@d14", SqlDbType.Image);
                     p.Value = data;
                     cmd.Parameters.Add(p);
                 }
                 else
                 {
-                    cmd.Parameters.Add("@d15", SqlDbType.VarBinary, -1);
-                    cmd.Parameters["@d15"].Value = DBNull.Value;
+                    cmd.Parameters.Add("@d14", SqlDbType.VarBinary, -1);
+                    cmd.Parameters["@d14"].Value = DBNull.Value;
                 }
 
                 cmd.ExecuteNonQuery();
@@ -504,7 +503,6 @@ namespace BillsPayableSystem
                 MessageBox.Show("Please Select A Valid Payable To", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbPayableTo.ResetText();
                 this.BeginInvoke(new ChangeFocusDelegate(changeFocus), cmbPayableTo);
-
             }
         }
 
@@ -551,10 +549,7 @@ namespace BillsPayableSystem
                 this.BeginInvoke(new ChangeFocusDelegate(changeFocus), cmbBillPurpose);
             }
         }
-
-    
-
-      
+     
     }
  }
 
