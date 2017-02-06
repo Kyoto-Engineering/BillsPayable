@@ -212,11 +212,11 @@
             this.lblPaymentMethod.AutoSize = true;
             this.lblPaymentMethod.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPaymentMethod.ForeColor = System.Drawing.Color.Blue;
-            this.lblPaymentMethod.Location = new System.Drawing.Point(107, 344);
+            this.lblPaymentMethod.Location = new System.Drawing.Point(25, 345);
             this.lblPaymentMethod.Name = "lblPaymentMethod";
-            this.lblPaymentMethod.Size = new System.Drawing.Size(159, 22);
+            this.lblPaymentMethod.Size = new System.Drawing.Size(241, 22);
             this.lblPaymentMethod.TabIndex = 21;
-            this.lblPaymentMethod.Text = "Payment Method :";
+            this.lblPaymentMethod.Text = "Proposed Payment Method :";
             // 
             // lblAmount
             // 
@@ -353,7 +353,6 @@
             this.dtpTo.Size = new System.Drawing.Size(134, 29);
             this.dtpTo.TabIndex = 9;
             this.dtpTo.Visible = false;
-        
             // 
             // lblSiNo
             // 

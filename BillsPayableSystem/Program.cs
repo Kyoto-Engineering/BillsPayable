@@ -24,8 +24,6 @@ namespace BillsPayableSystem
             //Application.Run(new frmPayment());
             //Application.Run(new frmBillEntry());
             //Application.Run(new MainUI1());  
-
-
         }
     }
 }

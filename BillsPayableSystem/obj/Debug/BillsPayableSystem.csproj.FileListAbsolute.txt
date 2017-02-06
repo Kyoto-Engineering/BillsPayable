@@ -1,7 +1,6 @@
 G:\git\BillsPayable\BillsPayableSystem\bin\Debug\BillsPayableSystem.exe.config
 G:\git\BillsPayable\BillsPayableSystem\bin\Debug\BillsPayableSystem.exe
 G:\git\BillsPayable\BillsPayableSystem\bin\Debug\BillsPayableSystem.pdb
-G:\git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.csprojResolveAssemblyReference.cache
 G:\git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.frmBillEntry.resources
 G:\git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.Properties.Resources.resources
 G:\git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.csproj.GenerateResource.Cache
@@ -49,3 +48,4 @@ C:\Users\Runju\Downloads\BillsPayable-master\BillsPayableSystem\obj\Debug\BillsP
 C:\Users\Runju\Downloads\BillsPayable-master\BillsPayableSystem\obj\Debug\BillsPayableSystem.csproj.GenerateResource.Cache
 C:\Users\Runju\Downloads\BillsPayable-master\BillsPayableSystem\obj\Debug\BillsPayableSystem.exe.manifest
 C:\Users\Runju\Downloads\BillsPayable-master\BillsPayableSystem\obj\Debug\BillsPayableSystem.application
+G:\git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.csprojResolveAssemblyReference.cache

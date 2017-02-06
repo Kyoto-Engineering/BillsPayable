@@ -23,7 +23,7 @@ namespace BillsPayableSystem
         private SqlCommand cmd;
         private SqlDataReader rdr;
         ConnectionString cs = new ConnectionString();
-        public int btype_id, nameOfBillId, bPayableToId, billId;
+        public int btype_id, nameOfBillId, bPayableToId, billId, billTransactionId; 
         public string user_id,inpb=null;
         private delegate void ChangeFocusDelegate(Control ctl);
         
@@ -53,7 +53,7 @@ namespace BillsPayableSystem
             txtAmount.Clear();
             cmbPaymentMethod.SelectedIndex = -1;
             cmbBillType.SelectedIndex = -1;
-            cmbBillPurpose.Text = "";
+            cmbBillPurpose.Items.Clear(); 
             cmbBillPurpose.Items.Clear();
             cmbBillPurpose.SelectedIndex = -1;
             txtpictureBox.Image = null;
@@ -332,64 +332,57 @@ namespace BillsPayableSystem
                 }
             }
         }
-
-        private void SaveBillTransaction2()
-        {
+      
+        private void RecurrentLoad()
+        {          
             try
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, SiNo, UserId, BillImage) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                String query = "insert into RecurrentInfo(BillTransactionId, PeriodFrom, PeriodTo) values (@d1,@d2,@d3)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+              
                 cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@d1", billId);
-                cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
-                cmd.Parameters.AddWithValue("@d3", cmbPaymentMethod.Text);
-                cmd.Parameters.AddWithValue("@d4", Convert.ToDecimal(txtAmount.Text));
-                cmd.Parameters.AddWithValue("@d5", dtpBillDate.Value);
-                cmd.Parameters.AddWithValue("@d6", dtpBillReceivedDate.Value);
-                cmd.Parameters.AddWithValue("@d7", dtpDueDate.Value);
-                cmd.Parameters.AddWithValue("@d8", bPayableToId);
-                cmd.Parameters.AddWithValue("@d9", txtNote.Text);
-                cmd.Parameters.AddWithValue("@d10", txtBillSiNo.Text);
-                cmd.Parameters.AddWithValue("@d11", user_id);
-                
-
-                if (txtpictureBox.Image != null)
-                {
-                    MemoryStream ms = new MemoryStream();
-                    Bitmap bmpImage = new Bitmap(txtpictureBox.Image);
-                    bmpImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    byte[] data = ms.GetBuffer();
-                    SqlParameter p = new SqlParameter("@d12", SqlDbType.Image);
-                    p.Value = data;
-                    cmd.Parameters.Add(p);
-                }
-                else
-                {
-                    cmd.Parameters.Add("@d12", SqlDbType.VarBinary, -1);
-                    cmd.Parameters["@d12"].Value = DBNull.Value;
-                }
+                cmd.Parameters.AddWithValue("@d1", billTransactionId);
+                cmd.Parameters.AddWithValue("@d2", dtpFrom.Value);
+                cmd.Parameters.AddWithValue("@d3", dtpTo.Value);
                 cmd.ExecuteNonQuery();
                 con.Close();
-                MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ClearData();
-                PayableTo();
-                cmbPayableTo.ResetText();
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-       
+
+        private void NoteForBillTransactions()
+        {
+            try
+            {
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                String query5 = "insert into NoteForBillTransaction(Note, BillTransactionId) values (@d1,@d2)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+
+                cmd = new SqlCommand(query5, con);
+                cmd.Parameters.AddWithValue("@d1", txtNote.Text);
+                cmd.Parameters.AddWithValue("@d2", billTransactionId);
+               
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
         private void SaveBillTransaction()
         {
             try
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, Note, PeriodFrom, PeriodTo, SiNo, UserId, BillImage) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12,@d13,@d14)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, SiNo, UserId, BillImage) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                 cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@d1", billId);
                 cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
@@ -399,11 +392,8 @@ namespace BillsPayableSystem
                 cmd.Parameters.AddWithValue("@d6", dtpBillReceivedDate.Value);
                 cmd.Parameters.AddWithValue("@d7", dtpDueDate.Value);
                 cmd.Parameters.AddWithValue("@d8", bPayableToId);
-                cmd.Parameters.AddWithValue("@d9", txtNote.Text);
-                cmd.Parameters.AddWithValue("@d10", dtpFrom.Value);
-                cmd.Parameters.AddWithValue("@d11", dtpTo.Value);
-                cmd.Parameters.AddWithValue("@d12", txtBillSiNo.Text);
-                cmd.Parameters.AddWithValue("@d13", user_id);
+                cmd.Parameters.AddWithValue("@d9", txtBillSiNo.Text);
+                cmd.Parameters.AddWithValue("@d10", user_id);
                              
                 if (txtpictureBox.Image != null)
                 {
@@ -411,22 +401,19 @@ namespace BillsPayableSystem
                     Bitmap bmpImage = new Bitmap(txtpictureBox.Image);
                     bmpImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                     byte[] data = ms.GetBuffer();
-                    SqlParameter p = new SqlParameter("@d14", SqlDbType.Image);
+                    SqlParameter p = new SqlParameter("@d11", SqlDbType.Image);
                     p.Value = data;
                     cmd.Parameters.Add(p);
                 }
                 else
                 {
-                    cmd.Parameters.Add("@d14", SqlDbType.VarBinary, -1);
-                    cmd.Parameters["@d14"].Value = DBNull.Value;
+                    cmd.Parameters.Add("@d11", SqlDbType.VarBinary, -1);
+                    cmd.Parameters["@d11"].Value = DBNull.Value;
                 }
 
-                cmd.ExecuteNonQuery();
+                billTransactionId = (int) cmd.ExecuteScalar();
                 con.Close();
-                MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ClearData();
-                PayableTo();
-                cmbPayableTo.ResetText();
+                
             }
             catch (Exception ex)
             {
@@ -439,47 +426,51 @@ namespace BillsPayableSystem
             if (string.IsNullOrWhiteSpace(cmbPayableTo.Text))
             {
                 MessageBox.Show("Please  enter PayableTo Name", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                
             }
 
-            if (string.IsNullOrWhiteSpace(txtAmount.Text))
+            else if (string.IsNullOrWhiteSpace(txtAmount.Text))
             {
                 MessageBox.Show("Please  enter Amount", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                
             }
 
-            if (string.IsNullOrWhiteSpace(cmbPaymentMethod.Text))
+            else if (string.IsNullOrWhiteSpace(cmbPaymentMethod.Text))
             {
                 MessageBox.Show("Please Select Payment Method", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                
             }
 
-            if (string.IsNullOrWhiteSpace(cmbBillType.Text))
+            else if (string.IsNullOrWhiteSpace(cmbBillType.Text))
             {
                 MessageBox.Show("Please Select Type of Bill", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                
             }
 
-            if (string.IsNullOrWhiteSpace(cmbBillPurpose.Text))
+            else if (string.IsNullOrWhiteSpace(cmbBillPurpose.Text))
             {
                 MessageBox.Show("Please Select Bill Purpose", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+               
             }
 
-            if (string.IsNullOrWhiteSpace(txtBillNarrative.Text))
+            else if (string.IsNullOrWhiteSpace(txtBillNarrative.Text))
             {
                 MessageBox.Show("Please  enter Bill Narrative", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (cmbBillType.Text == "Recurrent")
-            {
-                SaveBillTransaction();
+                
             }
             else
             {
-                SaveBillTransaction2();
-            }
+                SaveBillTransaction();
+                NoteForBillTransactions();
+                if (cmbBillType.Text == "Recurrent")
+                {
+                    RecurrentLoad();
+                }
+                MessageBox.Show("Saved successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearData();
+                PayableTo();
+                cmbPayableTo.ResetText();
+            }            
         }
 
         private void txtAmount_KeyPress(object sender, KeyPressEventArgs e)
