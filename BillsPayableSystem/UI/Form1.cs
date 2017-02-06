@@ -461,7 +461,11 @@ namespace BillsPayableSystem
             else
             {
                 SaveBillTransaction();
-                NoteForBillTransactions();
+                if (!string.IsNullOrWhiteSpace(txtNote.Text))
+                {
+                    NoteForBillTransactions();
+                    
+                }
                 if (cmbBillType.Text == "Recurrent")
                 {
                     RecurrentLoad();
