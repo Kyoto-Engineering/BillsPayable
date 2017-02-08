@@ -92,6 +92,16 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BillsPayableDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BillsPayableDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BillsPayableDBDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BillsPayableDBDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DbGateway\ConnectionString.cs" />
     <Compile Include="LoginUI\frmLogin.cs">
       <SubType>Form</SubType>
@@ -150,6 +160,28 @@
     <EmbeddedResource Include="UI\PaymentUI.resx">
       <DependentUpon>PaymentUI.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="BillsPayableDBDataSet.xsc">
+      <DependentUpon>BillsPayableDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="BillsPayableDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BillsPayableDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BillsPayableDBDataSet.xss">
+      <DependentUpon>BillsPayableDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="BillsPayableDBDataSet1.xsc">
+      <DependentUpon>BillsPayableDBDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="BillsPayableDBDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BillsPayableDBDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BillsPayableDBDataSet1.xss">
+      <DependentUpon>BillsPayableDBDataSet1.xsd</DependentUpon>
+    </None>
     <None Include="BillsPayableSystem_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
