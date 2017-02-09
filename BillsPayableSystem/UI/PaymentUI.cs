@@ -70,7 +70,8 @@ namespace BillsPayableSystem.UI
         //R
         private void PaymentUI_Load(object sender, EventArgs e)
         {
-
+            approvalGroupBox.Enabled = false;
+            settlementGroupBox.Enabled = false;
             userName = frmLogin.userName;
             BillSerialNoLoad();
             AuthLoad();
@@ -209,7 +210,19 @@ namespace BillsPayableSystem.UI
             if (string.IsNullOrWhiteSpace(cmbBillSN.Text))
             {
                 MessageBox.Show("Please Select Bill Serial Number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-               
+                cmbBillSN.Focus();
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(approvalAmountTextBox.Text))
+            {
+                MessageBox.Show("Please Enter appoval amount", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                approvalAmountTextBox.Focus();
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(settlementAmountTxtBox.Text))
+            {
+                MessageBox.Show("Please Enter settlement amount", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                settlementAmountTxtBox.Focus();
                 return;
             }
 
@@ -238,9 +251,11 @@ namespace BillsPayableSystem.UI
                     con.Close();
                     MessageBox.Show("Paid successfully", "Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearData();
+                    ApprovedClear();
                     BillSerialNoLoad();
                     cmbBillSN.ResetText();
-
+                    paymentInfoGroupBox.Enabled = true;
+                    lblBillSiNo.Focus();
                 }
                 catch (Exception ex)
                 {
@@ -694,6 +709,106 @@ namespace BillsPayableSystem.UI
             }
         }
 
+        private void doneButton_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cmbBillSN.Text))
+            {
+                paymentInfoGroupBox.Enabled = false;
+                approvalGroupBox.Enabled = true;
+                ApprovedClear();
+                AuthLoad(); 
+            }
+            else
+            {
+                MessageBox.Show("Please Select Bill Serial Number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbBillSN.Focus();
+            }
+        }
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(approvalAuthComboBox.Text))
+            {
+                MessageBox.Show("Please Select Approval Authority ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                approvalAuthComboBox.Focus();
+                return;
+               
+            }
+
+            if (string.IsNullOrWhiteSpace(approvedByComboBox.Text))
+            {
+                MessageBox.Show("Please Select Approval person name ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                approvedByComboBox.Focus();
+                return;
+
+            }
+            approvalGroupBox.Enabled = false;
+            settlementGroupBox.Enabled = true;
+            
+        }
+        
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            //paymentInfoGroupBox.Enabled = true;  
+            //ClearData();
+            //BillSerialNoLoad(); 
+                                     
+            //settlementGroupBox.Enabled = false;
+            //approvalGroupBox.Enabled = true;
+            //ApprovedClear();
+            //approvalGroupBox.Enabled = false;
+            
+            //approvalGroupBox.Enabled = false;
+            //settlementGroupBox.Enabled = false;
+            //userName = frmLogin.userName;
+            //BillSerialNoLoad();
+            //AuthLoad();
+            this.PaymentUI_Load(null, null);
+            paymentInfoGroupBox.Enabled = true;
+            ClearData();
+            BillSerialNoLoad();
+            ApprovedClear();
+            SettlementClear();
+
+        }
+
+      
+       public void ApprovedClear()
+       {
+          
+            approvalAuthComboBox.Items.Clear();
+            approvalAuthComboBox.SelectedIndex=-1;
+            approvalAuthComboBox.ResetText();
+            approvedByComboBox.Items.Clear();
+            approvedByComboBox.SelectedIndex=-1;
+            approvedByComboBox.ResetText();
+            approvalAmountTextBox.Clear();
+           
+
+        }
+
+        public void SettlementClear()
+        {
+            settlementAmountTxtBox.Clear();
+            paymentMethodComboBox.Items.Clear();
+            paymentMethodComboBox.SelectedIndex = -1;
+            paymentMethodComboBox.ResetText();
+            bankNameComboBox.Items.Clear();
+            bankNameComboBox.SelectedIndex = -1;
+            bankNameComboBox.ResetText();
+            accontNumComboBox.Items.Clear();
+            accontNumComboBox.SelectedIndex = -1;
+            accontNumComboBox.ResetText();
+            chaqueNumTextBox.Clear();
+            
+        }
+
+        private void noButton_Click(object sender, EventArgs e)
+        {
+            ClearData();
+            BillSerialNoLoad();
+        }
        
 
     }
