@@ -39,6 +39,9 @@ namespace BillsPayableSystem.UI
             billPurposeTextBox.Clear();
             billEntryDateTextBox.Clear();
             payableTextBox.Clear();
+           //dtpPaymentDate.Value = DateTimePicker.MinDateTime;
+            //dtpPaymentDate.Text = DateTime.Now.ToString();
+            dtpPaymentDate.ResetText();
         }
 
         private void BillSerialNoLoad()
@@ -49,8 +52,8 @@ namespace BillsPayableSystem.UI
                 con.Open();
 
                 //string query = "Select SiNo from BTransaction except Select SiNo from BTransaction where StatusForSN='Paid'";
-                string query =
-                    "Select SiNo from BTransaction LEFT JOIN Payment ON BTransaction.BillTransactionId = Payment.BillTransactionId EXCEPT Select SiNo from BTransaction RIGHT JOIN Payment ON BTransaction.BillTransactionId = Payment.BillTransactionId";
+                //string query ="Select BillTransactionId from BTransaction LEFT JOIN Payment ON BTransaction.BillTransactionId = Payment.BillTransactionId EXCEPT Select SiNo from BTransaction RIGHT JOIN Payment ON BTransaction.BillTransactionId = Payment.BillTransactionId";
+                string query ="SELECT BillTransactionId FROM BTransaction EXCEPT SELECT Payment.BillTransactionId FROM Payment";
 
                 cmd = new SqlCommand(query, con);
                 rdr = cmd.ExecuteReader();
@@ -70,6 +73,7 @@ namespace BillsPayableSystem.UI
         //R
         private void PaymentUI_Load(object sender, EventArgs e)
         {
+            
             approvalGroupBox.Enabled = false;
             settlementGroupBox.Enabled = false;
             userName = frmLogin.userName;
@@ -209,7 +213,7 @@ namespace BillsPayableSystem.UI
 
             if (string.IsNullOrWhiteSpace(cmbBillSN.Text))
             {
-                MessageBox.Show("Please Select Bill Serial Number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please Select Bill ID", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbBillSN.Focus();
                 return;
             }
@@ -225,8 +229,40 @@ namespace BillsPayableSystem.UI
                 settlementAmountTxtBox.Focus();
                 return;
             }
+            
+            if (string.IsNullOrWhiteSpace(paymentMethodComboBox.Text))
+            {
+                MessageBox.Show("Please Select payment method", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                settlementAmountTxtBox.Focus();
+                return;
+            }
+            if (paymentMethodComboBox.Text=="cheque")
+            {
+                if (string.IsNullOrWhiteSpace(bankNameComboBox.Text))
+                {
+                    MessageBox.Show("Please Select bank name", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    settlementAmountTxtBox.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(accontNumComboBox.Text))
+                {
+                    MessageBox.Show("Please Select account number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    settlementAmountTxtBox.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(chaqueNumTextBox.Text))
+                {
+                    MessageBox.Show("Please give chaque number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    settlementAmountTxtBox.Focus();
+                    return;
+                }
+            }
+            
 
             InsertApprovalAndSettelement();
+
             DialogResult dialogResult = MessageBox.Show("Are you Sure want To Pay Now", "Confirm",
                 MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
@@ -244,7 +280,7 @@ namespace BillsPayableSystem.UI
                     cmd.Parameters.AddWithValue("@d1", dtpPaymentDate.Value);
                     cmd.Parameters.AddWithValue("@d2", DateTime.UtcNow.ToLocalTime());
                     cmd.Parameters.AddWithValue("@d3", userName);
-                    cmd.Parameters.AddWithValue("@d4", billTransactionId);
+                    cmd.Parameters.AddWithValue("@d4", Convert.ToInt32(cmbBillSN.Text));
                     cmd.Parameters.AddWithValue("@d5", fyr);
 
                     cmd.ExecuteNonQuery();
@@ -256,6 +292,8 @@ namespace BillsPayableSystem.UI
                     cmbBillSN.ResetText();
                     paymentInfoGroupBox.Enabled = true;
                     lblBillSiNo.Focus();
+                    SettlementClear();
+                    this.paymentMethodComboBox_SelectedIndexChanged(null, null);
                 }
                 catch (Exception ex)
                 {
@@ -279,8 +317,6 @@ namespace BillsPayableSystem.UI
 
         private void txtBillSerialNo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-
 
         }
 
@@ -321,7 +357,7 @@ namespace BillsPayableSystem.UI
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
                     cmd = con.CreateCommand();
-                    string query ="SELECT dbo.BPayableTo.BPayableToName, dbo.BTransaction.BIssueDate, dbo.BTransaction.Amount, dbo.BillsPayableName.BillName FROM dbo.BPayableTo INNER JOIN dbo.BTransaction ON dbo.BPayableTo.BPayableToId = dbo.BTransaction.BPayableToId INNER JOIN dbo.BillsPayableName ON dbo.BTransaction.BillId = dbo.BillsPayableName.BillId where SiNo= '" +cmbBillSN.Text + "'";
+                    string query = "SELECT dbo.BPayableTo.BPayableToName, dbo.BTransaction.BIssueDate, dbo.BTransaction.Amount, dbo.BillsPayableName.BillName FROM dbo.BPayableTo INNER JOIN dbo.BTransaction ON dbo.BPayableTo.BPayableToId = dbo.BTransaction.BPayableToId INNER JOIN dbo.BillsPayableName ON dbo.BTransaction.BillId = dbo.BillsPayableName.BillId where BillTransactionId= '" + cmbBillSN.Text + "'";
                     cmd = new SqlCommand(query, con);
                     rdr = cmd.ExecuteReader();
                     if (rdr.Read())
@@ -370,13 +406,15 @@ namespace BillsPayableSystem.UI
             frm3.Show();
         }
 
-        private void amountTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void dtpPaymentDate_ValueChanged(object sender, EventArgs e)
         {
+            if (dtpPaymentDate.Value >DateTime.Now)
+            {
+                //MessageBox.Show("You should select correct date or previous date from today");
+                MessageBox.Show("You should select correct date or previous date from today", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
         }
 
@@ -518,20 +556,22 @@ namespace BillsPayableSystem.UI
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
                     string ct3 = "select EmpName,DepartID from t_employee where EmpName='" + inpb + "'";
-
+                    
                     cmd = new SqlCommand(ct3, con);
                     rdr = cmd.ExecuteReader();
-                    if (rdr.Read())
-                    {
-                        departID = rdr.GetInt32(0);
-                    }
+                    //if (rdr.Read())
+                    //{
+                    //    departID = rdr.GetInt32(0);
+                    //}
                     if (rdr.Read() && !rdr.IsDBNull(0))
                     {
                         MessageBox.Show("This department Name Already Exists,Please Select From List", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                         con.Close();
                         approvedByComboBox.SelectedIndex = -1;
-                    }
+                    }  
+                
+                    
                     else
                     {
                         try
@@ -563,6 +603,7 @@ namespace BillsPayableSystem.UI
         {
             bankNameComboBox.Items.Clear();
             bankNameComboBox.SelectedIndex = -1;
+            bankNameComboBox.ResetText();
             BankNameLoad();
             //cmbBillPurpose.Text = "";
             //cmbBillPurpose.Items.Clear();
@@ -599,52 +640,59 @@ namespace BillsPayableSystem.UI
             AccountNoLoad();
             if (bankNameComboBox.Text == "Not In The List")
             {
-
-
                 inpb = Microsoft.VisualBasic.Interaction.InputBox("Please Input Bank name Here", "Input Here", "", -1,-1);
                 inpb1 = Microsoft.VisualBasic.Interaction.InputBox("Please Input Account no Here", "Input Here", "", -1, -1);
+
                 if (string.IsNullOrWhiteSpace(inpb))
                 {
                     bankNameComboBox.SelectedIndex = -1;
                 }
+
+                if (!string.IsNullOrEmpty(inpb1))
+                {
+                    
+                        con = new SqlConnection(cs.DBConn);
+                        con.Open();
+                        string ct3 = "select BankName from t_bank where BankName='" + inpb + "'";
+
+                        cmd = new SqlCommand(ct3, con);
+                        rdr = cmd.ExecuteReader();
+                        if (rdr.Read() && !rdr.IsDBNull(0))
+                        {
+                            MessageBox.Show("This Bank Name Already Exists,Please Select From List", "Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            con.Close();
+                            bankNameComboBox.SelectedIndex = -1;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                con = new SqlConnection(cs.DBConn);
+                                con.Open();
+                                string query4 = "insert into t_bank (BankName,AccountNo) values (@d1,@d2)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                                cmd = new SqlCommand(query4, con);
+                                cmd.Parameters.AddWithValue("@d1", inpb);
+                                cmd.Parameters.AddWithValue("@d2", inpb1);
+                                cmd.ExecuteNonQuery();
+                                con.Close();
+                                bankNameComboBox.Items.Clear();
+                                BankNameLoad();
+                                bankNameComboBox.SelectedText = inpb;
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                      
+                }
                 else
                 {
-                    con = new SqlConnection(cs.DBConn);
-                    con.Open();
-                    string ct3 = "select BankName from t_bank where BankName='" + inpb + "'";
-
-                    cmd = new SqlCommand(ct3, con);
-                    rdr = cmd.ExecuteReader();
-                    if (rdr.Read() && !rdr.IsDBNull(0))
-                    {
-                        MessageBox.Show("This Bank Name Already Exists,Please Select From List", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        con.Close();
-                        bankNameComboBox.SelectedIndex = -1;
-                    }
-                    else
-                    {
-                        try
-                        {
-                            con = new SqlConnection(cs.DBConn);
-                            con.Open();
-                            string query4 = "insert into t_bank (BankName,AccountNo) values (@d1,@d2)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
-                            cmd = new SqlCommand(query4, con);
-                            cmd.Parameters.AddWithValue("@d1", inpb);
-                            cmd.Parameters.AddWithValue("@d2", inpb1);
-                            cmd.ExecuteNonQuery();
-                            con.Close();
-                            bankNameComboBox.Items.Clear();
-                            BankNameLoad();
-                            bankNameComboBox.SelectedText = inpb;
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
+                    MessageBox.Show("Please enter bank account number");
                 }
             }
+
         }
 
         private void accontNumComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -737,13 +785,23 @@ namespace BillsPayableSystem.UI
 
             if (string.IsNullOrWhiteSpace(approvedByComboBox.Text))
             {
-                MessageBox.Show("Please Select Approval person name ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please Select Approval Person name ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 approvedByComboBox.Focus();
                 return;
 
             }
-            approvalGroupBox.Enabled = false;
-            settlementGroupBox.Enabled = true;
+            if (string.IsNullOrWhiteSpace(approvalAmountTextBox.Text))
+            {
+                MessageBox.Show("Please Select Approval Amount ", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                approvedByComboBox.Focus();
+                return;
+            }
+
+          
+                approvalGroupBox.Enabled = false;
+                settlementGroupBox.Enabled = true;  
+            
+            
             
         }
         
@@ -770,7 +828,7 @@ namespace BillsPayableSystem.UI
             BillSerialNoLoad();
             ApprovedClear();
             SettlementClear();
-
+            this.paymentMethodComboBox_SelectedIndexChanged(null, null);
         }
 
       
@@ -784,14 +842,14 @@ namespace BillsPayableSystem.UI
             approvedByComboBox.SelectedIndex=-1;
             approvedByComboBox.ResetText();
             approvalAmountTextBox.Clear();
-           
+           approvalDateTimePicker.ResetText();
 
         }
 
         public void SettlementClear()
         {
             settlementAmountTxtBox.Clear();
-            paymentMethodComboBox.Items.Clear();
+           // paymentMethodComboBox.Items.Clear();
             paymentMethodComboBox.SelectedIndex = -1;
             paymentMethodComboBox.ResetText();
             bankNameComboBox.Items.Clear();
@@ -801,7 +859,7 @@ namespace BillsPayableSystem.UI
             accontNumComboBox.SelectedIndex = -1;
             accontNumComboBox.ResetText();
             chaqueNumTextBox.Clear();
-            
+            settlementDateTimePicker.ResetText();
         }
 
         private void noButton_Click(object sender, EventArgs e)
@@ -809,6 +867,106 @@ namespace BillsPayableSystem.UI
             ClearData();
             BillSerialNoLoad();
         }
+
+        private void approvalDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (approvalDateTimePicker.Value > DateTime.Now)
+            {
+                //MessageBox.Show("You should select correct date or previous date from today");
+                MessageBox.Show("You should select correct date or previous date from today", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void settlementDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (settlementDateTimePicker.Value > DateTime.Now)
+            {
+                //MessageBox.Show("You should select correct date or previous date from today");
+                MessageBox.Show("You should select correct date or previous date from today", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void settlementAmountTxtBox_TextChanged(object sender, EventArgs e)
+        {
+            decimal val1=0;
+            decimal val2=0;
+            decimal.TryParse(approvalAmountTextBox.Text, out val1);
+            decimal.TryParse(settlementAmountTxtBox.Text, out val2);
+            if (val1<val2)
+            {
+
+                MessageBox.Show("You should enter less or equal amount ", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                settlementAmountTxtBox.Clear();
+                settlementAmountTxtBox.Focus();
+               
+                
+            } 
+            
+           
+        }
+
+        private void approvalAmountTextBox_TextChanged(object sender, EventArgs e)
+        {
+            decimal val1 = 0;
+            decimal val2 = 0;
+            decimal.TryParse(amountTextBox.Text, out val1);
+            decimal.TryParse(approvalAmountTextBox.Text, out val2);
+            if (val1 < val2)
+            {
+
+                MessageBox.Show("You should enter less or equal amount ", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                approvalAmountTextBox.Clear();
+                approvalAmountTextBox.Focus();
+
+
+            }
+        }
+
+        private void approvalAmountTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            decimal x;
+            if (ch == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+            else if (!char.IsDigit(ch) && ch != '.' || !Decimal.TryParse(approvalAmountTextBox.Text + ch, out x))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void settlementAmountTxtBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            decimal x;
+            if (ch == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+            else if (!char.IsDigit(ch) && ch != '.' || !Decimal.TryParse(settlementAmountTxtBox.Text + ch, out x))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void amountTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            decimal x;
+            if (ch == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+            else if (!char.IsDigit(ch) && ch != '.' || !Decimal.TryParse(amountTextBox.Text + ch, out x))
+            {
+                e.Handled = true;
+            }
+        }
+
+      
+      
+        
        
 
     }
