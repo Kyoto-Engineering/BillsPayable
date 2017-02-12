@@ -249,7 +249,6 @@
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(267, 29);
             this.txtAmount.TabIndex = 5;
-            
             this.txtAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAmount_KeyPress);
             // 
             // lblDueDate
@@ -360,7 +359,7 @@
             this.lblSiNo.AutoSize = true;
             this.lblSiNo.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSiNo.ForeColor = System.Drawing.Color.Blue;
-            this.lblSiNo.Location = new System.Drawing.Point(136, 213);
+            this.lblSiNo.Location = new System.Drawing.Point(136, 214);
             this.lblSiNo.Name = "lblSiNo";
             this.lblSiNo.Size = new System.Drawing.Size(130, 22);
             this.lblSiNo.TabIndex = 43;

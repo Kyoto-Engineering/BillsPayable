@@ -806,10 +806,10 @@ namespace BillsPayableSystem.UI
 
           
                 approvalGroupBox.Enabled = false;
-                settlementGroupBox.Enabled = true;  
-            
-            
-            
+                settlementGroupBox.Enabled = true;
+
+            MessageBox.Show("Approved Successfully...");
+
         }
         
 
