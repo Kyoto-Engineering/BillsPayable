@@ -555,23 +555,30 @@ namespace BillsPayableSystem.UI
                 {
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
-                    string ct3 = "select EmpName,DepartID from t_employee where EmpName='" + inpb + "'";
+                    string ct3 = "select EmpName,DepartID from t_employee where EmpName='" + inpb + "' AND DepartID='"+departID+"' ";
+                    //string ct3 = "SELECT dbo.t_employee.DepartID, dbo.t_employee.EmpName, dbo.t_department.DepartName FROM dbo.t_department INNER JOIN dbo.t_employee ON dbo.t_department.DepartID = dbo.t_employee.DepartID where EmpName='" + inpb + "'";
                     
                     cmd = new SqlCommand(ct3, con);
                     rdr = cmd.ExecuteReader();
+
+
                     //if (rdr.Read())
                     //{
                     //    departID = rdr.GetInt32(0);
                     //}
-                    if (rdr.Read() && !rdr.IsDBNull(0))
-                    {
-                        MessageBox.Show("This department Name Already Exists,Please Select From List", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        con.Close();
-                        approvedByComboBox.SelectedIndex = -1;
-                    }  
-                
+
+
+
                     
+                        if (rdr.Read() && !rdr.IsDBNull(0))
+                        {
+                            MessageBox.Show("This employee Name Already Exists,Please Select From List", "Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            con.Close();
+                            approvedByComboBox.SelectedIndex = -1;
+                        }
+                    
+
                     else
                     {
                         try

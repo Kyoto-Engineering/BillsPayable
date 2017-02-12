@@ -19,9 +19,9 @@ namespace BillsPayableSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-             Application.Run(new frmLogin());
+             //Application.Run(new frmLogin());
             //Application.Run(new frmRegistration());
-             //Application.Run(new frmPayment());
+             Application.Run(new frmPayment());
             //Application.Run(new frmBillEntry());
             //Application.Run(new MainUI1()); 
             
