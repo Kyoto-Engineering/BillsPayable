@@ -414,6 +414,7 @@ namespace BillsPayableSystem.UI
             {
                 //MessageBox.Show("You should select correct date or previous date from today");
                 MessageBox.Show("You should select correct date or previous date from today", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dtpPaymentDate.ResetText();
             }
 
         }
@@ -641,23 +642,32 @@ namespace BillsPayableSystem.UI
 
         private void bankNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             accontNumComboBox.Items.Clear();
             accontNumComboBox.SelectedIndex = -1;
             accontNumComboBox.ResetText();
             AccountNoLoad();
             if (bankNameComboBox.Text == "Not In The List")
             {
-                inpb = Microsoft.VisualBasic.Interaction.InputBox("Please Input Bank name Here", "Input Here", "", -1,-1);
-                inpb1 = Microsoft.VisualBasic.Interaction.InputBox("Please Input Account no Here", "Input Here", "", -1, -1);
 
-                if (string.IsNullOrWhiteSpace(inpb))
-                {
-                    bankNameComboBox.SelectedIndex = -1;
-                }
+                inpb = Microsoft.VisualBasic.Interaction.InputBox("Please Input Bank name Here", "Input Here", "", -1,
+                    -1);
 
-                if (!string.IsNullOrEmpty(inpb1))
+                if (!string.IsNullOrEmpty(inpb))
                 {
-                    
+                    inpb1 = Microsoft.VisualBasic.Interaction.InputBox("Please Input Account no Here", "Input Here", "",
+                        -1, -1);
+
+
+
+                    if (string.IsNullOrWhiteSpace(inpb))
+                    {
+                        bankNameComboBox.SelectedIndex = -1;
+                    }
+
+                    if (!string.IsNullOrEmpty(inpb1))
+                    {
+
                         con = new SqlConnection(cs.DBConn);
                         con.Open();
                         string ct3 = "select BankName from t_bank where BankName='" + inpb + "'";
@@ -677,7 +687,8 @@ namespace BillsPayableSystem.UI
                             {
                                 con = new SqlConnection(cs.DBConn);
                                 con.Open();
-                                string query4 = "insert into t_bank (BankName,AccountNo) values (@d1,@d2)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                                string query4 = "insert into t_bank (BankName,AccountNo) values (@d1,@d2)" +
+                                                "SELECT CONVERT(int, SCOPE_IDENTITY())";
                                 cmd = new SqlCommand(query4, con);
                                 cmd.Parameters.AddWithValue("@d1", inpb);
                                 cmd.Parameters.AddWithValue("@d2", inpb1);
@@ -692,22 +703,29 @@ namespace BillsPayableSystem.UI
                                 MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
-                      
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter bank account number");
+                    }
+
                 }
                 else
                 {
-                    MessageBox.Show("Please enter bank account number");
+                    MessageBox.Show("Please enter bank name");
+                    
+                    bankNameComboBox.SelectedIndex = -1;
+                    bankNameComboBox.ResetText();
                 }
             }
-
         }
 
+        //&& !string.IsNullOrEmpty(bankNameComboBox.Text) && !(bankNameComboBox.Text == "Not In The List")
         private void accontNumComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (accontNumComboBox.Text == "Not In The List")
+            if (accontNumComboBox.Text == "Not In The List" && !string.IsNullOrEmpty(bankNameComboBox.Text) && !(bankNameComboBox.Text == "Not In The List"))
             {
-
-
                 inpb = Microsoft.VisualBasic.Interaction.InputBox("Please Input Account number Here", "Input Here", "", -1, -1);
                 if (string.IsNullOrWhiteSpace(inpb))
                 {
@@ -751,7 +769,9 @@ namespace BillsPayableSystem.UI
                             
                             cmd.ExecuteNonQuery();
                             con.Close();
-                          
+                            accontNumComboBox.Items.Clear();
+                            accontNumComboBox.SelectedIndex = -1;
+                            accontNumComboBox.ResetText();
                             AccountNoLoad();
                             accontNumComboBox.SelectedText = inpb;
                         }
@@ -762,6 +782,13 @@ namespace BillsPayableSystem.UI
                     }
                 }
             }
+            //else
+            //{
+            //    MessageBox.Show("Select Bank Name and Account Number in correct format");
+            //    accontNumComboBox.Items.Clear();
+            //    accontNumComboBox.SelectedIndex = -1;
+            //    accontNumComboBox.ResetText();
+            //}
         }
 
         private void doneButton_Click(object sender, EventArgs e)
@@ -881,6 +908,7 @@ namespace BillsPayableSystem.UI
             {
                 //MessageBox.Show("You should select correct date or previous date from today");
                 MessageBox.Show("You should select correct date or previous date from today", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                approvalDateTimePicker.ResetText();
             }
         }
 
@@ -890,6 +918,7 @@ namespace BillsPayableSystem.UI
             {
                 //MessageBox.Show("You should select correct date or previous date from today");
                 MessageBox.Show("You should select correct date or previous date from today", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                settlementDateTimePicker.ResetText();
             }
         }
 

@@ -300,6 +300,8 @@
             // 
             // paymentMethodComboBox
             // 
+            this.paymentMethodComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.paymentMethodComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.paymentMethodComboBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.paymentMethodComboBox.FormattingEnabled = true;
             this.paymentMethodComboBox.Items.AddRange(new object[] {
@@ -378,6 +380,8 @@
             // 
             // bankNameComboBox
             // 
+            this.bankNameComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.bankNameComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.bankNameComboBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bankNameComboBox.FormattingEnabled = true;
             this.bankNameComboBox.Location = new System.Drawing.Point(184, 186);
@@ -389,6 +393,8 @@
             // 
             // approvedByComboBox
             // 
+            this.approvedByComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.approvedByComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.approvedByComboBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.approvedByComboBox.FormattingEnabled = true;
             this.approvedByComboBox.Location = new System.Drawing.Point(179, 97);
@@ -413,6 +419,8 @@
             // 
             // accontNumComboBox
             // 
+            this.accontNumComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.accontNumComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.accontNumComboBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accontNumComboBox.FormattingEnabled = true;
             this.accontNumComboBox.Location = new System.Drawing.Point(184, 227);

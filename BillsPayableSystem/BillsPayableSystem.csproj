@@ -224,7 +224,10 @@
     <None Include="Resources\images.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BLL\" />
+    <Folder Include="DAL\" />
     <Folder Include="Image\" />
+    <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Capture.JPG" />
