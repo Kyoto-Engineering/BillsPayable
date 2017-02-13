@@ -135,7 +135,7 @@
             this.cmbBillSN.Location = new System.Drawing.Point(166, 86);
             this.cmbBillSN.Name = "cmbBillSN";
             this.cmbBillSN.Size = new System.Drawing.Size(282, 30);
-            this.cmbBillSN.TabIndex = 10;
+            this.cmbBillSN.TabIndex = 1;
             this.cmbBillSN.SelectedIndexChanged += new System.EventHandler(this.cmbBillSN_SelectedIndexChanged);
             // 
             // payableTextBox
@@ -145,7 +145,7 @@
             this.payableTextBox.Name = "payableTextBox";
             this.payableTextBox.ReadOnly = true;
             this.payableTextBox.Size = new System.Drawing.Size(282, 29);
-            this.payableTextBox.TabIndex = 11;
+            this.payableTextBox.TabIndex = 2;
             // 
             // amountTextBox
             // 
@@ -154,7 +154,7 @@
             this.amountTextBox.Name = "amountTextBox";
             this.amountTextBox.ReadOnly = true;
             this.amountTextBox.Size = new System.Drawing.Size(282, 29);
-            this.amountTextBox.TabIndex = 12;
+            this.amountTextBox.TabIndex = 3;
             this.amountTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amountTextBox_KeyPress);
             // 
             // billEntryDateTextBox
@@ -164,7 +164,7 @@
             this.billEntryDateTextBox.Name = "billEntryDateTextBox";
             this.billEntryDateTextBox.ReadOnly = true;
             this.billEntryDateTextBox.Size = new System.Drawing.Size(282, 29);
-            this.billEntryDateTextBox.TabIndex = 13;
+            this.billEntryDateTextBox.TabIndex = 4;
             // 
             // billPurposeTextBox
             // 
@@ -173,7 +173,7 @@
             this.billPurposeTextBox.Name = "billPurposeTextBox";
             this.billPurposeTextBox.ReadOnly = true;
             this.billPurposeTextBox.Size = new System.Drawing.Size(282, 29);
-            this.billPurposeTextBox.TabIndex = 14;
+            this.billPurposeTextBox.TabIndex = 5;
             // 
             // label2
             // 
@@ -189,11 +189,11 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(74, 184);
+            this.label3.Location = new System.Drawing.Point(28, 184);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 22);
+            this.label3.Size = new System.Drawing.Size(125, 22);
             this.label3.TabIndex = 16;
-            this.label3.Text = "Amount:";
+            this.label3.Text = "Total Amount:";
             // 
             // label4
             // 
@@ -231,9 +231,9 @@
             this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(67, 99);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(103, 19);
+            this.label7.Size = new System.Drawing.Size(106, 19);
             this.label7.TabIndex = 20;
-            this.label7.Text = "Approved by :";
+            this.label7.Text = "Approved By :";
             // 
             // label8
             // 
@@ -251,9 +251,9 @@
             this.label9.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(38, 193);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(132, 19);
+            this.label9.Size = new System.Drawing.Size(134, 19);
             this.label9.TabIndex = 22;
-            this.label9.Text = "Approval amount :";
+            this.label9.Text = "Approval Amount :";
             // 
             // label11
             // 
@@ -271,9 +271,9 @@
             this.label13.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(52, 147);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(129, 19);
+            this.label13.Size = new System.Drawing.Size(133, 19);
             this.label13.TabIndex = 26;
-            this.label13.Text = "Payment method :";
+            this.label13.Text = "Payment Method :";
             // 
             // bankNameLabel
             // 
@@ -295,7 +295,7 @@
             this.approvalAuthComboBox.Location = new System.Drawing.Point(179, 48);
             this.approvalAuthComboBox.Name = "approvalAuthComboBox";
             this.approvalAuthComboBox.Size = new System.Drawing.Size(133, 27);
-            this.approvalAuthComboBox.TabIndex = 28;
+            this.approvalAuthComboBox.TabIndex = 0;
             this.approvalAuthComboBox.SelectedIndexChanged += new System.EventHandler(this.approvalAuthComboBox_SelectedIndexChanged);
             // 
             // paymentMethodComboBox
@@ -306,11 +306,11 @@
             this.paymentMethodComboBox.FormattingEnabled = true;
             this.paymentMethodComboBox.Items.AddRange(new object[] {
             "Cash",
-            "cheque"});
+            "Cheque"});
             this.paymentMethodComboBox.Location = new System.Drawing.Point(184, 147);
             this.paymentMethodComboBox.Name = "paymentMethodComboBox";
             this.paymentMethodComboBox.Size = new System.Drawing.Size(110, 27);
-            this.paymentMethodComboBox.TabIndex = 29;
+            this.paymentMethodComboBox.TabIndex = 2;
             this.paymentMethodComboBox.SelectedIndexChanged += new System.EventHandler(this.paymentMethodComboBox_SelectedIndexChanged);
             // 
             // approvalAmountTextBox
@@ -319,7 +319,7 @@
             this.approvalAmountTextBox.Location = new System.Drawing.Point(179, 194);
             this.approvalAmountTextBox.Name = "approvalAmountTextBox";
             this.approvalAmountTextBox.Size = new System.Drawing.Size(133, 26);
-            this.approvalAmountTextBox.TabIndex = 31;
+            this.approvalAmountTextBox.TabIndex = 3;
             this.approvalAmountTextBox.TextChanged += new System.EventHandler(this.approvalAmountTextBox_TextChanged);
             this.approvalAmountTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.approvalAmountTextBox_KeyPress);
             // 
@@ -331,7 +331,7 @@
             this.approvalDateTimePicker.Location = new System.Drawing.Point(179, 148);
             this.approvalDateTimePicker.Name = "approvalDateTimePicker";
             this.approvalDateTimePicker.Size = new System.Drawing.Size(133, 29);
-            this.approvalDateTimePicker.TabIndex = 32;
+            this.approvalDateTimePicker.TabIndex = 2;
             this.approvalDateTimePicker.Value = new System.DateTime(2017, 2, 9, 13, 6, 54, 0);
             this.approvalDateTimePicker.ValueChanged += new System.EventHandler(this.approvalDateTimePicker_ValueChanged);
             // 
@@ -343,7 +343,7 @@
             this.settlementDateTimePicker.Location = new System.Drawing.Point(184, 47);
             this.settlementDateTimePicker.Name = "settlementDateTimePicker";
             this.settlementDateTimePicker.Size = new System.Drawing.Size(110, 26);
-            this.settlementDateTimePicker.TabIndex = 33;
+            this.settlementDateTimePicker.TabIndex = 0;
             this.settlementDateTimePicker.Value = new System.DateTime(2017, 2, 11, 12, 59, 9, 0);
             this.settlementDateTimePicker.ValueChanged += new System.EventHandler(this.settlementDateTimePicker_ValueChanged);
             // 
@@ -375,7 +375,7 @@
             this.chaqueNumTextBox.Location = new System.Drawing.Point(184, 269);
             this.chaqueNumTextBox.Name = "chaqueNumTextBox";
             this.chaqueNumTextBox.Size = new System.Drawing.Size(110, 26);
-            this.chaqueNumTextBox.TabIndex = 41;
+            this.chaqueNumTextBox.TabIndex = 5;
             this.chaqueNumTextBox.Visible = false;
             // 
             // bankNameComboBox
@@ -387,7 +387,7 @@
             this.bankNameComboBox.Location = new System.Drawing.Point(184, 186);
             this.bankNameComboBox.Name = "bankNameComboBox";
             this.bankNameComboBox.Size = new System.Drawing.Size(110, 27);
-            this.bankNameComboBox.TabIndex = 42;
+            this.bankNameComboBox.TabIndex = 3;
             this.bankNameComboBox.Visible = false;
             this.bankNameComboBox.SelectedIndexChanged += new System.EventHandler(this.bankNameComboBox_SelectedIndexChanged);
             // 
@@ -400,7 +400,7 @@
             this.approvedByComboBox.Location = new System.Drawing.Point(179, 97);
             this.approvedByComboBox.Name = "approvedByComboBox";
             this.approvedByComboBox.Size = new System.Drawing.Size(133, 27);
-            this.approvedByComboBox.TabIndex = 43;
+            this.approvedByComboBox.TabIndex = 1;
             this.approvedByComboBox.SelectedIndexChanged += new System.EventHandler(this.approvedByComboBox_SelectedIndexChanged);
             // 
             // billsPayableDBDataSet
@@ -426,7 +426,7 @@
             this.accontNumComboBox.Location = new System.Drawing.Point(184, 227);
             this.accontNumComboBox.Name = "accontNumComboBox";
             this.accontNumComboBox.Size = new System.Drawing.Size(110, 27);
-            this.accontNumComboBox.TabIndex = 44;
+            this.accontNumComboBox.TabIndex = 4;
             this.accontNumComboBox.Visible = false;
             this.accontNumComboBox.SelectedIndexChanged += new System.EventHandler(this.accontNumComboBox_SelectedIndexChanged);
             // 
@@ -436,7 +436,7 @@
             this.settlementAmountTxtBox.Location = new System.Drawing.Point(184, 96);
             this.settlementAmountTxtBox.Name = "settlementAmountTxtBox";
             this.settlementAmountTxtBox.Size = new System.Drawing.Size(110, 26);
-            this.settlementAmountTxtBox.TabIndex = 45;
+            this.settlementAmountTxtBox.TabIndex = 1;
             this.settlementAmountTxtBox.TextChanged += new System.EventHandler(this.settlementAmountTxtBox_TextChanged);
             this.settlementAmountTxtBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.settlementAmountTxtBox_KeyPress);
             // 
@@ -465,7 +465,7 @@
             this.approvalGroupBox.Location = new System.Drawing.Point(493, 86);
             this.approvalGroupBox.Name = "approvalGroupBox";
             this.approvalGroupBox.Size = new System.Drawing.Size(318, 318);
-            this.approvalGroupBox.TabIndex = 47;
+            this.approvalGroupBox.TabIndex = 3;
             this.approvalGroupBox.TabStop = false;
             this.approvalGroupBox.Text = "Approval ";
             // 
@@ -475,7 +475,7 @@
             this.approveButton.Location = new System.Drawing.Point(222, 235);
             this.approveButton.Name = "approveButton";
             this.approveButton.Size = new System.Drawing.Size(90, 32);
-            this.approveButton.TabIndex = 44;
+            this.approveButton.TabIndex = 4;
             this.approveButton.Text = "Approve";
             this.approveButton.UseVisualStyleBackColor = true;
             this.approveButton.Click += new System.EventHandler(this.okButton_Click);
@@ -500,7 +500,7 @@
             this.paymentInfoGroupBox.Location = new System.Drawing.Point(12, 37);
             this.paymentInfoGroupBox.Name = "paymentInfoGroupBox";
             this.paymentInfoGroupBox.Size = new System.Drawing.Size(464, 367);
-            this.paymentInfoGroupBox.TabIndex = 48;
+            this.paymentInfoGroupBox.TabIndex = 2;
             this.paymentInfoGroupBox.TabStop = false;
             this.paymentInfoGroupBox.Text = "Payment Information";
             // 
@@ -510,7 +510,7 @@
             this.cancelButton.Location = new System.Drawing.Point(292, 326);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 29);
-            this.cancelButton.TabIndex = 20;
+            this.cancelButton.TabIndex = 6;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.noButton_Click);
@@ -521,7 +521,7 @@
             this.agreeButton.Location = new System.Drawing.Point(373, 326);
             this.agreeButton.Name = "agreeButton";
             this.agreeButton.Size = new System.Drawing.Size(75, 28);
-            this.agreeButton.TabIndex = 19;
+            this.agreeButton.TabIndex = 7;
             this.agreeButton.Text = "Agree";
             this.agreeButton.UseVisualStyleBackColor = true;
             this.agreeButton.Click += new System.EventHandler(this.doneButton_Click);
@@ -541,10 +541,10 @@
             this.settlementGroupBox.Controls.Add(this.accontNumComboBox);
             this.settlementGroupBox.Controls.Add(this.label13);
             this.settlementGroupBox.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.settlementGroupBox.Location = new System.Drawing.Point(829, 146);
+            this.settlementGroupBox.Location = new System.Drawing.Point(828, 86);
             this.settlementGroupBox.Name = "settlementGroupBox";
-            this.settlementGroupBox.Size = new System.Drawing.Size(309, 314);
-            this.settlementGroupBox.TabIndex = 47;
+            this.settlementGroupBox.Size = new System.Drawing.Size(309, 318);
+            this.settlementGroupBox.TabIndex = 4;
             this.settlementGroupBox.TabStop = false;
             this.settlementGroupBox.Text = "Settlement";
             // 
@@ -553,10 +553,10 @@
             this.refreshButton.BackgroundImage = global::BillsPayableSystem.Properties.Resources.Capture;
             this.refreshButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.refreshButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.refreshButton.Location = new System.Drawing.Point(884, 479);
+            this.refreshButton.Location = new System.Drawing.Point(895, 417);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(114, 49);
-            this.refreshButton.TabIndex = 20;
+            this.refreshButton.TabIndex = 0;
             this.refreshButton.UseVisualStyleBackColor = true;
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
@@ -565,10 +565,10 @@
             this.btnSave.BackgroundImage = global::BillsPayableSystem.Properties.Resources.pay_button_blue_hi;
             this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSave.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(1004, 479);
+            this.btnSave.Location = new System.Drawing.Point(1015, 417);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(122, 49);
-            this.btnSave.TabIndex = 5;
+            this.btnSave.TabIndex = 1;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -578,7 +578,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1138, 556);
+            this.ClientSize = new System.Drawing.Size(1249, 556);
             this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.settlementGroupBox);
             this.Controls.Add(this.paymentInfoGroupBox);
@@ -588,7 +588,6 @@
             this.Name = "frmPayment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PaymentUI";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPayment_FormClosed);
             this.Load += new System.EventHandler(this.PaymentUI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.billsPayableDBDataSet)).EndInit();

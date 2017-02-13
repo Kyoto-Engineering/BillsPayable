@@ -618,7 +618,7 @@ namespace BillsPayableSystem.UI
             //cmbBillPurpose.SelectedIndex = -1;
             //txtBillNarrative.Clear();
 
-            if (paymentMethodComboBox.Text == "cheque")
+            if (paymentMethodComboBox.Text == "Cheque")
             {
                 bankNameLabel.Visible = true;
                 bankNameComboBox.Visible = true;
@@ -697,6 +697,9 @@ namespace BillsPayableSystem.UI
                                 bankNameComboBox.Items.Clear();
                                 BankNameLoad();
                                 bankNameComboBox.SelectedText = inpb;
+                                accontNumComboBox.Items.Clear();
+                                AccountNoLoad();
+                                accontNumComboBox.SelectedText = inpb1;
                             }
                             catch (Exception ex)
                             {
@@ -931,7 +934,7 @@ namespace BillsPayableSystem.UI
             if (val1<val2)
             {
 
-                MessageBox.Show("You should enter less or equal amount ", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("You should enter less or equal amount of appoval amount ", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 settlementAmountTxtBox.Clear();
                 settlementAmountTxtBox.Focus();
                
@@ -950,7 +953,7 @@ namespace BillsPayableSystem.UI
             if (val1 < val2)
             {
 
-                MessageBox.Show("You should enter less or equal amount ", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("You should enter less or equal amount of total amount ", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 approvalAmountTextBox.Clear();
                 approvalAmountTextBox.Focus();
 

@@ -268,7 +268,7 @@ namespace BillsPayableSystem
                 {
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
-                    string ct3 = "select BillName from BillsPayableName where BillName='" + inpb + "'";
+                    string ct3 = "select BillName from BillsPayableName where BillName='" + inpb + "' AND BillTypeId='"+btype_id+"'";
                     cmd = new SqlCommand(ct3, con);
                     rdr = cmd.ExecuteReader();
                     if (rdr.Read() && !rdr.IsDBNull(0))
