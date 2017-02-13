@@ -169,7 +169,7 @@ namespace BillsPayableSystem.UI
                 currentId = (int) cmd.ExecuteScalar();
                 con.Close();
             }
-            if (paymentMethodComboBox.Text == "cheque")
+            if (paymentMethodComboBox.Text == "Cheque")
                 {
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
