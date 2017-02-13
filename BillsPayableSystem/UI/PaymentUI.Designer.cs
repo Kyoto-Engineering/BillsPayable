@@ -553,9 +553,9 @@
             this.refreshButton.BackgroundImage = global::BillsPayableSystem.Properties.Resources.Capture;
             this.refreshButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.refreshButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.refreshButton.Location = new System.Drawing.Point(895, 417);
+            this.refreshButton.Location = new System.Drawing.Point(899, 423);
             this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(114, 49);
+            this.refreshButton.Size = new System.Drawing.Size(114, 43);
             this.refreshButton.TabIndex = 0;
             this.refreshButton.UseVisualStyleBackColor = true;
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
@@ -565,9 +565,9 @@
             this.btnSave.BackgroundImage = global::BillsPayableSystem.Properties.Resources.pay_button_blue_hi;
             this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSave.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(1015, 417);
+            this.btnSave.Location = new System.Drawing.Point(1015, 423);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(122, 49);
+            this.btnSave.Size = new System.Drawing.Size(122, 43);
             this.btnSave.TabIndex = 1;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);

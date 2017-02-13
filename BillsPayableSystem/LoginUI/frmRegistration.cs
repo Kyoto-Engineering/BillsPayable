@@ -64,7 +64,19 @@ namespace BillsPayableSystem.LoginUI
         //    return readyPassword1;
         //}
 
-        private void userButton_Click(object sender, EventArgs e)
+       
+        
+
+       
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmLogin frm = new frmLogin();
+            frm.Show();
+        }
+
+
+        private void userButton_Click_1(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtUsername.Text))
             {
@@ -190,7 +202,7 @@ namespace BillsPayableSystem.LoginUI
             }
         }
 
-        private void txtContact_no_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtContact_no_KeyPress_1(object sender, KeyPressEventArgs e)
         {
             string Contact_No = txtContact_no.Text;
             //if (char.IsNumber(e.KeyChar) || e.KeyChar=='+')
@@ -201,6 +213,10 @@ namespace BillsPayableSystem.LoginUI
                 e.Handled = e.KeyChar != (char)Keys.Back;
             }
         }
+
+        
+
+      
 
         private void txtEmail_Validating(object sender, CancelEventArgs e)
         {
@@ -214,13 +230,6 @@ namespace BillsPayableSystem.LoginUI
                 MessageBox.Show("E-mail address format is incorrect.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtEmail.Focus();
             }
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            frmLogin frm = new frmLogin();
-            frm.Show();
         }
     }
 }

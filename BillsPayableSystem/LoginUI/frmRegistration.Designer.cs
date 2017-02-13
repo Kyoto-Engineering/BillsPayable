@@ -107,6 +107,7 @@
             this.userButton.TabIndex = 50;
             this.userButton.Text = "Create User";
             this.userButton.UseVisualStyleBackColor = true;
+            this.userButton.Click += new System.EventHandler(this.userButton_Click_1);
             // 
             // cmbUserType
             // 
@@ -128,6 +129,7 @@
             this.txtContact_no.Name = "txtContact_no";
             this.txtContact_no.Size = new System.Drawing.Size(229, 29);
             this.txtContact_no.TabIndex = 48;
+            this.txtContact_no.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContact_no_KeyPress_1);
             // 
             // departmentTextBox
             // 
@@ -160,6 +162,8 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(229, 29);
             this.txtEmail.TabIndex = 44;
+           
+            this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Validating);
             // 
             // txtPassword
             // 
