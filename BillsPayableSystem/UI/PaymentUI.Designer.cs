@@ -297,6 +297,7 @@
             this.approvalAuthComboBox.Size = new System.Drawing.Size(133, 27);
             this.approvalAuthComboBox.TabIndex = 0;
             this.approvalAuthComboBox.SelectedIndexChanged += new System.EventHandler(this.approvalAuthComboBox_SelectedIndexChanged);
+            this.approvalAuthComboBox.Leave += new System.EventHandler(this.approvalAuthComboBox_Leave);
             // 
             // paymentMethodComboBox
             // 
@@ -402,6 +403,7 @@
             this.approvedByComboBox.Size = new System.Drawing.Size(133, 27);
             this.approvedByComboBox.TabIndex = 1;
             this.approvedByComboBox.SelectedIndexChanged += new System.EventHandler(this.approvedByComboBox_SelectedIndexChanged);
+            this.approvedByComboBox.Leave += new System.EventHandler(this.approvedByComboBox_Leave);
             // 
             // billsPayableDBDataSet
             // 

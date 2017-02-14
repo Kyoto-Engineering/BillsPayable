@@ -461,6 +461,7 @@ namespace BillsPayableSystem
             else
             {
                 SaveBillTransaction();
+
                 if (!string.IsNullOrWhiteSpace(txtNote.Text))
                 {
                     NoteForBillTransactions();
@@ -544,6 +545,8 @@ namespace BillsPayableSystem
                 this.BeginInvoke(new ChangeFocusDelegate(changeFocus), cmbBillPurpose);
             }
         }
+
+       
 
        
 

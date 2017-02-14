@@ -271,6 +271,7 @@
             this.dtpDueDate.Name = "dtpDueDate";
             this.dtpDueDate.Size = new System.Drawing.Size(144, 29);
             this.dtpDueDate.TabIndex = 2;
+          
             // 
             // lblBillReceivedDate
             // 

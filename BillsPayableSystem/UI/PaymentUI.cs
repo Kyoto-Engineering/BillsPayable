@@ -23,14 +23,20 @@ namespace BillsPayableSystem.UI
         public int billTransactionId;
         public string userName;
         public int departID,currentId;
-        public string inpb;
+        //public string inpb;
+        public string user_id, inpb = null;
         public string inpb1;
         public string bankName;
+        private delegate void ChangeFocusDelegate(Control ctl);
+        public int bank_id, emp_id;
         public frmPayment()
         {
             InitializeComponent();
         }
-
+        private void changeFocus(Control ctl)
+        {
+            ctl.Focus();
+        }
         private void ClearData()
         {
             cmbBillSN.Items.Clear();
@@ -73,7 +79,7 @@ namespace BillsPayableSystem.UI
         //R
         private void PaymentUI_Load(object sender, EventArgs e)
         {
-            
+            user_id = frmLogin.uId.ToString();
             approvalGroupBox.Enabled = false;
             settlementGroupBox.Enabled = false;
             userName = frmLogin.userName;
@@ -85,11 +91,13 @@ namespace BillsPayableSystem.UI
         }
         private void AccountNoLoad()
         {
+            
             try
             {
+                SelectBankId();
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string ctt = "select AccountNo from t_bank where BankName='"+bankNameComboBox.Text+"'";
+                string ctt = "select AccountNumber from t_account where BankId='" + bank_id + "'";
                 cmd = new SqlCommand(ctt);
                 cmd.Connection = con;
                 rdr = cmd.ExecuteReader();
@@ -118,6 +126,7 @@ namespace BillsPayableSystem.UI
                 {
                     approvalAuthComboBox.Items.Add(rdr.GetValue(0).ToString());
                 }
+                
                 approvalAuthComboBox.Items.Add("Not In The List");
             }
             catch (Exception ex)
@@ -150,25 +159,51 @@ namespace BillsPayableSystem.UI
             }
         }
 
+        //Insert Account Number
+        public void InsertAccountNumber()
+        {
+
+            if (!string.IsNullOrEmpty(inpb1)) 
+            {
+                SelectBankId();
+                con = new SqlConnection(cs.DBConn);
+                con.Open();
+                string query1 = "insert into t_account(AccountNumber, BankId, UserId) values(@d1,@d2,@d3)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+
+                cmd = new SqlCommand(query1, con);
+                cmd.Parameters.AddWithValue("@d1", inpb1);
+                cmd.Parameters.AddWithValue("@d2", bank_id);
+                cmd.Parameters.AddWithValue("@d3", user_id);             
+                cmd.ExecuteScalar();
+                con.Close();
+            }
+            else
+            {
+                MessageBox.Show("Please give account number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);   
+            }
+        }
+
         //R
         public void InsertApprovalAndSettelement()
         {
             if (!string.IsNullOrWhiteSpace(cmbBillSN.Text))
             {
+                SelectDepartIdAndEmpId();
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string query1 =
-                    "insert into t_approval(ApprovedAuth, ApprovedBy, ApprovedDate,ApprovedAmount) values(@d1,@d2,@d3,@d4)" +
+                string query1 ="insert into t_approval(DepartID, EmpId, ApprovedDate,ApprovedAmount,UserId) values(@d1,@d2,@d3,@d4,@d5)" +
                     "SELECT CONVERT(int, SCOPE_IDENTITY())";
 
                 cmd = new SqlCommand(query1, con);
-                cmd.Parameters.AddWithValue("@d1", approvalAuthComboBox.Text);
-                cmd.Parameters.AddWithValue("@d2", approvedByComboBox.Text);
-                cmd.Parameters.AddWithValue("@d3", approvalDateTimePicker.Text);
+                cmd.Parameters.AddWithValue("@d1", departID);
+                cmd.Parameters.AddWithValue("@d2", emp_id);
+                cmd.Parameters.AddWithValue("@d3", approvalDateTimePicker.Value);
                 cmd.Parameters.AddWithValue("@d4", Convert.ToDecimal(approvalAmountTextBox.Text));
+                cmd.Parameters.AddWithValue("@d5", user_id);
                 currentId = (int) cmd.ExecuteScalar();
                 con.Close();
             }
+
             if (paymentMethodComboBox.Text == "Cheque")
                 {
                     con = new SqlConnection(cs.DBConn);
@@ -192,12 +227,13 @@ namespace BillsPayableSystem.UI
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string query ="insert into t_settlement(SettlementDate, PayMethod,SettlementAmount) values(@d1,@d2,@d3)" +"SELECT CONVERT(int, SCOPE_IDENTITY())";
+                string query ="insert into t_settlement(SettlementDate, PayMethod,SettlementAmount,UserId) values(@d1,@d2,@d3,@d4)" +"SELECT CONVERT(int, SCOPE_IDENTITY())";
 
                 cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@d1", settlementDateTimePicker.Text);
+                cmd.Parameters.AddWithValue("@d1", settlementDateTimePicker.Value);
                 cmd.Parameters.AddWithValue("@d2", paymentMethodComboBox.Text);
                 cmd.Parameters.AddWithValue("@d3", Convert.ToDecimal(settlementAmountTxtBox.Text));
+                cmd.Parameters.AddWithValue("@d4", user_id);
                 currentId = (int) cmd.ExecuteScalar();
                 con.Close();
             }
@@ -236,7 +272,7 @@ namespace BillsPayableSystem.UI
                 settlementAmountTxtBox.Focus();
                 return;
             }
-            if (paymentMethodComboBox.Text=="cheque")
+            if (paymentMethodComboBox.Text=="Cheque")
             {
                 if (string.IsNullOrWhiteSpace(bankNameComboBox.Text))
                 {
@@ -260,6 +296,7 @@ namespace BillsPayableSystem.UI
                 }
             }
             
+            //insert approval and settlemenet
 
             InsertApprovalAndSettelement();
 
@@ -455,15 +492,17 @@ namespace BillsPayableSystem.UI
                         {
                             con = new SqlConnection(cs.DBConn);
                             con.Open();
-                            string query4 = "insert into t_department (DepartName) values (@d1)" +
+                            string query4 = "insert into t_department (DepartName,UserId) values (@d1,@d2)" +
                                             "SELECT CONVERT(int, SCOPE_IDENTITY())";
                             cmd = new SqlCommand(query4, con);
                             cmd.Parameters.AddWithValue("@d1", inpb);
+                            cmd.Parameters.AddWithValue("@d2", user_id);
                             cmd.ExecuteNonQuery();
                             con.Close();
                             approvalAuthComboBox.Items.Clear();
                             AuthLoad();
                             approvalAuthComboBox.SelectedText = inpb;
+                            approvedByComboBox.Focus();
                         }
                         catch (Exception ex)
                         {
@@ -586,16 +625,19 @@ namespace BillsPayableSystem.UI
                         {
                             con = new SqlConnection(cs.DBConn);
                             con.Open();
-                            string query4 = "insert into t_employee (EmpName,departID) values (@d1,@d2)" +
+                            string query4 = "insert into t_employee (EmpName,DepartID,UserId) values (@d1,@d2,@d3)" +
                                             "SELECT CONVERT(int, SCOPE_IDENTITY())";
                             cmd = new SqlCommand(query4, con);
                             cmd.Parameters.AddWithValue("@d1", inpb);
                             cmd.Parameters.AddWithValue("@d2", departID);
-                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.AddWithValue("@d3", user_id);
+                            cmd.ExecuteScalar();
                             con.Close();
-                            approvedByComboBox.Items.Clear();
+                            approvedByComboBox.Items.Clear();                                                  
                             GetAllEmpByDepartID();
+                            approvedByComboBox.SelectedIndex = -1;  
                             approvedByComboBox.SelectedText = inpb;
+                            approvalDateTimePicker.Focus();
                         }
                         catch (Exception ex)
                         {
@@ -604,6 +646,7 @@ namespace BillsPayableSystem.UI
                     }
                 }
             }
+            approvalDateTimePicker.Focus();
         }
 
 
@@ -626,7 +669,7 @@ namespace BillsPayableSystem.UI
                 accontNumComboBox.Visible = true;
                 chqNumberLabel.Visible = true;
                 chaqueNumTextBox.Visible = true;
-
+                bankNameComboBox.SelectedText = "--Select--";
             }
             else
             {
@@ -638,6 +681,8 @@ namespace BillsPayableSystem.UI
                 chaqueNumTextBox.Visible = false;
             }
             // BillPurposeLoad();
+
+            bankNameComboBox.Focus();
         }
 
         private void bankNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -650,13 +695,12 @@ namespace BillsPayableSystem.UI
             if (bankNameComboBox.Text == "Not In The List")
             {
 
-                inpb = Microsoft.VisualBasic.Interaction.InputBox("Please Input Bank name Here", "Input Here", "", -1,
-                    -1);
+                inpb = Microsoft.VisualBasic.Interaction.InputBox("Please Input Bank name Here", "Input Here", "", -1, -1);
+                bankNameComboBox.SelectedText = inpb;
 
                 if (!string.IsNullOrEmpty(inpb))
                 {
-                    inpb1 = Microsoft.VisualBasic.Interaction.InputBox("Please Input Account no Here", "Input Here", "",
-                        -1, -1);
+                    inpb1 = Microsoft.VisualBasic.Interaction.InputBox("Please Input Account no Here", "Input Here", "",-1, -1);
 
 
 
@@ -687,24 +731,31 @@ namespace BillsPayableSystem.UI
                             {
                                 con = new SqlConnection(cs.DBConn);
                                 con.Open();
-                                string query4 = "insert into t_bank (BankName,AccountNo) values (@d1,@d2)" +
-                                                "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                                string query4 = "insert into t_bank (BankName,UserId) values (@d1,@d2)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                               // string query5 = "insert into t_bank (BankName,UserId) values (@d1,@d2)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                                 cmd = new SqlCommand(query4, con);
+                                
                                 cmd.Parameters.AddWithValue("@d1", inpb);
-                                cmd.Parameters.AddWithValue("@d2", inpb1);
+                                cmd.Parameters.AddWithValue("@d2", user_id);                              
                                 cmd.ExecuteNonQuery();
                                 con.Close();
+
+                                InsertAccountNumber();
+
                                 bankNameComboBox.Items.Clear();
                                 BankNameLoad();
-                                bankNameComboBox.SelectedText = inpb;
+                                
                                 accontNumComboBox.Items.Clear();
                                 AccountNoLoad();
+                                accontNumComboBox.Focus();
                                 accontNumComboBox.SelectedText = inpb1;
                             }
                             catch (Exception ex)
                             {
                                 MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
+
+
                         }
 
                     }
@@ -720,13 +771,68 @@ namespace BillsPayableSystem.UI
                     
                     bankNameComboBox.SelectedIndex = -1;
                     bankNameComboBox.ResetText();
+
                 }
+            }
+
+            
+        }
+
+
+        //select bank id
+        public void SelectBankId()
+        {
+          
+
+            con = new SqlConnection(cs.DBConn);
+            con.Open();
+            cmd = con.CreateCommand();
+
+            cmd.CommandText = "select BankId from t_bank WHERE BankName= '" + bankNameComboBox.Text + "' OR BankName='"+inpb+"'";
+
+            rdr = cmd.ExecuteReader();
+            if (rdr.Read())
+            {
+                bank_id = rdr.GetInt32(0);
+            }
+            if ((rdr != null))
+            {
+                rdr.Close();
+            }
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            } 
+        }
+
+        //select department_id & Emp_Id from 
+        public void SelectDepartIdAndEmpId()
+        {
+            con = new SqlConnection(cs.DBConn);
+            con.Open();
+            cmd = con.CreateCommand();
+
+            cmd.CommandText = "select DepartId,EmpId from t_employee WHERE EmpName= '" + approvedByComboBox.Text + "'";
+
+            rdr = cmd.ExecuteReader();
+            if (rdr.Read())
+            {
+                bank_id = rdr.GetInt32(0);
+                emp_id = rdr.GetInt32(1);
+            }
+            if ((rdr != null))
+            {
+                rdr.Close();
+            }
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
             }
         }
 
-        //&& !string.IsNullOrEmpty(bankNameComboBox.Text) && !(bankNameComboBox.Text == "Not In The List")
         private void accontNumComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SelectBankId();
             if (accontNumComboBox.Text == "Not In The List" && !string.IsNullOrEmpty(bankNameComboBox.Text) && !(bankNameComboBox.Text == "Not In The List"))
             {
                 inpb = Microsoft.VisualBasic.Interaction.InputBox("Please Input Account number Here", "Input Here", "", -1, -1);
@@ -738,7 +844,7 @@ namespace BillsPayableSystem.UI
                 {
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
-                    string ct3 = "select AccountNo from t_bank where AccountNo='" + inpb + "'";
+                    string ct3 = "select AccountNumber from t_account where AccountNumber='" + inpb + "'";
                    
                     cmd = new SqlCommand(ct3, con);
                     rdr = cmd.ExecuteReader();
@@ -761,14 +867,16 @@ namespace BillsPayableSystem.UI
                            
                             
                               //  bankName = rdr.ToString();
-                            
-                            string query4 = "insert into t_bank (BankName,AccountNo) values ('"+bankNameComboBox.Text +"',@d2)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+
+                            string query4 = "insert into t_account (AccountNumber,BankId,UserId) values (@d1,@d2,@d3)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                             
                             cmd = new SqlCommand(query4, con);
                             
                                                      
-                           // cmd.Parameters.AddWithValue("@d1", bankName);
-                            cmd.Parameters.AddWithValue("@d2", inpb);
+                            cmd.Parameters.AddWithValue("@d1", inpb);
+                            cmd.Parameters.AddWithValue("@d2", bank_id);
+                            cmd.Parameters.AddWithValue("@d3", user_id);
+                            
                             
                             cmd.ExecuteNonQuery();
                             con.Close();
@@ -777,6 +885,7 @@ namespace BillsPayableSystem.UI
                             accontNumComboBox.ResetText();
                             AccountNoLoad();
                             accontNumComboBox.SelectedText = inpb;
+                            chaqueNumTextBox.Focus();
                         }
                         catch (Exception ex)
                         {
@@ -801,13 +910,15 @@ namespace BillsPayableSystem.UI
                 paymentInfoGroupBox.Enabled = false;
                 approvalGroupBox.Enabled = true;
                 ApprovedClear();
-                AuthLoad(); 
+                AuthLoad();
+                approvalAuthComboBox.SelectedText = "--Select--";
             }
             else
             {
                 MessageBox.Show("Please Select Bill Serial Number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbBillSN.Focus();
             }
+            approvalAuthComboBox.Focus();
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -837,8 +948,9 @@ namespace BillsPayableSystem.UI
           
                 approvalGroupBox.Enabled = false;
                 settlementGroupBox.Enabled = true;
-
             MessageBox.Show("Approved Successfully...");
+
+            settlementDateTimePicker.Focus();
 
         }
         
@@ -912,7 +1024,13 @@ namespace BillsPayableSystem.UI
                 //MessageBox.Show("You should select correct date or previous date from today");
                 MessageBox.Show("You should select correct date or previous date from today", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 approvalDateTimePicker.ResetText();
+                approvalDateTimePicker.Focus();
             }
+            else
+            {
+                approvalAmountTextBox.Focus();
+            }
+          
         }
 
         private void settlementDateTimePicker_ValueChanged(object sender, EventArgs e)
@@ -1002,6 +1120,29 @@ namespace BillsPayableSystem.UI
                 e.Handled = true;
             }
         }
+
+        private void approvalAuthComboBox_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(approvalAuthComboBox.Text) && !approvalAuthComboBox.Items.Contains(approvalAuthComboBox.Text))
+            {
+                MessageBox.Show("Please Select A Valid Payable To", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                approvalAuthComboBox.ResetText();
+                this.BeginInvoke(new ChangeFocusDelegate(changeFocus), approvalAuthComboBox);
+            }
+
+        }
+
+        private void approvedByComboBox_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(approvedByComboBox.Text) && !approvedByComboBox.Items.Contains(approvedByComboBox.Text))
+            {
+                MessageBox.Show("Please Select A Valid Payable To", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                approvedByComboBox.ResetText();
+                this.BeginInvoke(new ChangeFocusDelegate(changeFocus), approvedByComboBox);
+            }
+        }
+
+      
 
       
       
