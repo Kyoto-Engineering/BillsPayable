@@ -21,6 +21,7 @@ namespace BillsPayableSystem.LoginUI
         ConnectionString cs = new ConnectionString();
         public static int uId;
         public static string userType, userName;
+
         public frmLogin()
         {
             InitializeComponent();

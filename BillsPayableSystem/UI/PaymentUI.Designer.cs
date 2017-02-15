@@ -313,6 +313,7 @@
             this.paymentMethodComboBox.Size = new System.Drawing.Size(110, 27);
             this.paymentMethodComboBox.TabIndex = 2;
             this.paymentMethodComboBox.SelectedIndexChanged += new System.EventHandler(this.paymentMethodComboBox_SelectedIndexChanged);
+            this.paymentMethodComboBox.Leave += new System.EventHandler(this.paymentMethodComboBox_Leave);
             // 
             // approvalAmountTextBox
             // 
@@ -391,6 +392,7 @@
             this.bankNameComboBox.TabIndex = 3;
             this.bankNameComboBox.Visible = false;
             this.bankNameComboBox.SelectedIndexChanged += new System.EventHandler(this.bankNameComboBox_SelectedIndexChanged);
+            this.bankNameComboBox.Leave += new System.EventHandler(this.bankNameComboBox_Leave);
             // 
             // approvedByComboBox
             // 
