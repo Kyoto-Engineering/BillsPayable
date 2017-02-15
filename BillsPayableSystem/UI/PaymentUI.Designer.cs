@@ -433,6 +433,7 @@
             this.accontNumComboBox.TabIndex = 4;
             this.accontNumComboBox.Visible = false;
             this.accontNumComboBox.SelectedIndexChanged += new System.EventHandler(this.accontNumComboBox_SelectedIndexChanged);
+            this.accontNumComboBox.Leave += new System.EventHandler(this.accontNumComboBox_Leave);
             // 
             // settlementAmountTxtBox
             // 

@@ -364,15 +364,7 @@ namespace BillsPayableSystem.UI
                 }
             }
 
-            if (paymentMethodComboBox.Text == "Cheque")
-            {
-                InsertCheque();
-            }
             
-            //insert approval and settlemenet
-
-
-            InsertApprovalAndSettelement();
 
            
 
@@ -380,6 +372,16 @@ namespace BillsPayableSystem.UI
                 MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
+
+                if (paymentMethodComboBox.Text == "Cheque")
+                {
+                    InsertCheque();
+                }
+
+                //insert approval and settlemenet
+
+                InsertApprovalAndSettelement();
+
                 try
                 {
                     int fyr = FiscallYear();
@@ -745,7 +747,7 @@ namespace BillsPayableSystem.UI
                 accontNumComboBox.Visible = true;
                 chqNumberLabel.Visible = true;
                 chaqueNumTextBox.Visible = true;
-                bankNameComboBox.SelectedText = "--Select--";
+                //bankNameComboBox.SelectedText = "--Select--";
             }
             else
             {
@@ -987,7 +989,7 @@ namespace BillsPayableSystem.UI
                 approvalGroupBox.Enabled = true;
                 ApprovedClear();
                 AuthLoad();
-                approvalAuthComboBox.SelectedText = "--Select--";
+                //approvalAuthComboBox.SelectedText = "--Select--";
             }
             else
             {
@@ -1201,7 +1203,7 @@ namespace BillsPayableSystem.UI
         {
             if (!string.IsNullOrWhiteSpace(approvalAuthComboBox.Text) && !approvalAuthComboBox.Items.Contains(approvalAuthComboBox.Text))
             {
-                MessageBox.Show("Please Select A Valid Authority name", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please Select A Valid Authority Department Name", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 approvalAuthComboBox.ResetText();
                 this.BeginInvoke(new ChangeFocusDelegate(changeFocus), approvalAuthComboBox);
             }
@@ -1235,6 +1237,16 @@ namespace BillsPayableSystem.UI
                 MessageBox.Show("Please Select A Valid Payment Method Name", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 paymentMethodComboBox.ResetText();
                 this.BeginInvoke(new ChangeFocusDelegate(changeFocus), paymentMethodComboBox);
+            }
+        }
+
+        private void accontNumComboBox_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(accontNumComboBox.Text) && !accontNumComboBox.Items.Contains(accontNumComboBox.Text))
+            {
+                MessageBox.Show("Please Select A Valid Account Number", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                accontNumComboBox.ResetText();
+                this.BeginInvoke(new ChangeFocusDelegate(changeFocus), accontNumComboBox);
             }
         }
 
