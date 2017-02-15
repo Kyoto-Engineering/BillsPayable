@@ -182,10 +182,12 @@ namespace BillsPayableSystem
                         {
                             con = new SqlConnection(cs.DBConn);
                             con.Open();
-                            string query1 = "insert into BPayableTo (BPayableToName, UserId) values (@d1,@d2)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                            string query1 = "insert into BPayableTo (BPayableToName, UserId,DateTime) values (@d1,@d2,@d3)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                             cmd = new SqlCommand(query1, con);
                             cmd.Parameters.AddWithValue("@d1", input);
                             cmd.Parameters.AddWithValue("@d2", user_id);
+                            cmd.Parameters.AddWithValue("@d3", DateTime.UtcNow.ToLocalTime());
+
                             cmd.ExecuteNonQuery();
                             
                             con.Close();
@@ -284,11 +286,12 @@ namespace BillsPayableSystem
                         {
                             con = new SqlConnection(cs.DBConn);
                             con.Open();
-                            string query4 = "insert into BillsPayableName (BillName, BillTypeId, UserId) values (@d1,@d2,@d3)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                            string query4 = "insert into BillsPayableName (BillName, BillTypeId, UserId,DateTime) values (@d1,@d2,@d3,@d4)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                             cmd = new SqlCommand(query4, con);
                             cmd.Parameters.AddWithValue("@d1", inpb);
                             cmd.Parameters.AddWithValue("@d2", btype_id);
                             cmd.Parameters.AddWithValue("@d3", user_id);
+                            cmd.Parameters.AddWithValue("@d4", DateTime.UtcNow.ToLocalTime());
                             cmd.ExecuteNonQuery();
                             con.Close();
 
@@ -382,7 +385,7 @@ namespace BillsPayableSystem
             {
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, SiNo, UserId, BillImage) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                String query = "insert into BTransaction(BillId, Narrative, PaymentMethod, Amount, BIssueDate, BReceivedDate, DueDate, BPayableToId, SiNo, UserId, BillImage,DateTime) values (@d1,@d2,@d3,@d4,@d5,@d6,@d7,@d8,@d9,@d10,@d11,@d12)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                 cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@d1", billId);
                 cmd.Parameters.AddWithValue("@d2", txtBillNarrative.Text);
@@ -394,6 +397,7 @@ namespace BillsPayableSystem
                 cmd.Parameters.AddWithValue("@d8", bPayableToId);
                 cmd.Parameters.AddWithValue("@d9", txtBillSiNo.Text);
                 cmd.Parameters.AddWithValue("@d10", user_id);
+                cmd.Parameters.AddWithValue("@d12", DateTime.UtcNow.ToLocalTime());
                              
                 if (txtpictureBox.Image != null)
                 {

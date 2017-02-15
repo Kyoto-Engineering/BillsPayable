@@ -221,7 +221,7 @@ namespace BillsPayableSystem.UI
             cmd.Parameters.AddWithValue("@d2", account_id);
             cmd.Parameters.AddWithValue("@d3", Bank_Id);
             cmd.Parameters.AddWithValue("@d4", user_id);
-            cmd.Parameters.AddWithValue("@d5", DateTime.UtcNow.Date);
+            cmd.Parameters.AddWithValue("@d5", DateTime.UtcNow.ToLocalTime());
 
             currentId = (int)cmd.ExecuteScalar();
             con.Close();
@@ -235,15 +235,13 @@ namespace BillsPayableSystem.UI
                 SelectDepartIdAndEmpId();
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string query1 ="insert into t_approval(DepartID, EmpId, ApprovedDate,ApprovedAmount,UserId) values(@d1,@d2,@d3,@d4,@d5)" +
+                string query1 ="insert into t_approval(EmpId, ApprovedDate,ApprovedAmount,UserId) values(@d1,@d2,@d3,@d4)" +
                     "SELECT CONVERT(int, SCOPE_IDENTITY())";
-
                 cmd = new SqlCommand(query1, con);
-                cmd.Parameters.AddWithValue("@d1", departID);
-                cmd.Parameters.AddWithValue("@d2", emp_id);
-                cmd.Parameters.AddWithValue("@d3", approvalDateTimePicker.Value);
-                cmd.Parameters.AddWithValue("@d4", Convert.ToDecimal(approvalAmountTextBox.Text));
-                cmd.Parameters.AddWithValue("@d5", user_id);
+                cmd.Parameters.AddWithValue("@d1", emp_id);
+                cmd.Parameters.AddWithValue("@d2", approvalDateTimePicker.Value);
+                cmd.Parameters.AddWithValue("@d3", Convert.ToDecimal(approvalAmountTextBox.Text));
+                cmd.Parameters.AddWithValue("@d4", user_id);               
                 currentId = (int) cmd.ExecuteScalar();
                 con.Close();
             }
@@ -390,13 +388,13 @@ namespace BillsPayableSystem.UI
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
                     string query =
-                        "insert into Payment(PaymentDate, EntryDateTime, InputBy, BillTransactionId,Fiscalyr) values(@d1,@d2,@d3,@d4,@d5)" +
+                        "insert into Payment(PaymentDate, EntryDateTime, UserId, BillTransactionId,Fiscalyr) values(@d1,@d2,@d3,@d4,@d5)" +
                         "SELECT CONVERT(int, SCOPE_IDENTITY())";
 
                     cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@d1", dtpPaymentDate.Value);
                     cmd.Parameters.AddWithValue("@d2", DateTime.UtcNow.ToLocalTime());
-                    cmd.Parameters.AddWithValue("@d3", userName);
+                    cmd.Parameters.AddWithValue("@d3", user_id);
                     cmd.Parameters.AddWithValue("@d4", Convert.ToInt32(cmbBillSN.Text));
                     cmd.Parameters.AddWithValue("@d5", fyr);
 
@@ -572,11 +570,12 @@ namespace BillsPayableSystem.UI
                         {
                             con = new SqlConnection(cs.DBConn);
                             con.Open();
-                            string query4 = "insert into t_department (DepartName,UserId) values (@d1,@d2)" +
+                            string query4 = "insert into t_department (DepartName,UserId,DateTime) values (@d1,@d2,@d3)" +
                                             "SELECT CONVERT(int, SCOPE_IDENTITY())";
                             cmd = new SqlCommand(query4, con);
                             cmd.Parameters.AddWithValue("@d1", inpb);
                             cmd.Parameters.AddWithValue("@d2", user_id);
+                            cmd.Parameters.AddWithValue("@d3", DateTime.UtcNow.ToLocalTime());
                             cmd.ExecuteNonQuery();
                             con.Close();
                             approvalAuthComboBox.Items.Clear();
@@ -705,12 +704,13 @@ namespace BillsPayableSystem.UI
                         {
                             con = new SqlConnection(cs.DBConn);
                             con.Open();
-                            string query4 = "insert into t_employee (EmpName,DepartID,UserId) values (@d1,@d2,@d3)" +
+                            string query4 = "insert into t_employee (EmpName,DepartID,UserId,DateTime) values (@d1,@d2,@d3,@d4)" +
                                             "SELECT CONVERT(int, SCOPE_IDENTITY())";
                             cmd = new SqlCommand(query4, con);
                             cmd.Parameters.AddWithValue("@d1", inpb);
                             cmd.Parameters.AddWithValue("@d2", departID);
                             cmd.Parameters.AddWithValue("@d3", user_id);
+                            cmd.Parameters.AddWithValue("@d4", DateTime.UtcNow.ToLocalTime());
                             cmd.ExecuteScalar();
                             con.Close();
                             approvedByComboBox.Items.Clear();                                                  
@@ -811,12 +811,13 @@ namespace BillsPayableSystem.UI
                             {
                                 con = new SqlConnection(cs.DBConn);
                                 con.Open();
-                                string query4 = "insert into t_bank (BankName,UserId) values (@d1,@d2)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                                string query4 = "insert into t_bank (BankName,UserId,DateTime) values (@d1,@d2,@d3)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                                // string query5 = "insert into t_bank (BankName,UserId) values (@d1,@d2)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                                 cmd = new SqlCommand(query4, con);
                                 
                                 cmd.Parameters.AddWithValue("@d1", inpb);
                                 cmd.Parameters.AddWithValue("@d2", user_id);                              
+                                cmd.Parameters.AddWithValue("@d3", DateTime.UtcNow.ToLocalTime());                              
                                 cmd.ExecuteNonQuery();
                                 con.Close();
 
@@ -948,7 +949,7 @@ namespace BillsPayableSystem.UI
                             
                               //  bankName = rdr.ToString();
 
-                            string query4 = "insert into t_account (AccountNumber,BankId,UserId) values (@d1,@d2,@d3)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                            string query4 = "insert into t_account (AccountNumber,BankId,UserId,DateTime) values (@d1,@d2,@d3,@d4)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
                             
                             cmd = new SqlCommand(query4, con);
                             
@@ -956,6 +957,7 @@ namespace BillsPayableSystem.UI
                             cmd.Parameters.AddWithValue("@d1", inpb);
                             cmd.Parameters.AddWithValue("@d2", bank_id);
                             cmd.Parameters.AddWithValue("@d3", user_id);
+                            cmd.Parameters.AddWithValue("@d4", DateTime.UtcNow.ToLocalTime());
                             
                             
                             cmd.ExecuteNonQuery();
@@ -1252,6 +1254,9 @@ namespace BillsPayableSystem.UI
             }
         }
 
+       
+
+  
       
 
       

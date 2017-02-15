@@ -146,6 +146,7 @@
             this.payableTextBox.ReadOnly = true;
             this.payableTextBox.Size = new System.Drawing.Size(282, 29);
             this.payableTextBox.TabIndex = 2;
+            
             // 
             // amountTextBox
             // 

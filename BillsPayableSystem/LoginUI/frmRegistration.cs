@@ -182,7 +182,7 @@ namespace BillsPayableSystem.LoginUI
 
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string cb = "insert into Registration(UserName,Email,UserType,Password,Name,Designation,Department,ContactNo) VALUES ('" + txtUsername.Text + "','" + txtEmail.Text + "','" + cmbUserType.Text + "','" + txtPassword.Text + "','" + txtFullName.Text + "','" + designationTextBox.Text + "','" + departmentTextBox.Text + "','" + txtContact_no.Text + "')";
+                string cb = "insert into Registration(UserName,Email,UserType,Password,Name,Designation,Department,ContactNo,DateTime) VALUES ('" + txtUsername.Text + "','" + txtEmail.Text + "','" + cmbUserType.Text + "','" + txtPassword.Text + "','" + txtFullName.Text + "','" + designationTextBox.Text + "','" + departmentTextBox.Text + "','" + txtContact_no.Text + "','"+DateTime.UtcNow.ToLocalTime()+"')";
                 cmd = new SqlCommand(cb);
                 cmd.Connection = con;
                 cmd.ExecuteReader();

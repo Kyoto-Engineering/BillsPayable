@@ -71,6 +71,7 @@ D:\Git\BillsPayable\BillsPayableSystem\bin\Debug\Kyoto Payable Bills System.exe.
 D:\Git\BillsPayable\BillsPayableSystem\bin\Debug\Kyoto Payable Bills System.application
 D:\Git\BillsPayable\BillsPayableSystem\bin\Debug\Kyoto Payable Bills System.exe
 D:\Git\BillsPayable\BillsPayableSystem\bin\Debug\Kyoto Payable Bills System.pdb
+D:\Git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.csprojResolveAssemblyReference.cache
 D:\Git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.LoginUI.frmLogin.resources
 D:\Git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.LoginUI.frmRegistration.resources
 D:\Git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.frmBillEntry.resources
