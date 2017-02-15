@@ -170,12 +170,13 @@ namespace BillsPayableSystem.UI
                 SelectBankId();
                 con = new SqlConnection(cs.DBConn);
                 con.Open();
-                string query1 = "insert into t_account(AccountNumber, BankId, UserId) values(@d1,@d2,@d3)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
+                string query1 = "insert into t_account(AccountNumber, BankId, UserId) values(@d1,@d2,@d3,@d4)" + "SELECT CONVERT(int, SCOPE_IDENTITY())";
 
                 cmd = new SqlCommand(query1, con);
                 cmd.Parameters.AddWithValue("@d1", inpb1);
                 cmd.Parameters.AddWithValue("@d2", bank_id);
                 cmd.Parameters.AddWithValue("@d3", user_id);             
+                cmd.Parameters.AddWithValue("@d4", DateTime.UtcNow.Date);             
                 cmd.ExecuteScalar();
                 con.Close();
             }
@@ -188,7 +189,7 @@ namespace BillsPayableSystem.UI
         //insert Cheque
         public void InsertCheque()
         {
-            
+            //DateTime date=
             con = new SqlConnection(cs.DBConn);
             con.Open();
             cmd = con.CreateCommand();
@@ -212,15 +213,16 @@ namespace BillsPayableSystem.UI
 
             con = new SqlConnection(cs.DBConn);
             con.Open();
-            string query1 = "insert into t_Cheque(ChequeNumber, AccountId, BankId,UserId) values(@d1,@d2,@d3,@d4)" +
+            string query1 = "insert into t_Cheque(ChequeNumber, AccountId, BankId,UserId,DateTime) values(@d1,@d2,@d3,@d4,@d5)" +
                 "SELECT CONVERT(int, SCOPE_IDENTITY())";
 
             cmd = new SqlCommand(query1, con);
             cmd.Parameters.AddWithValue("@d1", chaqueNumTextBox.Text);
             cmd.Parameters.AddWithValue("@d2", account_id);
             cmd.Parameters.AddWithValue("@d3", Bank_Id);
-          
             cmd.Parameters.AddWithValue("@d4", user_id);
+            cmd.Parameters.AddWithValue("@d5", DateTime.UtcNow.Date);
+
             currentId = (int)cmd.ExecuteScalar();
             con.Close();
             
