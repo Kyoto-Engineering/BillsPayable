@@ -41,8 +41,8 @@ namespace BillsPayableSystem.UI
         }
         private void ClearData()
         {
-            cmbBillSN.Items.Clear();
-            cmbBillSN.SelectedIndex = -1;
+            billIdTextBox.Clear();
+           
             amountTextBox.Clear();
             billPurposeTextBox.Clear();
             billEntryDateTextBox.Clear();
@@ -54,28 +54,28 @@ namespace BillsPayableSystem.UI
 
         private void BillSerialNoLoad()
         {
-            try
-            {
-                con = new SqlConnection(cs.DBConn);
-                con.Open();
+            //try
+            //{
+            //    con = new SqlConnection(cs.DBConn);
+            //    con.Open();
 
-                //string query = "Select SiNo from BTransaction except Select SiNo from BTransaction where StatusForSN='Paid'";
-                //string query ="Select BillTransactionId from BTransaction LEFT JOIN Payment ON BTransaction.BillTransactionId = Payment.BillTransactionId EXCEPT Select SiNo from BTransaction RIGHT JOIN Payment ON BTransaction.BillTransactionId = Payment.BillTransactionId";
-                string query ="SELECT BillTransactionId FROM BTransaction EXCEPT SELECT Payment.BillTransactionId FROM Payment";
+            //    //string query = "Select SiNo from BTransaction except Select SiNo from BTransaction where StatusForSN='Paid'";
+            //    //string query ="Select BillTransactionId from BTransaction LEFT JOIN Payment ON BTransaction.BillTransactionId = Payment.BillTransactionId EXCEPT Select SiNo from BTransaction RIGHT JOIN Payment ON BTransaction.BillTransactionId = Payment.BillTransactionId";
+            //    string query ="SELECT BillTransactionId FROM BTransaction EXCEPT SELECT Payment.BillTransactionId FROM Payment";
 
-                cmd = new SqlCommand(query, con);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    cmbBillSN.Items.Add(rdr[0]);
-                }
-                con.Close();
+            //    cmd = new SqlCommand(query, con);
+            //    rdr = cmd.ExecuteReader();
+            //    while (rdr.Read())
+            //    {
+            //        billIdTextBox.Items.Add(rdr[0]);
+            //    }
+            //    con.Close();
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         //R
@@ -213,8 +213,7 @@ namespace BillsPayableSystem.UI
 
             con = new SqlConnection(cs.DBConn);
             con.Open();
-            string query1 = "insert into t_Cheque(ChequeNumber, AccountId, BankId,UserId,DateTime) values(@d1,@d2,@d3,@d4,@d5)" +
-                "SELECT CONVERT(int, SCOPE_IDENTITY())";
+            string query1 = "insert into t_Cheque(ChequeNumber, AccountId, BankId,UserId,DateTime) values(@d1,@d2,@d3,@d4,@d5)" +"SELECT CONVERT(int, SCOPE_IDENTITY())";
 
             cmd = new SqlCommand(query1, con);
             cmd.Parameters.AddWithValue("@d1", chaqueNumTextBox.Text);
@@ -230,7 +229,7 @@ namespace BillsPayableSystem.UI
         public void InsertApprovalAndSettelement()
         {
 
-            if (!string.IsNullOrWhiteSpace(cmbBillSN.Text))
+            if (!string.IsNullOrWhiteSpace(billIdTextBox.Text))
             {
                 SelectDepartIdAndEmpId();
                 con = new SqlConnection(cs.DBConn);
@@ -313,12 +312,16 @@ namespace BillsPayableSystem.UI
             //btnSave1.IsBalloon = true;
             //btnSave1.ShowAlways = true;
             //btnSave1.SetToolTip(btnSave, "hi");
-           
+            if (dtpPaymentDate.Value>approvalDateTimePicker.Value)
+            {
+                MessageBox.Show("Payment date should not exceed approval and settlement date", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);           
+                return;
+            }
 
-            if (string.IsNullOrWhiteSpace(cmbBillSN.Text))
+            if (string.IsNullOrWhiteSpace(billIdTextBox.Text))
             {
                 MessageBox.Show("Please Select Bill ID", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbBillSN.Focus();
+                billIdTextBox.Focus();
                 return;
             }
             if (string.IsNullOrWhiteSpace(approvalAmountTextBox.Text))
@@ -395,7 +398,7 @@ namespace BillsPayableSystem.UI
                     cmd.Parameters.AddWithValue("@d1", dtpPaymentDate.Value);
                     cmd.Parameters.AddWithValue("@d2", DateTime.UtcNow.ToLocalTime());
                     cmd.Parameters.AddWithValue("@d3", user_id);
-                    cmd.Parameters.AddWithValue("@d4", Convert.ToInt32(cmbBillSN.Text));
+                    cmd.Parameters.AddWithValue("@d4", Convert.ToInt32(billIdTextBox.Text));
                     cmd.Parameters.AddWithValue("@d5", fyr);
 
                     cmd.ExecuteNonQuery();
@@ -404,11 +407,14 @@ namespace BillsPayableSystem.UI
                     ClearData();
                     ApprovedClear();
                     BillSerialNoLoad();
-                    cmbBillSN.ResetText();
+                    billIdTextBox.ResetText();
                     paymentInfoGroupBox.Enabled = true;
+                    approvalGroupBox.Enabled = false;
+                    settlementGroupBox.Enabled = false;
                     lblBillSiNo.Focus();
                     SettlementClear();
                     this.paymentMethodComboBox_SelectedIndexChanged(null, null);
+                    this.Dispose();
                 }
                 catch (Exception ex)
                 {
@@ -443,7 +449,7 @@ namespace BillsPayableSystem.UI
                 con.Open();
                 cmd = con.CreateCommand();
 
-                cmd.CommandText = "select BillTransactionId,SiNo from BTransaction WHERE SiNo= '" + cmbBillSN.Text + "'";
+                cmd.CommandText = "select BillTransactionId,SiNo from BTransaction WHERE SiNo= '" + billIdTextBox.Text + "'";
 
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
@@ -465,14 +471,14 @@ namespace BillsPayableSystem.UI
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            if (!string.IsNullOrWhiteSpace(cmbBillSN.Text))
+            if (!string.IsNullOrWhiteSpace(billIdTextBox.Text))
             {
                 try
                 {
                     con = new SqlConnection(cs.DBConn);
                     con.Open();
                     cmd = con.CreateCommand();
-                    string query = "SELECT dbo.BPayableTo.BPayableToName, dbo.BTransaction.BIssueDate, dbo.BTransaction.Amount, dbo.BillsPayableName.BillName FROM dbo.BPayableTo INNER JOIN dbo.BTransaction ON dbo.BPayableTo.BPayableToId = dbo.BTransaction.BPayableToId INNER JOIN dbo.BillsPayableName ON dbo.BTransaction.BillId = dbo.BillsPayableName.BillId where BillTransactionId= '" + cmbBillSN.Text + "'";
+                    string query = "SELECT dbo.BPayableTo.BPayableToName, dbo.BTransaction.BIssueDate, dbo.BTransaction.Amount, dbo.BillsPayableName.BillName FROM dbo.BPayableTo INNER JOIN dbo.BTransaction ON dbo.BPayableTo.BPayableToId = dbo.BTransaction.BPayableToId INNER JOIN dbo.BillsPayableName ON dbo.BTransaction.BillId = dbo.BillsPayableName.BillId where BillTransactionId= '" + billIdTextBox.Text + "'";
                     cmd = new SqlCommand(query, con);
                     rdr = cmd.ExecuteReader();
                     if (rdr.Read())
@@ -517,7 +523,7 @@ namespace BillsPayableSystem.UI
         private void frmPayment_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Dispose();
-            MainUI1 frm3 = new MainUI1();
+            UnpaidBillListUI frm3 = new UnpaidBillListUI();
             frm3.Show();
         }
 
@@ -987,7 +993,7 @@ namespace BillsPayableSystem.UI
 
         private void doneButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(cmbBillSN.Text))
+            if (!string.IsNullOrEmpty(billIdTextBox.Text))
             {
                 paymentInfoGroupBox.Enabled = false;
                 approvalGroupBox.Enabled = true;
@@ -998,7 +1004,7 @@ namespace BillsPayableSystem.UI
             else
             {
                 MessageBox.Show("Please Select Bill Serial Number", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbBillSN.Focus();
+                billIdTextBox.Focus();
             }
             approvalAuthComboBox.Focus();
         }
@@ -1060,6 +1066,7 @@ namespace BillsPayableSystem.UI
             ApprovedClear();
             SettlementClear();
             this.paymentMethodComboBox_SelectedIndexChanged(null, null);
+            this.Dispose();
         }
 
       
@@ -1097,6 +1104,9 @@ namespace BillsPayableSystem.UI
         {
             ClearData();
             BillSerialNoLoad();
+            this.Dispose();
+            //UnpaidBillListUI unpaidBillList=new UnpaidBillListUI();
+            //unpaidBillList.Show();
         }
 
         private void approvalDateTimePicker_ValueChanged(object sender, EventArgs e)
@@ -1106,8 +1116,9 @@ namespace BillsPayableSystem.UI
                 //MessageBox.Show("You should select correct date or previous date from today");
                 MessageBox.Show("You should select correct date or previous date from today", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 approvalDateTimePicker.ResetText();
-                approvalDateTimePicker.Focus();
+                approvalDateTimePicker.Focus();              
             }
+            
             else
             {
                 approvalAmountTextBox.Focus();
@@ -1118,8 +1129,7 @@ namespace BillsPayableSystem.UI
         private void settlementDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
             if (settlementDateTimePicker.Value > DateTime.Now)
-            {
-                //MessageBox.Show("You should select correct date or previous date from today");
+            {              
                 MessageBox.Show("You should select correct date or previous date from today", "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 settlementDateTimePicker.ResetText();
             }
@@ -1254,15 +1264,6 @@ namespace BillsPayableSystem.UI
             }
         }
 
-       
-
-  
-      
-
-      
-      
-        
-       
-
+            
     }
 }

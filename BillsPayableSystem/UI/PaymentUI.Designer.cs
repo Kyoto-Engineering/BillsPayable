@@ -34,7 +34,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label1 = new System.Windows.Forms.Label();
             this.lblBillSiNo = new System.Windows.Forms.Label();
-            this.cmbBillSN = new System.Windows.Forms.ComboBox();
             this.payableTextBox = new System.Windows.Forms.TextBox();
             this.amountTextBox = new System.Windows.Forms.TextBox();
             this.billEntryDateTextBox = new System.Windows.Forms.TextBox();
@@ -69,6 +68,7 @@
             this.approvalGroupBox = new System.Windows.Forms.GroupBox();
             this.approveButton = new System.Windows.Forms.Button();
             this.paymentInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.billIdTextBox = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.agreeButton = new System.Windows.Forms.Button();
             this.settlementGroupBox = new System.Windows.Forms.GroupBox();
@@ -127,17 +127,6 @@
             this.lblBillSiNo.TabIndex = 9;
             this.lblBillSiNo.Text = "Bill ID :";
             // 
-            // cmbBillSN
-            // 
-            this.cmbBillSN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBillSN.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbBillSN.FormattingEnabled = true;
-            this.cmbBillSN.Location = new System.Drawing.Point(166, 86);
-            this.cmbBillSN.Name = "cmbBillSN";
-            this.cmbBillSN.Size = new System.Drawing.Size(282, 30);
-            this.cmbBillSN.TabIndex = 1;
-            this.cmbBillSN.SelectedIndexChanged += new System.EventHandler(this.cmbBillSN_SelectedIndexChanged);
-            // 
             // payableTextBox
             // 
             this.payableTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -146,7 +135,6 @@
             this.payableTextBox.ReadOnly = true;
             this.payableTextBox.Size = new System.Drawing.Size(282, 29);
             this.payableTextBox.TabIndex = 2;
-            
             // 
             // amountTextBox
             // 
@@ -488,6 +476,7 @@
             // 
             // paymentInfoGroupBox
             // 
+            this.paymentInfoGroupBox.Controls.Add(this.billIdTextBox);
             this.paymentInfoGroupBox.Controls.Add(this.cancelButton);
             this.paymentInfoGroupBox.Controls.Add(this.agreeButton);
             this.paymentInfoGroupBox.Controls.Add(this.lblPaymentDate);
@@ -495,7 +484,6 @@
             this.paymentInfoGroupBox.Controls.Add(this.label5);
             this.paymentInfoGroupBox.Controls.Add(this.lblBillSiNo);
             this.paymentInfoGroupBox.Controls.Add(this.label4);
-            this.paymentInfoGroupBox.Controls.Add(this.cmbBillSN);
             this.paymentInfoGroupBox.Controls.Add(this.label3);
             this.paymentInfoGroupBox.Controls.Add(this.payableTextBox);
             this.paymentInfoGroupBox.Controls.Add(this.label2);
@@ -509,6 +497,15 @@
             this.paymentInfoGroupBox.TabIndex = 2;
             this.paymentInfoGroupBox.TabStop = false;
             this.paymentInfoGroupBox.Text = "Payment Information";
+            // 
+            // billIdTextBox
+            // 
+            this.billIdTextBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.billIdTextBox.Location = new System.Drawing.Point(166, 82);
+            this.billIdTextBox.Name = "billIdTextBox";
+            this.billIdTextBox.ReadOnly = true;
+            this.billIdTextBox.Size = new System.Drawing.Size(282, 26);
+            this.billIdTextBox.TabIndex = 19;
             // 
             // cancelButton
             // 
@@ -618,11 +615,10 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblBillSiNo;
-        private System.Windows.Forms.ComboBox cmbBillSN;
-        private System.Windows.Forms.TextBox payableTextBox;
-        private System.Windows.Forms.TextBox amountTextBox;
-        private System.Windows.Forms.TextBox billEntryDateTextBox;
-        private System.Windows.Forms.TextBox billPurposeTextBox;
+        public System.Windows.Forms.TextBox payableTextBox;
+        public System.Windows.Forms.TextBox amountTextBox;
+        public System.Windows.Forms.TextBox billEntryDateTextBox;
+        public System.Windows.Forms.TextBox billPurposeTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -651,11 +647,12 @@
         private System.Windows.Forms.TextBox settlementAmountTxtBox;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.GroupBox approvalGroupBox;
-        private System.Windows.Forms.GroupBox paymentInfoGroupBox;
         private System.Windows.Forms.Button agreeButton;
         private System.Windows.Forms.GroupBox settlementGroupBox;
         private System.Windows.Forms.Button refreshButton;
         private System.Windows.Forms.Button approveButton;
         private System.Windows.Forms.Button cancelButton;
+        public System.Windows.Forms.TextBox billIdTextBox;
+        public System.Windows.Forms.GroupBox paymentInfoGroupBox;
     }
 }

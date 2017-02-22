@@ -136,6 +136,12 @@
     <Compile Include="UI\PaymentUI.Designer.cs">
       <DependentUpon>PaymentUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UnpaidBillListUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UnpaidBillListUI.Designer.cs">
+      <DependentUpon>UnpaidBillListUI.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="LoginUI\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -160,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\PaymentUI.resx">
       <DependentUpon>PaymentUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UnpaidBillListUI.resx">
+      <DependentUpon>UnpaidBillListUI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="BillsPayableDBDataSet.xsc">
       <DependentUpon>BillsPayableDBDataSet.xsd</DependentUpon>

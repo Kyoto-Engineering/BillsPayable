@@ -48,8 +48,12 @@ namespace BillsPayableSystem.UI
         private void btnPayment_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmPayment frm1 = new frmPayment();
-            frm1.Show();
+            UnpaidBillListUI unpaidBillList=new UnpaidBillListUI();
+            unpaidBillList.Show();
+
+            //this.Hide();
+            //frmPayment frm1 = new frmPayment();
+            //frm1.Show();
         }
 
 
