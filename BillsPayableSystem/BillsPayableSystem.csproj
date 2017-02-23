@@ -116,6 +116,12 @@
       <DependentUpon>frmRegistration.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="UI\AllPayableBillListUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AllPayableBillListUI.Designer.cs">
+      <DependentUpon>AllPayableBillListUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginUI\frmRegistration.resx">
       <DependentUpon>frmRegistration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AllPayableBillListUI.resx">
+      <DependentUpon>AllPayableBillListUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

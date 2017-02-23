@@ -64,6 +64,13 @@ namespace BillsPayableSystem.UI
             frm.Show();
         }
 
+        private void showBillListButton_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+            AllPayableBillListUI frm = new AllPayableBillListUI();
+            frm.Show();
+        }
+
         
 
     }

@@ -83,3 +83,5 @@ D:\Git\BillsPayable\BillsPayableSystem\obj\Debug\Kyoto Payable Bills System.appl
 D:\Git\BillsPayable\BillsPayableSystem\obj\Debug\Kyoto Payable Bills System.exe
 D:\Git\BillsPayable\BillsPayableSystem\obj\Debug\Kyoto Payable Bills System.pdb
 D:\Git\BillsPayable\BillsPayableSystem\bin\Debug\Kyoto Payable Bills System.pdb
+D:\Git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.csprojResolveAssemblyReference.cache
+D:\Git\BillsPayable\BillsPayableSystem\obj\Debug\BillsPayableSystem.UI.AllPayableBillListUI.resources

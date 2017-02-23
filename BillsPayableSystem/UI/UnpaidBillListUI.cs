@@ -27,28 +27,7 @@ namespace BillsPayableSystem.UI
         private void UnpaidBillListUI_Load(object sender, EventArgs e)
         {
             GetUnPaidBillList();
-            //try
-            //{
-            //    con = new SqlConnection(cs.DBConn);
-            //    con.Open();
-
-            //    //string query = "Select SiNo from BTransaction except Select SiNo from BTransaction where StatusForSN='Paid'";
-            //    //string query ="Select BillTransactionId from BTransaction LEFT JOIN Payment ON BTransaction.BillTransactionId = Payment.BillTransactionId EXCEPT Select SiNo from BTransaction RIGHT JOIN Payment ON BTransaction.BillTransactionId = Payment.BillTransactionId";
-            //    string query = "SELECT BillTransactionId FROM BTransaction EXCEPT SELECT Payment.BillTransactionId FROM Payment";
-
-            //    cmd = new SqlCommand(query, con);
-            //    rdr = cmd.ExecuteReader();
-            //    while (rdr.Read())
-            //    {
-            //        cmbBillSN.Items.Add(rdr[0]);
-            //    }
-            //    con.Close();
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            
         }
 
         private void GetUnPaidBillList()
@@ -104,37 +83,8 @@ namespace BillsPayableSystem.UI
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
-            //(uppaidBillListDataGridView.DataSource as DataTable).DefaultView.RowFilter = string.Format("Column2 LIKE '{0}%'", searchTextBox.Text);
-
-            //DataTable dt=new DataTable();
-
-            //string searchValue = string.Format("Column2 LIKE '{0}%'", searchTextBox.Text);
-
-            //uppaidBillListDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            //try
-            //{
-            //    foreach (DataGridViewRow row in uppaidBillListDataGridView.Rows)
-            //    {
-            //        if (row.Cells[1].Value.ToString().Equals(searchValue))
-            //        {
-            //            row.Selected = true;
-            //            break;
-            //        }
-            //    }
-            //}
-            //catch (Exception exc)
-            //{
-            //    MessageBox.Show(exc.Message);
-            //}
-
-
-            string searchString = searchTextBox.Text.Trim();
-            if (searchString == string.Empty)
-            {
-                MessageBox.Show("Enter Valid Consumer Number..!");
-            }
-            else
-            {
+           
+            string searchString = searchTextBox.Text.Trim();           
                 foreach (DataGridViewRow row in uppaidBillListDataGridView.Rows)
                 {
                     if (row.Cells["Column2"].Value.ToString().Contains(searchString))
@@ -144,17 +94,9 @@ namespace BillsPayableSystem.UI
                         int index = row.Index;
                         uppaidBillListDataGridView.FirstDisplayedScrollingRowIndex = index;
                         break;
-                    }
-                }
-            }
-
-
-           
+                    }              
+            }          
         }
-
     }
-
-
-
 }
 
