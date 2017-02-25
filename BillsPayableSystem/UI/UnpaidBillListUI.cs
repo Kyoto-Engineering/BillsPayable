@@ -84,18 +84,38 @@ namespace BillsPayableSystem.UI
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
            
-            string searchString = searchTextBox.Text.Trim();           
-                foreach (DataGridViewRow row in uppaidBillListDataGridView.Rows)
-                {
-                    if (row.Cells["Column2"].Value.ToString().Contains(searchString))
-                    {
-                        uppaidBillListDataGridView.CurrentRow.Selected = false;
-                        uppaidBillListDataGridView.Rows[row.Index].Selected = true;
-                        int index = row.Index;
-                        uppaidBillListDataGridView.FirstDisplayedScrollingRowIndex = index;
-                        break;
-                    }              
-            }          
+            //string searchString = searchTextBox.Text.Trim();           
+            //    foreach (DataGridViewRow row in uppaidBillListDataGridView.Rows)
+            //    {
+            //        if (row.Cells["Column2"].Value.ToString().Contains(searchString))
+            //        {
+            //            uppaidBillListDataGridView.CurrentRow.Selected = false;
+            //            uppaidBillListDataGridView.Rows[row.Index].Selected = true;
+            //            int index = row.Index;
+            //            uppaidBillListDataGridView.FirstDisplayedScrollingRowIndex = index;
+            //            break;
+            //        }              
+            //}     
+
+
+           // SqlDataAdapter sda = new SqlDataAdapter("SELECT *FROM BTransaction WHERE (Amount LIKE '%" + searchTextBox.Text + "%')", con);
+            SqlDataAdapter sda = new SqlDataAdapter("SELECT BTransaction.BillTransactionId,BPayableTo.BPayableToName, BTransaction.Amount, BTransaction.DueDate,BillsPayableName.BillName FROM BillsPayableName INNER JOIN BTransaction ON BillsPayableName.BillId = BTransaction.BillId INNER JOIN BPayableTo ON BTransaction.BPayableToId = BPayableTo.BPayableToId WHERE (BPayableTo.BPayableToName LIKE '%" + searchTextBox.Text + "%')", con);
+            DataTable dataTable = new DataTable();
+            sda.Fill(dataTable);
+            uppaidBillListDataGridView.Rows.Clear();
+            foreach (DataRow item in dataTable.Rows)
+            {
+                int n = uppaidBillListDataGridView.Rows.Add();
+                uppaidBillListDataGridView.Rows[n].Cells[0].Value = item[0].ToString();
+                uppaidBillListDataGridView.Rows[n].Cells[1].Value = item[1].ToString();
+                uppaidBillListDataGridView.Rows[n].Cells[2].Value = item[2].ToString();
+                uppaidBillListDataGridView.Rows[n].Cells[3].Value = item[3].ToString();
+                uppaidBillListDataGridView.Rows[n].Cells[4].Value = item[4].ToString();
+            }
+
+
+
+
         }
     }
 }

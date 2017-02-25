@@ -323,7 +323,7 @@
             this.approvalDateTimePicker.Name = "approvalDateTimePicker";
             this.approvalDateTimePicker.Size = new System.Drawing.Size(133, 29);
             this.approvalDateTimePicker.TabIndex = 2;
-            this.approvalDateTimePicker.Value = new System.DateTime(2017, 2, 9, 13, 6, 54, 0);
+            this.approvalDateTimePicker.Value = new System.DateTime(2017, 2, 23, 0, 0, 0, 0);
             this.approvalDateTimePicker.ValueChanged += new System.EventHandler(this.approvalDateTimePicker_ValueChanged);
             // 
             // settlementDateTimePicker
@@ -335,7 +335,7 @@
             this.settlementDateTimePicker.Name = "settlementDateTimePicker";
             this.settlementDateTimePicker.Size = new System.Drawing.Size(110, 26);
             this.settlementDateTimePicker.TabIndex = 0;
-            this.settlementDateTimePicker.Value = new System.DateTime(2017, 2, 11, 12, 59, 9, 0);
+            this.settlementDateTimePicker.Value = new System.DateTime(2017, 2, 23, 0, 0, 0, 0);
             this.settlementDateTimePicker.ValueChanged += new System.EventHandler(this.settlementDateTimePicker_ValueChanged);
             // 
             // accNumberLabel
