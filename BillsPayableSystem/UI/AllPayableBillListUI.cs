@@ -63,6 +63,24 @@ namespace BillsPayableSystem.UI
             mainUi1.Show();
         }
 
+        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            SqlDataAdapter sda = new SqlDataAdapter("SELECT BTransaction.BillTransactionId,BPayableTo.BPayableToName, BTransaction.Amount, BTransaction.DueDate,BillsPayableName.BillName FROM BillsPayableName INNER JOIN BTransaction ON BillsPayableName.BillId = BTransaction.BillId INNER JOIN BPayableTo ON BTransaction.BPayableToId = BPayableTo.BPayableToId WHERE (BPayableTo.BPayableToName LIKE '%" + searchTextBox.Text + "%')", con);
+            DataTable dataTable = new DataTable();
+            sda.Fill(dataTable);
+            allPayableBillDataGridView.Rows.Clear();
+            foreach (DataRow item in dataTable.Rows)
+            {
+                int n = allPayableBillDataGridView.Rows.Add();
+                allPayableBillDataGridView.Rows[n].Cells[0].Value = item[0].ToString();
+                allPayableBillDataGridView.Rows[n].Cells[1].Value = item[1].ToString();
+                allPayableBillDataGridView.Rows[n].Cells[2].Value = item[2].ToString();
+                allPayableBillDataGridView.Rows[n].Cells[3].Value = item[3].ToString();
+                allPayableBillDataGridView.Rows[n].Cells[4].Value = item[4].ToString();
+            }
+
+        }
+
 
     }
 }
