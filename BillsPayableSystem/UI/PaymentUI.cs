@@ -48,7 +48,7 @@ namespace BillsPayableSystem.UI
             billEntryDateTextBox.Clear();
             payableTextBox.Clear();
            //dtpPaymentDate.Value = DateTimePicker.MinDateTime;
-            //dtpPaymentDate.Text = DateTime.Now.ToString();
+           //dtpPaymentDate.Text = DateTime.Now.ToString();
             dtpPaymentDate.ResetText();
         }
 

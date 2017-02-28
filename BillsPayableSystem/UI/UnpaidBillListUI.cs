@@ -98,7 +98,7 @@ namespace BillsPayableSystem.UI
             //}     
            // SqlDataAdapter sda = new SqlDataAdapter("SELECT *FROM BTransaction WHERE (Amount LIKE '%" + searchTextBox.Text + "%')", con);
 
-            SqlDataAdapter sda = new SqlDataAdapter("SELECT BTransaction.BillTransactionId,BPayableTo.BPayableToName, BTransaction.Amount, BTransaction.DueDate,BillsPayableName.BillName FROM BillsPayableName INNER JOIN BTransaction ON BillsPayableName.BillId = BTransaction.BillId INNER JOIN BPayableTo ON BTransaction.BPayableToId = BPayableTo.BPayableToId WHERE (BPayableTo.BPayableToName LIKE '%" + searchTextBox.Text + "%')", con);
+            SqlDataAdapter sda = new SqlDataAdapter("SELECT BTransaction.BillTransactionId,BPayableTo.BPayableToName, BTransaction.Amount, BTransaction.DueDate,BillsPayableName.BillName FROM BillsPayableName INNER JOIN BTransaction ON BillsPayableName.BillId = BTransaction.BillId INNER JOIN BPayableTo ON BTransaction.BPayableToId = BPayableTo.BPayableToId WHERE (BPayableTo.BPayableToName LIKE '" + searchTextBox.Text + "%')", con);
             DataTable dataTable = new DataTable();
             sda.Fill(dataTable);
             uppaidBillListDataGridView.Rows.Clear();

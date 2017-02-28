@@ -188,11 +188,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(15, 231);
+            this.label4.Location = new System.Drawing.Point(61, 231);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(138, 22);
+            this.label4.Size = new System.Drawing.Size(92, 22);
             this.label4.TabIndex = 17;
-            this.label4.Text = "Bill Entry Date:";
+            this.label4.Text = "Due Date:";
             // 
             // label5
             // 
@@ -323,7 +323,7 @@
             this.approvalDateTimePicker.Name = "approvalDateTimePicker";
             this.approvalDateTimePicker.Size = new System.Drawing.Size(133, 29);
             this.approvalDateTimePicker.TabIndex = 2;
-            this.approvalDateTimePicker.Value = new System.DateTime(2017, 2, 23, 0, 0, 0, 0);
+            this.approvalDateTimePicker.Value = new System.DateTime(2017, 2, 26, 0, 0, 0, 0);
             this.approvalDateTimePicker.ValueChanged += new System.EventHandler(this.approvalDateTimePicker_ValueChanged);
             // 
             // settlementDateTimePicker
@@ -335,7 +335,7 @@
             this.settlementDateTimePicker.Name = "settlementDateTimePicker";
             this.settlementDateTimePicker.Size = new System.Drawing.Size(110, 26);
             this.settlementDateTimePicker.TabIndex = 0;
-            this.settlementDateTimePicker.Value = new System.DateTime(2017, 2, 23, 0, 0, 0, 0);
+            this.settlementDateTimePicker.Value = new System.DateTime(2017, 2, 26, 0, 0, 0, 0);
             this.settlementDateTimePicker.ValueChanged += new System.EventHandler(this.settlementDateTimePicker_ValueChanged);
             // 
             // accNumberLabel
