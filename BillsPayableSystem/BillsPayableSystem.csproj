@@ -115,6 +115,18 @@
     <Compile Include="LoginUI\frmRegistration.Designer.cs">
       <DependentUpon>frmRegistration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\ReportViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportViewer.Designer.cs">
+      <DependentUpon>ReportViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\UnpaidBillListReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnpaidBillListReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="UI\AllPayableBillListUI.cs">
       <SubType>Form</SubType>
@@ -142,6 +154,12 @@
     <Compile Include="UI\PaymentUI.Designer.cs">
       <DependentUpon>PaymentUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ReportUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ReportUI.Designer.cs">
+      <DependentUpon>ReportUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UnpaidBillListUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +171,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginUI\frmRegistration.resx">
       <DependentUpon>frmRegistration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportViewer.resx">
+      <DependentUpon>ReportViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\UnpaidBillListReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>UnpaidBillListReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AllPayableBillListUI.resx">
       <DependentUpon>AllPayableBillListUI.cs</DependentUpon>
@@ -175,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\PaymentUI.resx">
       <DependentUpon>PaymentUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ReportUI.resx">
+      <DependentUpon>ReportUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UnpaidBillListUI.resx">
       <DependentUpon>UnpaidBillListUI.cs</DependentUpon>
