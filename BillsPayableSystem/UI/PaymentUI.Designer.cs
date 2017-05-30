@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPayment));
             this.dtpPaymentDate = new System.Windows.Forms.DateTimePicker();
             this.lblPaymentDate = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -588,6 +589,7 @@
             this.Controls.Add(this.approvalGroupBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSave);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPayment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PaymentUI";

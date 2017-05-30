@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportUI));
             this.unpaidBillListButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@
             this.BackColor = System.Drawing.Color.SlateGray;
             this.ClientSize = new System.Drawing.Size(791, 396);
             this.Controls.Add(this.unpaidBillListButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ReportUI";
             this.Text = "ReportUI";
             this.ResumeLayout(false);

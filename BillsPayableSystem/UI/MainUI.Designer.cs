@@ -33,8 +33,8 @@
             this.btnRegistration = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnPayment = new System.Windows.Forms.Button();
             this.showBillListButton = new System.Windows.Forms.Button();
+            this.btnPayment = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,18 +92,6 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             // 
-            // btnPayment
-            // 
-            this.btnPayment.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnPayment.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPayment.Location = new System.Drawing.Point(15, 289);
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(147, 66);
-            this.btnPayment.TabIndex = 2;
-            this.btnPayment.Text = "Unpaid Bill List And Pay";
-            this.btnPayment.UseVisualStyleBackColor = false;
-            this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
-            // 
             // showBillListButton
             // 
             this.showBillListButton.BackColor = System.Drawing.Color.ForestGreen;
@@ -118,6 +106,18 @@
             this.showBillListButton.UseVisualStyleBackColor = false;
             this.showBillListButton.Click += new System.EventHandler(this.showBillListButton_Click);
             // 
+            // btnPayment
+            // 
+            this.btnPayment.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnPayment.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPayment.Location = new System.Drawing.Point(15, 289);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(147, 66);
+            this.btnPayment.TabIndex = 2;
+            this.btnPayment.Text = "Unpaid Bill List And Pay";
+            this.btnPayment.UseVisualStyleBackColor = false;
+            this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
+            // 
             // MainUI1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -129,6 +129,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "MainUI1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

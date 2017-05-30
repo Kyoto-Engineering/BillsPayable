@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRegistration));
             this.btnClose = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -162,7 +163,6 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(229, 29);
             this.txtEmail.TabIndex = 44;
-           
             this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Validating);
             // 
             // txtPassword
@@ -280,10 +280,10 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btnClose);
             this.ForeColor = System.Drawing.Color.Black;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmRegistration";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registration Form";
             this.Load += new System.EventHandler(this.frmRegistration_Load);
